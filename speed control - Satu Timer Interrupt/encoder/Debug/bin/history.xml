@@ -1,0 +1,32 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<history>
+   <processor signature="arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -g -nostartfiles -Map=encoder.map -O0 --gc-sections -LC:\CooCox\CoIDE\configuration\ProgramData\encoder -TC:\CooCox\CoIDE\configuration\ProgramData\encoder/link.ld -g -L..\..\.. -lm">
+      <target file="encoder.elf" lastModified="169e8bd6309">
+         <source file="..\obj\uart_node.o" lastModified="169e8bd31d7"/>
+         <source file="..\obj\stm32f4xx_syscfg.o" lastModified="169e8bd32d1"/>
+         <source file="..\obj\stm32f4xx_usart.o" lastModified="169e8bd3503"/>
+         <source file="..\obj\startup_stm32f4xx.o" lastModified="169e8bd362c"/>
+         <source file="..\obj\pwm_motor.o" lastModified="169e8bd383f"/>
+         <source file="..\obj\main.o" lastModified="169e8bd39f5"/>
+         <source file="..\obj\stm32f4xx_rcc.o" lastModified="169e8bd3c27"/>
+         <source file="..\obj\tm_stm32f4_hcsr04.o" lastModified="169e8bd3eb8"/>
+         <source file="..\obj\printf.o" lastModified="169e8bd402f"/>
+         <source file="..\obj\tm_stm32f4_rotary_encoder.o" lastModified="169e8bd41b5"/>
+         <source file="..\obj\odometry.o" lastModified="169e8bd437a"/>
+         <source file="..\obj\tm_stm32f4_delay.o" lastModified="169e8bd4484"/>
+         <source file="..\obj\stm32f4xx_gpio.o" lastModified="169e8bd45ad"/>
+         <source file="..\obj\mekanisme_penendang.o" lastModified="169e8bd46c6"/>
+         <source file="..\obj\lcd_16x2.o" lastModified="169e8bd47ef"/>
+         <source file="..\obj\system_stm32f4xx.o" lastModified="169e8bd4956"/>
+         <source file="..\obj\syscalls.o" lastModified="169e8bd4b4a"/>
+         <source file="..\obj\uart_camera.o" lastModified="169e8bd4ca2"/>
+         <source file="..\obj\stm32f4xx_i2c.o" lastModified="169e8bd4eb5"/>
+         <source file="..\obj\speed_control.o" lastModified="169e8bd52cc"/>
+         <source file="..\obj\stm32f4xx_exti.o" lastModified="169e8bd53e6"/>
+         <source file="..\obj\misc.o" lastModified="169e8bd558b"/>
+         <source file="..\obj\tm_stm32f4_gpio.o" lastModified="169e8bd5770"/>
+         <source file="..\obj\localization.o" lastModified="169e8bd5c71"/>
+         <source file="..\obj\stm32f4xx_tim.o" lastModified="169e8bd5f30"/>
+      </target>
+   </processor>
+</history>
