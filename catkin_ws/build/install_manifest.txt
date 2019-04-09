@@ -1,0 +1,10 @@
+/home/irsyad/catkin_ws/install/_setup_util.py
+/home/irsyad/catkin_ws/install/env.sh
+/home/irsyad/catkin_ws/install/setup.bash
+/home/irsyad/catkin_ws/install/setup.sh
+/home/irsyad/catkin_ws/install/setup.zsh
+/home/irsyad/catkin_ws/install/.rosinstall
+/home/irsyad/catkin_ws/install/lib/pkgconfig/beginner_tutorials.pc
+/home/irsyad/catkin_ws/install/share/beginner_tutorials/cmake/beginner_tutorialsConfig.cmake
+/home/irsyad/catkin_ws/install/share/beginner_tutorials/cmake/beginner_tutorialsConfig-version.cmake
+/home/irsyad/catkin_ws/install/share/beginner_tutorials/package.xml
