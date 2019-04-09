@@ -499,7 +499,6 @@ void TIM2_IRQHandler()
 	// else if(motor == 1)
 	// {
 		//menggunakan encoder untuk mapping
-		//sistem trajectory + PID
 		if (TIM_GetITStatus(TIM2, TIM_IT_Update) != RESET)
 		{
 			TIM_ClearITPendingBit(TIM2, TIM_IT_Update);
@@ -519,37 +518,39 @@ void TIM2_IRQHandler()
 			calculatePID();
 			kinematic();
 
-//			output = LIMITOUT(output, min_pwm_limit, max_pwm_limit);
 			if(output > max_pwm_limit) output = max_pwm_limit;
 			else if(output < min_pwm_limit) output = min_pwm_limit;
 
-//			outputDua = LIMITOUT(outputDua, min_pwm_limit, max_pwm_limit);
 			if(outputDua > max_pwm_limit) outputDua = max_pwm_limit;
 			else if(outputDua < min_pwm_limit) outputDua = min_pwm_limit;
 
-//			outputTiga = LIMITOUT(outputTiga, min_pwm_limit, max_pwm_limit);
 			if(outputTiga > max_pwm_limit) outputTiga = max_pwm_limit;
 			else if(outputTiga < min_pwm_limit) outputTiga = min_pwm_limit;
 
-//			outputEmpat = LIMITOUT(outputEmpat, min_pwm_limit, max_pwm_limit);
 			if(outputEmpat > max_pwm_limit) outputEmpat = max_pwm_limit;
 			else if(outputEmpat < min_pwm_limit) outputEmpat = min_pwm_limit;
 
 			pid_error_w = tra_input_w - current_w;
 
-			if(pid_error_w > 5 && pid_error_w < 180)
+			if(pid_error_w < 10 && pid_error_w > -10)
+			{
+
+			}
+			else if((pid_error_w > 10 && pid_error_w < 180) || pid_error_w < -180)
 			{
 				output += 5000;
 				outputDua += 5000;
 				outputTiga += 5000;
 				outputEmpat += 5000;
+				aaa = 0;
 			}
-			else if(pid_error_w < -5 || pid_error_w > 180)
+			else if(pid_error_w < -10 || pid_error_w > 180)
 			{
 				output -= 5000;
 				outputDua -= 5000;
 				outputTiga -= 5000;
 				outputEmpat -= 5000;
+				aaa = 1;
 			}
 
 			motorDC(1, output);
@@ -557,13 +558,23 @@ void TIM2_IRQHandler()
 			motorDC(3, outputTiga);
 			motorDC(4, outputEmpat);
 //			}
+
 		}
 //	 }
 }
 
 int xCoor2;
 int yCoor2;
+extern uint16_t xCoor;
+extern uint16_t yCoor;
 double sudut2;
+
+//hitung koordinat global
+double a, b;
+int abs1 = 1, abs2 = 1;
+int ballCoorX, ballCoorY;
+double testes;
+double sudutBall;
 
 void moveInput(){
 
@@ -579,31 +590,56 @@ void moveInput(){
  * 160	525
  * 180	525
  */
+	//ubah titik tengah pixel
+	xCoor2 = - ((int)xCoor - 320);
+	yCoor2 = - ((int)yCoor - 240);
 
-	xCoor2 = - (xCoor - 320);
-	yCoor2 = - (yCoor - 240);
-
+	//default diam, kalau ga ada bola
 	if(xCoor2 == 0 || yCoor2 == 0)
 	{
 		traInit(current_x, current_y, current_w, 0.0);
 		return;
 	}
 
-	sudut = atan2(yCoor2, xCoor2) * 180 / PI;
 
+	//////hitung sudut bola dari kamera ke sudut global
+
+	//cari sudut bola terhadap kamera
+	if(xCoor2 == 0 && yCoor2 == 0)
+		{sudut = 90;}
+	else
+		{sudut = atan2(yCoor2, xCoor2) * 180 / PI;}
+
+	//ubah sudut untuk kuadran
 	if(xCoor2 < 0  && yCoor2 < 0)
-		sudut = 360 + sudut;
+		{sudut = 360 + sudut;}
 	else if(xCoor2 > 0  && yCoor2 < 0)
-		sudut += 360;
+		{sudut += 360;}
 
-//	sudut = sudut + current_w;
-//
-//	if(sudut > 360)
-//		sudut -= 360;
+	//shift 90 agar 0 derajat bola di depan robot
+	if(sudut > 90)
+		{sudut -= 90;}
+	else
+		{sudut += 270;}
 
-	double a, b;
-	int abs1 = 1, abs2 = 1;
+	//ubah ke sudut global
+	sudut += current_w;
 
+	if(sudut > 360)
+		{sudut -= 360;}
+
+	sudutBall = sudut;
+
+	/////selesai hitung sudut global bola di variabel sudutBall
+
+
+	//////mulai hitung jarak bola dalam centimeter
+
+	//penanda nilai negatif untuk hitung pixel ke centimeter
+	abs1 = 1;
+	abs2 = 1;
+
+	//ubah koordinat jadi absolut dulu
 	if (xCoor2 < 0)
 	{
 		xCoor2 *= -1;
@@ -616,7 +652,10 @@ void moveInput(){
 		abs2 = 0;
 	}
 
-	if(xCoor2 < 141)	//40
+	//ubah pixel ke centimeter
+	if(xCoor2 < 100)
+		a = 0;
+	else if(xCoor2 < 141)	//40
 		a =  65;
 	else if(xCoor2 < 163)	//60
 		a =  85;
@@ -631,7 +670,9 @@ void moveInput(){
 	else if(xCoor2 < 205)	//160
 		a =  185;
 
-	if(yCoor2 < 141)		//40
+	if(yCoor2 < 100)
+		b = 0;
+	else if(yCoor2 < 141)		//40
 		b =  65;
 	else if(yCoor2 < 163)	//60
 		b =  85;
@@ -651,11 +692,16 @@ void moveInput(){
 
 	if(abs2 == 0)
 		b *= -1;
+	//////selesai hitung centimeter
 
-	ballXCoor = (cos(current_w)*a) + (sin(current_w)*b) + current_x;
-	ballYCoor = (cos(current_w)*b) - (sin(current_w)*a) + current_y;
 
-	traInit(ballXCoor, ballYCoor, sudut, 0.0);
+	//koordinat bola di kamera ke koordinat global
+	ballCoorX = (cos(current_w2)*a) + (sin(current_w2)*b) + current_x;
+	ballCoorY = (cos(current_w2)*b) - (sin(current_w2)*a) + current_y;
+
+	//perintah gerak ke arah bola
+	traInit(ballCoorX, ballCoorY, sudut, 0.0);
+//	traInit(0, 0, sudutBall, 0.0);
 }
 
 void calculatePosition2(){
@@ -669,8 +715,8 @@ void calculatePosition2(){
 	odo_local_w = (current_speed_1+current_speed_2)/(2*robot_radius);
 
 	//ubah kecepatan lokal ke kecepatan global
-	odo_global_vx = (cos(current_w)*odo_local_vx)-(sin(current_w)*odo_local_vy);
-	odo_global_vy = (sin(current_w)*odo_local_vx)+(cos(current_w)*odo_local_vy);
+	odo_global_vx = (cos(current_w2)*odo_local_vx)-(sin(current_w2)*odo_local_vy);
+	odo_global_vy = (sin(current_w2)*odo_local_vx)+(cos(current_w2)*odo_local_vy);
 	odo_global_w = odo_local_w;
 
 	//ubah keceptan global ke koordinat global dengan trapezoidal rule
@@ -712,8 +758,9 @@ void calculatePosition(){
 //	odo_local_vy = 0.5 * (current_speed_1-current_speed_3);
 //	odo_local_w = (current_speed_1+current_speed_2+current_speed_3+current_speed_4)/(4*robot_radius);
 
-	current_w2 = current_w * PI / 180;
-	current_w2 = 0;
+	//fungsi butuh radian
+	current_w2 = current_w * (PI/ 180);
+
 	//ubah kecepatan lokal ke kecepatan global
 	odo_global_vx = (cos(current_w2)*odo_local_vx) - (sin(current_w2)*odo_local_vy);
 	odo_global_vy = (sin(current_w2)*odo_local_vx) + (cos(current_w2)*odo_local_vy);
@@ -724,16 +771,11 @@ void calculatePosition(){
 	current_x += (odo_global_vx + odo_global_vx_prev)* 0.5 * time_sampling;
 	current_y += (odo_global_vy + odo_global_vy_prev)* 0.5 * time_sampling;
 	current_w += (odo_global_w + odo_global_w_prev)* 0.5 * time_sampling * (180 / PI);
-//	current_w = 90 ;
-
-	cosw = cos(current_w2);
-	sinw = sin(current_w2);
 
 	if(current_w >= 360) current_w -= 360;
 	else if(current_w < 0) current_w += 360;
 
 //	current_w = compassHeading;
-//	current_w = 0;
 
 	//simpan value saat ini untuk perhitungan selanjutnya
 	odo_global_vx_prev = odo_global_vx;

@@ -51,15 +51,19 @@ int main(void)
 	resetInit();
 	traInit(0, 0, 0, 0);
 
-//	traInit(0, 100, 0, 0);
+	Delayms(3000);
 //
-//	Delayms(3000);
-//
-//	traInit(100, 100, 0, 0);
+//	traInit(0, 0, 90, 0);
 //
 //	Delayms(3000);
 //
 //	traInit(0, 0, 0, 0);
+
+//	traInit(100, 100, 0, 0);
+//
+//	Delayms(3000);
+//
+//	traInit(0, 0, 180, 0);
 
 //	if(GPIO_ReadInputDataBit(GPIOE,GPIO_PIN_8) == 1){
 ////		while(1)
@@ -72,10 +76,17 @@ int main(void)
 //		Delayms(3000);
 //	}
 
-
     while(1)
     {
+
     	moveInput();
-    	Delayms(500);
+//    	traInit(0, 0, 45, 0);
+//		Delayms(3000);
+//
+//    	traInit(0, 0, 0, 0);
+//		Delayms(3000);
+//
+//    	traInit(0, 0, 315, 0);
+//		Delayms(3000);
     }
 }

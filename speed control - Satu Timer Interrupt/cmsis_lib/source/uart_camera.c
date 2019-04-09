@@ -72,6 +72,8 @@ void init_camera(void)
 char buff[5];
 char flag1 = 'a';
 
+
+
 void USART3_IRQHandler(void)
 {
 
@@ -130,12 +132,12 @@ void USART3_IRQHandler(void)
 		flag = 0;
 	}
 
-	else if(flagX == 2)
-	{
-		ballXCoor = fragX;
-		flagX = 0;
-		flag = 0;
-	}
+//	else if(flagX == 2)
+//	{
+//		ballXCoor = fragX;
+//		flagX = 0;
+//		flag = 0;
+//	}
 
 
 	// select Y coordinate of camera servo
@@ -160,12 +162,12 @@ void USART3_IRQHandler(void)
 		flag = 0;
 	}
 
-	else if(flagY == 2)
-	{
-		ballYCoor = fragY;
-		flagY = 0;
-		flag = 0;
-	}
+//	else if(flagY == 2)
+//	{
+//		ballYCoor = fragY;
+//		flagY = 0;
+//		flag = 0;
+//	}
 
 	// select compass data
 	else if (flag =='C')
