@@ -79,7 +79,6 @@ Ydis                0x4               ..\obj\odometry.o
 odomHeading         0x4               ..\obj\odometry.o
 Yaccel              0x4               ..\obj\odometry.o
 SRFDepanKanan       0x14              ..\obj\tm_stm32f4_hcsr04.o
-b                   0x8               ..\obj\speed_control.o
 lcd                 0x10              ..\obj\localization.o
 Lticks              0x4               ..\obj\odometry.o
 Favg                0x4               ..\obj\odometry.o
@@ -98,7 +97,6 @@ secondCount         0x4               ..\obj\tm_stm32f4_rotary_encoder.o
 TM_INT_RE_Count     0x4               ..\obj\tm_stm32f4_rotary_encoder.o
 jarakKiri           0x4               ..\obj\tm_stm32f4_hcsr04.o
 errorBallMaju       0x4               ..\obj\localization.o
-ballCoorY           0x4               ..\obj\speed_control.o
 data4               0x18              ..\obj\speed_control.o
 mov                 0x4               ..\obj\localization.o
 Fticks              0x4               ..\obj\odometry.o
@@ -119,7 +117,6 @@ nodex2              0x4               ..\obj\uart_node.o
 thirdCount          0x4               ..\obj\tm_stm32f4_rotary_encoder.o
 Rticks              0x4               ..\obj\odometry.o
 SRFSerongKiri       0x14              ..\obj\tm_stm32f4_hcsr04.o
-ballCoorX           0x4               ..\obj\speed_control.o
 derivErrorBall      0x4               ..\obj\localization.o
 Y_pos               0x4               ..\obj\odometry.o
 lebargawang         0x4               ..\obj\localization.o
@@ -152,7 +149,6 @@ gotoxyFlag          0x4               ..\obj\localization.o
 fragY               0x1               ..\obj\uart_node.o
 Bavg                0x4               ..\obj\odometry.o
 X_pos               0x4               ..\obj\odometry.o
-sudutBall           0x8               ..\obj\speed_control.o
 tengahx             0x4               ..\obj\localization.o
 data                0x18              ..\obj\speed_control.o
 Y_poscmps           0x4               ..\obj\odometry.o
@@ -176,7 +172,6 @@ rotateCount         0x4               ..\obj\localization.o
 flagNode            0x1               ..\obj\uart_node.o
 SRFDepanKiri        0x14              ..\obj\tm_stm32f4_hcsr04.o
 data3               0x18              ..\obj\speed_control.o
-sudut               0x8               ..\obj\speed_control.o
 LRmeters            0x4               ..\obj\odometry.o
 coorCount           0x4               ..\obj\speed_control.o
 ball                0x4               ..\obj\localization.o
@@ -188,7 +183,6 @@ sinw                0x4               ..\obj\speed_control.o
 prevErrorHead       0x4               ..\obj\localization.o
 X_poscmps           0x4               ..\obj\odometry.o
 data5               0x18              ..\obj\speed_control.o
-a                   0x8               ..\obj\speed_control.o
 derivErrorBallMaju  0x4               ..\obj\localization.o
 strategyCount       0x4               ..\obj\localization.o
 intErrorBall        0x4               ..\obj\localization.o
@@ -198,7 +192,6 @@ acceleroY           0x1               ..\obj\uart_node.o
 jarakSerongKiri     0x4               ..\obj\tm_stm32f4_hcsr04.o
 SRFKanan            0x14              ..\obj\tm_stm32f4_hcsr04.o
 prevGameState       0x1               ..\obj\localization.o
-testes              0x8               ..\obj\speed_control.o
 data6               0x18              ..\obj\speed_control.o
 Fmeters             0x4               ..\obj\odometry.o
 Ravg                0x4               ..\obj\odometry.o
@@ -604,8 +597,6 @@ Discarded input sections
                 0x00000000      0x474 ..\obj\speed_control.o
  .text.motorOutput
                 0x00000000       0x14 ..\obj\speed_control.o
- .text.motorSpeed
-                0x00000000       0x54 ..\obj\speed_control.o
  .text.motorSpeed1
                 0x00000000       0x54 ..\obj\speed_control.o
  .text.maju     0x00000000       0x38 ..\obj\speed_control.o
@@ -1067,7 +1058,7 @@ Linker script and memory map
 
                 0x20020000                _eram = 0x20020000
 
-.text           0x08000000     0x7680
+.text           0x08000000     0x7690
  *(.isr_vector)
  .isr_vector    0x08000000      0x188 ..\obj\startup_stm32f4xx.o
                 0x08000000                g_pfnVectors
@@ -1201,430 +1192,432 @@ Linker script and memory map
                 0x0800094c                init_motor
  .text.motorDC  0x08000a08      0x138 ..\obj\pwm_motor.o
                 0x08000a08                motorDC
- .text.main     0x08000b40       0x78 ..\obj\main.o
+ .text.main     0x08000b40       0x84 ..\obj\main.o
                 0x08000b40                main
  .text.RCC_HSEConfig
-                0x08000bb8       0x24 ..\obj\stm32f4xx_rcc.o
-                0x08000bb8                RCC_HSEConfig
+                0x08000bc4       0x24 ..\obj\stm32f4xx_rcc.o
+                0x08000bc4                RCC_HSEConfig
  .text.RCC_WaitForHSEStartUp
-                0x08000bdc       0x50 ..\obj\stm32f4xx_rcc.o
-                0x08000bdc                RCC_WaitForHSEStartUp
+                0x08000be8       0x50 ..\obj\stm32f4xx_rcc.o
+                0x08000be8                RCC_WaitForHSEStartUp
  .text.RCC_GetClocksFreq
-                0x08000c2c      0x150 ..\obj\stm32f4xx_rcc.o
-                0x08000c2c                RCC_GetClocksFreq
+                0x08000c38      0x150 ..\obj\stm32f4xx_rcc.o
+                0x08000c38                RCC_GetClocksFreq
  .text.RCC_AHB1PeriphClockCmd
-                0x08000d7c       0x3c ..\obj\stm32f4xx_rcc.o
-                0x08000d7c                RCC_AHB1PeriphClockCmd
+                0x08000d88       0x3c ..\obj\stm32f4xx_rcc.o
+                0x08000d88                RCC_AHB1PeriphClockCmd
  .text.RCC_APB1PeriphClockCmd
-                0x08000db8       0x3c ..\obj\stm32f4xx_rcc.o
-                0x08000db8                RCC_APB1PeriphClockCmd
+                0x08000dc4       0x3c ..\obj\stm32f4xx_rcc.o
+                0x08000dc4                RCC_APB1PeriphClockCmd
  .text.RCC_APB2PeriphClockCmd
-                0x08000df4       0x3c ..\obj\stm32f4xx_rcc.o
-                0x08000df4                RCC_APB2PeriphClockCmd
+                0x08000e00       0x3c ..\obj\stm32f4xx_rcc.o
+                0x08000e00                RCC_APB2PeriphClockCmd
  .text.RCC_APB1PeriphResetCmd
-                0x08000e30       0x3c ..\obj\stm32f4xx_rcc.o
-                0x08000e30                RCC_APB1PeriphResetCmd
+                0x08000e3c       0x3c ..\obj\stm32f4xx_rcc.o
+                0x08000e3c                RCC_APB1PeriphResetCmd
  .text.RCC_APB2PeriphResetCmd
-                0x08000e6c       0x3c ..\obj\stm32f4xx_rcc.o
-                0x08000e6c                RCC_APB2PeriphResetCmd
+                0x08000e78       0x3c ..\obj\stm32f4xx_rcc.o
+                0x08000e78                RCC_APB2PeriphResetCmd
  .text.RCC_GetFlagStatus
-                0x08000ea8       0x74 ..\obj\stm32f4xx_rcc.o
-                0x08000ea8                RCC_GetFlagStatus
- .text.PutChar  0x08000f1c       0x1e ..\obj\printf.o
-                0x08000f1c                PutChar
+                0x08000eb4       0x74 ..\obj\stm32f4xx_rcc.o
+                0x08000eb4                RCC_GetFlagStatus
+ .text.PutChar  0x08000f28       0x1e ..\obj\printf.o
+                0x08000f28                PutChar
  .text.PutString
-                0x08000f3a       0x3a ..\obj\printf.o
-                0x08000f3a                PutString
+                0x08000f46       0x3a ..\obj\printf.o
+                0x08000f46                PutString
  .text.PutUnsignedInt
-                0x08000f74       0x9c ..\obj\printf.o
-                0x08000f74                PutUnsignedInt
+                0x08000f80       0x9c ..\obj\printf.o
+                0x08000f80                PutUnsignedInt
  .text.PutSignedInt
-                0x08001010       0xf8 ..\obj\printf.o
-                0x08001010                PutSignedInt
- .text.PutHexa  0x08001108       0xd4 ..\obj\printf.o
-                0x08001108                PutHexa
+                0x0800101c       0xf8 ..\obj\printf.o
+                0x0800101c                PutSignedInt
+ .text.PutHexa  0x08001114       0xd4 ..\obj\printf.o
+                0x08001114                PutHexa
  .text.vsnprintf
-                0x080011dc      0x254 ..\obj\printf.o
-                0x080011dc                vsnprintf
+                0x080011e8      0x254 ..\obj\printf.o
+                0x080011e8                vsnprintf
  .text.vsprintf
-                0x08001430       0x22 ..\obj\printf.o
-                0x08001430                vsprintf
- .text.sprintf  0x08001452       0x2c ..\obj\printf.o
-                0x08001452                sprintf
- *fill*         0x0800147e        0x2 
+                0x0800143c       0x22 ..\obj\printf.o
+                0x0800143c                vsprintf
+ .text.sprintf  0x0800145e       0x2c ..\obj\printf.o
+                0x0800145e                sprintf
+ *fill*         0x0800148a        0x2 
  .text.TM_RE_Init
-                0x08001480       0xb8 ..\obj\tm_stm32f4_rotary_encoder.o
-                0x08001480                TM_RE_Init
+                0x0800148c       0xb8 ..\obj\tm_stm32f4_rotary_encoder.o
+                0x0800148c                TM_RE_Init
  .text.InitSecondEncoder
-                0x08001538       0xb8 ..\obj\tm_stm32f4_rotary_encoder.o
-                0x08001538                InitSecondEncoder
+                0x08001544       0xb8 ..\obj\tm_stm32f4_rotary_encoder.o
+                0x08001544                InitSecondEncoder
  .text.InitThirdEncoder
-                0x080015f0       0xb8 ..\obj\tm_stm32f4_rotary_encoder.o
-                0x080015f0                InitThirdEncoder
+                0x080015fc       0xb8 ..\obj\tm_stm32f4_rotary_encoder.o
+                0x080015fc                InitThirdEncoder
  .text.InitFourthEncoder
-                0x080016a8       0xb8 ..\obj\tm_stm32f4_rotary_encoder.o
-                0x080016a8                InitFourthEncoder
+                0x080016b4       0xb8 ..\obj\tm_stm32f4_rotary_encoder.o
+                0x080016b4                InitFourthEncoder
  .text.InitFifthEncoder
-                0x08001760       0xb8 ..\obj\tm_stm32f4_rotary_encoder.o
-                0x08001760                InitFifthEncoder
+                0x0800176c       0xb8 ..\obj\tm_stm32f4_rotary_encoder.o
+                0x0800176c                InitFifthEncoder
  .text.InitSixthEncoder
-                0x08001818       0xb8 ..\obj\tm_stm32f4_rotary_encoder.o
-                0x08001818                InitSixthEncoder
+                0x08001824       0xb8 ..\obj\tm_stm32f4_rotary_encoder.o
+                0x08001824                InitSixthEncoder
  .text.TM_RE_Get
-                0x080018d0       0x78 ..\obj\tm_stm32f4_rotary_encoder.o
-                0x080018d0                TM_RE_Get
+                0x080018dc       0x78 ..\obj\tm_stm32f4_rotary_encoder.o
+                0x080018dc                TM_RE_Get
  .text.SecondGet
-                0x08001948       0x78 ..\obj\tm_stm32f4_rotary_encoder.o
-                0x08001948                SecondGet
+                0x08001954       0x78 ..\obj\tm_stm32f4_rotary_encoder.o
+                0x08001954                SecondGet
  .text.ThirdGet
-                0x080019c0       0x78 ..\obj\tm_stm32f4_rotary_encoder.o
-                0x080019c0                ThirdGet
+                0x080019cc       0x78 ..\obj\tm_stm32f4_rotary_encoder.o
+                0x080019cc                ThirdGet
  .text.FourthGet
-                0x08001a38       0x78 ..\obj\tm_stm32f4_rotary_encoder.o
-                0x08001a38                FourthGet
+                0x08001a44       0x78 ..\obj\tm_stm32f4_rotary_encoder.o
+                0x08001a44                FourthGet
  .text.TM_RE_Process
-                0x08001ab0       0x68 ..\obj\tm_stm32f4_rotary_encoder.o
-                0x08001ab0                TM_RE_Process
+                0x08001abc       0x68 ..\obj\tm_stm32f4_rotary_encoder.o
+                0x08001abc                TM_RE_Process
  .text.SecondProcess
-                0x08001b18       0x68 ..\obj\tm_stm32f4_rotary_encoder.o
-                0x08001b18                SecondProcess
+                0x08001b24       0x68 ..\obj\tm_stm32f4_rotary_encoder.o
+                0x08001b24                SecondProcess
  .text.ThirdProcess
-                0x08001b80       0x68 ..\obj\tm_stm32f4_rotary_encoder.o
-                0x08001b80                ThirdProcess
+                0x08001b8c       0x68 ..\obj\tm_stm32f4_rotary_encoder.o
+                0x08001b8c                ThirdProcess
  .text.FourthProcess
-                0x08001be8       0x68 ..\obj\tm_stm32f4_rotary_encoder.o
-                0x08001be8                FourthProcess
+                0x08001bf4       0x68 ..\obj\tm_stm32f4_rotary_encoder.o
+                0x08001bf4                FourthProcess
  .text.FifthProcess
-                0x08001c50       0x68 ..\obj\tm_stm32f4_rotary_encoder.o
-                0x08001c50                FifthProcess
+                0x08001c5c       0x68 ..\obj\tm_stm32f4_rotary_encoder.o
+                0x08001c5c                FifthProcess
  .text.SixthProcess
-                0x08001cb8       0x68 ..\obj\tm_stm32f4_rotary_encoder.o
-                0x08001cb8                SixthProcess
+                0x08001cc4       0x68 ..\obj\tm_stm32f4_rotary_encoder.o
+                0x08001cc4                SixthProcess
  .text.EXTI0_IRQHandler
-                0x08001d20       0x1e ..\obj\tm_stm32f4_rotary_encoder.o
-                0x08001d20                EXTI0_IRQHandler
+                0x08001d2c       0x1e ..\obj\tm_stm32f4_rotary_encoder.o
+                0x08001d2c                EXTI0_IRQHandler
  .text.EXTI1_IRQHandler
-                0x08001d3e       0x1e ..\obj\tm_stm32f4_rotary_encoder.o
-                0x08001d3e                EXTI1_IRQHandler
+                0x08001d4a       0x1e ..\obj\tm_stm32f4_rotary_encoder.o
+                0x08001d4a                EXTI1_IRQHandler
  .text.EXTI2_IRQHandler
-                0x08001d5c       0x1e ..\obj\tm_stm32f4_rotary_encoder.o
-                0x08001d5c                EXTI2_IRQHandler
+                0x08001d68       0x1e ..\obj\tm_stm32f4_rotary_encoder.o
+                0x08001d68                EXTI2_IRQHandler
  .text.EXTI3_IRQHandler
-                0x08001d7a       0x1e ..\obj\tm_stm32f4_rotary_encoder.o
-                0x08001d7a                EXTI3_IRQHandler
+                0x08001d86       0x1e ..\obj\tm_stm32f4_rotary_encoder.o
+                0x08001d86                EXTI3_IRQHandler
  .text.EXTI4_IRQHandler
-                0x08001d98       0x1e ..\obj\tm_stm32f4_rotary_encoder.o
-                0x08001d98                EXTI4_IRQHandler
+                0x08001da4       0x1e ..\obj\tm_stm32f4_rotary_encoder.o
+                0x08001da4                EXTI4_IRQHandler
  .text.EXTI9_5_IRQHandler
-                0x08001db6       0x1e ..\obj\tm_stm32f4_rotary_encoder.o
-                0x08001db6                EXTI9_5_IRQHandler
+                0x08001dc2       0x1e ..\obj\tm_stm32f4_rotary_encoder.o
+                0x08001dc2                EXTI9_5_IRQHandler
  .text.NVIC_SetPriority
-                0x08001dd4       0x54 ..\obj\tm_stm32f4_delay.o
+                0x08001de0       0x54 ..\obj\tm_stm32f4_delay.o
  .text.SysTick_Config
-                0x08001e28       0x44 ..\obj\tm_stm32f4_delay.o
- .text.Delayms  0x08001e6c       0x30 ..\obj\tm_stm32f4_delay.o
-                0x08001e6c                Delayms
+                0x08001e34       0x44 ..\obj\tm_stm32f4_delay.o
+ .text.Delayms  0x08001e78       0x30 ..\obj\tm_stm32f4_delay.o
+                0x08001e78                Delayms
  .text.SysTick_Handler
-                0x08001e9c       0x48 ..\obj\tm_stm32f4_delay.o
-                0x08001e9c                SysTick_Handler
+                0x08001ea8       0x48 ..\obj\tm_stm32f4_delay.o
+                0x08001ea8                SysTick_Handler
  .text.TM_DELAY_Init
-                0x08001ee4       0x50 ..\obj\tm_stm32f4_delay.o
-                0x08001ee4                TM_DELAY_Init
+                0x08001ef0       0x50 ..\obj\tm_stm32f4_delay.o
+                0x08001ef0                TM_DELAY_Init
  .text.GPIO_Init
-                0x08001f34      0x11a ..\obj\stm32f4xx_gpio.o
-                0x08001f34                GPIO_Init
+                0x08001f40      0x11a ..\obj\stm32f4xx_gpio.o
+                0x08001f40                GPIO_Init
  .text.GPIO_ReadInputDataBit
-                0x0800204e       0x32 ..\obj\stm32f4xx_gpio.o
-                0x0800204e                GPIO_ReadInputDataBit
+                0x0800205a       0x32 ..\obj\stm32f4xx_gpio.o
+                0x0800205a                GPIO_ReadInputDataBit
  .text.GPIO_SetBits
-                0x08002080       0x1c ..\obj\stm32f4xx_gpio.o
-                0x08002080                GPIO_SetBits
+                0x0800208c       0x1c ..\obj\stm32f4xx_gpio.o
+                0x0800208c                GPIO_SetBits
  .text.GPIO_ResetBits
-                0x0800209c       0x1c ..\obj\stm32f4xx_gpio.o
-                0x0800209c                GPIO_ResetBits
+                0x080020a8       0x1c ..\obj\stm32f4xx_gpio.o
+                0x080020a8                GPIO_ResetBits
  .text.GPIO_PinAFConfig
-                0x080020b8       0x90 ..\obj\stm32f4xx_gpio.o
-                0x080020b8                GPIO_PinAFConfig
+                0x080020c4       0x90 ..\obj\stm32f4xx_gpio.o
+                0x080020c4                GPIO_PinAFConfig
  .text.init_handle
-                0x08002148       0x60 ..\obj\mekanisme_penendang.o
-                0x08002148                init_handle
+                0x08002154       0x60 ..\obj\mekanisme_penendang.o
+                0x08002154                init_handle
  .text.init_penendang
-                0x080021a8       0x3c ..\obj\mekanisme_penendang.o
-                0x080021a8                init_penendang
+                0x080021b4       0x3c ..\obj\mekanisme_penendang.o
+                0x080021b4                init_penendang
  .text.lcd_init
-                0x080021e4       0x3c ..\obj\lcd_16x2.o
-                0x080021e4                lcd_init
+                0x080021f0       0x3c ..\obj\lcd_16x2.o
+                0x080021f0                lcd_init
  .text.lcd_clear
-                0x08002220       0x16 ..\obj\lcd_16x2.o
-                0x08002220                lcd_clear
+                0x0800222c       0x16 ..\obj\lcd_16x2.o
+                0x0800222c                lcd_clear
  .text.lcd_putsf
-                0x08002236       0x3e ..\obj\lcd_16x2.o
-                0x08002236                lcd_putsf
+                0x08002242       0x3e ..\obj\lcd_16x2.o
+                0x08002242                lcd_putsf
  .text.P_LCD_2x16_InitIO
-                0x08002274       0xa8 ..\obj\lcd_16x2.o
-                0x08002274                P_LCD_2x16_InitIO
+                0x08002280       0xa8 ..\obj\lcd_16x2.o
+                0x08002280                P_LCD_2x16_InitIO
  .text.P_LCD_2x16_PinLo
-                0x0800231c       0x40 ..\obj\lcd_16x2.o
-                0x0800231c                P_LCD_2x16_PinLo
+                0x08002328       0x40 ..\obj\lcd_16x2.o
+                0x08002328                P_LCD_2x16_PinLo
  .text.P_LCD_2x16_PinHi
-                0x0800235c       0x40 ..\obj\lcd_16x2.o
-                0x0800235c                P_LCD_2x16_PinHi
+                0x08002368       0x40 ..\obj\lcd_16x2.o
+                0x08002368                P_LCD_2x16_PinHi
  .text.P_LCD_2x16_Clk
-                0x0800239c       0x24 ..\obj\lcd_16x2.o
-                0x0800239c                P_LCD_2x16_Clk
+                0x080023a8       0x24 ..\obj\lcd_16x2.o
+                0x080023a8                P_LCD_2x16_Clk
  .text.P_LCD_2x16_InitSequenz
-                0x080023c0       0x68 ..\obj\lcd_16x2.o
-                0x080023c0                P_LCD_2x16_InitSequenz
+                0x080023cc       0x68 ..\obj\lcd_16x2.o
+                0x080023cc                P_LCD_2x16_InitSequenz
  .text.P_LCD_2x16_Cmd
-                0x08002428       0xde ..\obj\lcd_16x2.o
-                0x08002428                P_LCD_2x16_Cmd
+                0x08002434       0xde ..\obj\lcd_16x2.o
+                0x08002434                P_LCD_2x16_Cmd
  .text.P_LCD_2x16_Data
-                0x08002506       0xde ..\obj\lcd_16x2.o
-                0x08002506                P_LCD_2x16_Data
+                0x08002512       0xde ..\obj\lcd_16x2.o
+                0x08002512                P_LCD_2x16_Data
  .text.lcd_gotoxy
-                0x080025e4       0x4a ..\obj\lcd_16x2.o
-                0x080025e4                lcd_gotoxy
+                0x080025f0       0x4a ..\obj\lcd_16x2.o
+                0x080025f0                lcd_gotoxy
  .text.P_LCD_2x16_Delay
-                0x0800262e       0x1e ..\obj\lcd_16x2.o
-                0x0800262e                P_LCD_2x16_Delay
+                0x0800263a       0x1e ..\obj\lcd_16x2.o
+                0x0800263a                P_LCD_2x16_Delay
  .text.SystemInit
-                0x0800264c       0x5c ..\obj\system_stm32f4xx.o
-                0x0800264c                SystemInit
+                0x08002658       0x5c ..\obj\system_stm32f4xx.o
+                0x08002658                SystemInit
  .text.SetSysClock
-                0x080026a8       0xf4 ..\obj\system_stm32f4xx.o
+                0x080026b4       0xf4 ..\obj\system_stm32f4xx.o
  .text.init_camera
-                0x0800279c       0xb8 ..\obj\uart_camera.o
-                0x0800279c                init_camera
+                0x080027a8       0xb8 ..\obj\uart_camera.o
+                0x080027a8                init_camera
  .text.USART3_IRQHandler
-                0x08002854      0x268 ..\obj\uart_camera.o
-                0x08002854                USART3_IRQHandler
+                0x08002860      0x268 ..\obj\uart_camera.o
+                0x08002860                USART3_IRQHandler
  .text.InitializeTimer
-                0x08002abc       0x4e ..\obj\speed_control.o
-                0x08002abc                InitializeTimer
+                0x08002ac8       0x4e ..\obj\speed_control.o
+                0x08002ac8                InitializeTimer
  .text.EnableTimerInterrupt
-                0x08002b0a       0x26 ..\obj\speed_control.o
-                0x08002b0a                EnableTimerInterrupt
+                0x08002b16       0x26 ..\obj\speed_control.o
+                0x08002b16                EnableTimerInterrupt
  .text.init_speed_control
-                0x08002b30       0x5c ..\obj\speed_control.o
-                0x08002b30                init_speed_control
- .text.odoInit  0x08002b8c      0x12c ..\obj\speed_control.o
-                0x08002b8c                odoInit
- .text.traInit  0x08002cb8       0x3a ..\obj\speed_control.o
-                0x08002cb8                traInit
- *fill*         0x08002cf2        0x2 
+                0x08002b3c       0x5c ..\obj\speed_control.o
+                0x08002b3c                init_speed_control
+ .text.odoInit  0x08002b98      0x12c ..\obj\speed_control.o
+                0x08002b98                odoInit
+ .text.traInit  0x08002cc4       0x3a ..\obj\speed_control.o
+                0x08002cc4                traInit
+ *fill*         0x08002cfe        0x2 
  .text.traXInit
-                0x08002cf4       0x78 ..\obj\speed_control.o
-                0x08002cf4                traXInit
+                0x08002d00       0x78 ..\obj\speed_control.o
+                0x08002d00                traXInit
  .text.traYInit
-                0x08002d6c       0x78 ..\obj\speed_control.o
-                0x08002d6c                traYInit
+                0x08002d78       0x78 ..\obj\speed_control.o
+                0x08002d78                traYInit
  .text.traWInit
-                0x08002de4       0x78 ..\obj\speed_control.o
-                0x08002de4                traWInit
- .text.pidInit  0x08002e5c       0x78 ..\obj\speed_control.o
-                0x08002e5c                pidInit
+                0x08002df0       0x78 ..\obj\speed_control.o
+                0x08002df0                traWInit
+ .text.pidInit  0x08002e68       0x78 ..\obj\speed_control.o
+                0x08002e68                pidInit
  .text.resetInit
-                0x08002ed4       0xb8 ..\obj\speed_control.o
-                0x08002ed4                resetInit
+                0x08002ee0       0xb8 ..\obj\speed_control.o
+                0x08002ee0                resetInit
  .text.TIM2_IRQHandler
-                0x08002f8c      0x3d0 ..\obj\speed_control.o
-                0x08002f8c                TIM2_IRQHandler
- *fill*         0x0800335c        0x4 
+                0x08002f98      0x3bc ..\obj\speed_control.o
+                0x08002f98                TIM2_IRQHandler
+ *fill*         0x08003354        0x4 
  .text.moveInput
-                0x08003360      0x580 ..\obj\speed_control.o
-                0x08003360                moveInput
+                0x08003358      0x548 ..\obj\speed_control.o
+                0x08003358                moveInput
  .text.calculatePosition
-                0x080038e0      0x620 ..\obj\speed_control.o
-                0x080038e0                calculatePosition
+                0x080038a0      0x620 ..\obj\speed_control.o
+                0x080038a0                calculatePosition
  .text.calculatePID
-                0x08003f00      0x118 ..\obj\speed_control.o
-                0x08003f00                calculatePID
+                0x08003ec0      0x118 ..\obj\speed_control.o
+                0x08003ec0                calculatePID
  .text.kinematic
-                0x08004018      0x23c ..\obj\speed_control.o
-                0x08004018                kinematic
+                0x08003fd8      0x23c ..\obj\speed_control.o
+                0x08003fd8                kinematic
+ .text.motorSpeed
+                0x08004214       0x54 ..\obj\speed_control.o
+                0x08004214                motorSpeed
  .text.EXTI_Init
-                0x08004254       0xe4 ..\obj\stm32f4xx_exti.o
-                0x08004254                EXTI_Init
+                0x08004268       0xe4 ..\obj\stm32f4xx_exti.o
+                0x08004268                EXTI_Init
  .text.EXTI_GetITStatus
-                0x08004338       0x48 ..\obj\stm32f4xx_exti.o
-                0x08004338                EXTI_GetITStatus
+                0x0800434c       0x48 ..\obj\stm32f4xx_exti.o
+                0x0800434c                EXTI_GetITStatus
  .text.EXTI_ClearITPendingBit
-                0x08004380       0x1c ..\obj\stm32f4xx_exti.o
-                0x08004380                EXTI_ClearITPendingBit
+                0x08004394       0x1c ..\obj\stm32f4xx_exti.o
+                0x08004394                EXTI_ClearITPendingBit
  .text.NVIC_Init
-                0x0800439c       0xc4 ..\obj\misc.o
-                0x0800439c                NVIC_Init
+                0x080043b0       0xc4 ..\obj\misc.o
+                0x080043b0                NVIC_Init
  .text.printData
-                0x08004460       0x80 ..\obj\localization.o
-                0x08004460                printData
+                0x08004474       0x80 ..\obj\localization.o
+                0x08004474                printData
  .text.init_proximity
-                0x080044e0       0x94 ..\obj\localization.o
-                0x080044e0                init_proximity
+                0x080044f4       0x94 ..\obj\localization.o
+                0x080044f4                init_proximity
  .text.LCD_InitializeTimer
-                0x08004574       0x50 ..\obj\localization.o
-                0x08004574                LCD_InitializeTimer
+                0x08004588       0x50 ..\obj\localization.o
+                0x08004588                LCD_InitializeTimer
  .text.LCD_EnableTimerInterrupt
-                0x080045c4       0x26 ..\obj\localization.o
-                0x080045c4                LCD_EnableTimerInterrupt
- *fill*         0x080045ea        0x2 
+                0x080045d8       0x26 ..\obj\localization.o
+                0x080045d8                LCD_EnableTimerInterrupt
+ *fill*         0x080045fe        0x2 
  .text.TIM5_IRQHandler
-                0x080045ec       0x28 ..\obj\localization.o
-                0x080045ec                TIM5_IRQHandler
+                0x08004600       0x28 ..\obj\localization.o
+                0x08004600                TIM5_IRQHandler
  .text.init_lcdTimer
-                0x08004614       0x10 ..\obj\localization.o
-                0x08004614                init_lcdTimer
+                0x08004628       0x10 ..\obj\localization.o
+                0x08004628                init_lcdTimer
  .text.TIM_TimeBaseInit
-                0x08004624       0xd4 ..\obj\stm32f4xx_tim.o
-                0x08004624                TIM_TimeBaseInit
- .text.TIM_Cmd  0x080046f8       0x3e ..\obj\stm32f4xx_tim.o
-                0x080046f8                TIM_Cmd
- *fill*         0x08004736        0x2 
+                0x08004638       0xd4 ..\obj\stm32f4xx_tim.o
+                0x08004638                TIM_TimeBaseInit
+ .text.TIM_Cmd  0x0800470c       0x3e ..\obj\stm32f4xx_tim.o
+                0x0800470c                TIM_Cmd
+ *fill*         0x0800474a        0x2 
  .text.TIM_OC1Init
-                0x08004738       0xf4 ..\obj\stm32f4xx_tim.o
-                0x08004738                TIM_OC1Init
+                0x0800474c       0xf4 ..\obj\stm32f4xx_tim.o
+                0x0800474c                TIM_OC1Init
  .text.TIM_OC2Init
-                0x0800482c      0x110 ..\obj\stm32f4xx_tim.o
-                0x0800482c                TIM_OC2Init
+                0x08004840      0x110 ..\obj\stm32f4xx_tim.o
+                0x08004840                TIM_OC2Init
  .text.TIM_OC3Init
-                0x0800493c      0x10c ..\obj\stm32f4xx_tim.o
-                0x0800493c                TIM_OC3Init
+                0x08004950      0x10c ..\obj\stm32f4xx_tim.o
+                0x08004950                TIM_OC3Init
  .text.TIM_OC4Init
-                0x08004a48       0xcc ..\obj\stm32f4xx_tim.o
-                0x08004a48                TIM_OC4Init
+                0x08004a5c       0xcc ..\obj\stm32f4xx_tim.o
+                0x08004a5c                TIM_OC4Init
  .text.TIM_OC1PreloadConfig
-                0x08004b14       0x36 ..\obj\stm32f4xx_tim.o
-                0x08004b14                TIM_OC1PreloadConfig
+                0x08004b28       0x36 ..\obj\stm32f4xx_tim.o
+                0x08004b28                TIM_OC1PreloadConfig
  .text.TIM_OC2PreloadConfig
-                0x08004b4a       0x3a ..\obj\stm32f4xx_tim.o
-                0x08004b4a                TIM_OC2PreloadConfig
+                0x08004b5e       0x3a ..\obj\stm32f4xx_tim.o
+                0x08004b5e                TIM_OC2PreloadConfig
  .text.TIM_OC3PreloadConfig
-                0x08004b84       0x36 ..\obj\stm32f4xx_tim.o
-                0x08004b84                TIM_OC3PreloadConfig
+                0x08004b98       0x36 ..\obj\stm32f4xx_tim.o
+                0x08004b98                TIM_OC3PreloadConfig
  .text.TIM_OC4PreloadConfig
-                0x08004bba       0x3a ..\obj\stm32f4xx_tim.o
-                0x08004bba                TIM_OC4PreloadConfig
+                0x08004bce       0x3a ..\obj\stm32f4xx_tim.o
+                0x08004bce                TIM_OC4PreloadConfig
  .text.TIM_ITConfig
-                0x08004bf4       0x46 ..\obj\stm32f4xx_tim.o
-                0x08004bf4                TIM_ITConfig
+                0x08004c08       0x46 ..\obj\stm32f4xx_tim.o
+                0x08004c08                TIM_ITConfig
  .text.TIM_GetITStatus
-                0x08004c3a       0x52 ..\obj\stm32f4xx_tim.o
-                0x08004c3a                TIM_GetITStatus
+                0x08004c4e       0x52 ..\obj\stm32f4xx_tim.o
+                0x08004c4e                TIM_GetITStatus
  .text.TIM_ClearITPendingBit
-                0x08004c8c       0x20 ..\obj\stm32f4xx_tim.o
-                0x08004c8c                TIM_ClearITPendingBit
- *fill*         0x08004cac        0x4 
- .text.atan     0x08004cb0      0x344 c:/program files (x86)/gnu tools arm embedded/6 2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m\libm.a(lib_a-s_atan.o)
-                0x08004cb0                atan
- .text.cos      0x08004ff4       0x94 c:/program files (x86)/gnu tools arm embedded/6 2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m\libm.a(lib_a-s_cos.o)
-                0x08004ff4                cos
- .text.fabs     0x08005088        0x8 c:/program files (x86)/gnu tools arm embedded/6 2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m\libm.a(lib_a-s_fabs.o)
-                0x08005088                fabs
- .text.sin      0x08005090       0x88 c:/program files (x86)/gnu tools arm embedded/6 2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m\libm.a(lib_a-s_sin.o)
-                0x08005090                sin
- .text.atan2    0x08005118        0x4 c:/program files (x86)/gnu tools arm embedded/6 2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m\libm.a(lib_a-w_atan2.o)
-                0x08005118                atan2
- *fill*         0x0800511c        0x4 
+                0x08004ca0       0x20 ..\obj\stm32f4xx_tim.o
+                0x08004ca0                TIM_ClearITPendingBit
+ .text.atan     0x08004cc0      0x344 c:/program files (x86)/gnu tools arm embedded/6 2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m\libm.a(lib_a-s_atan.o)
+                0x08004cc0                atan
+ .text.cos      0x08005004       0x94 c:/program files (x86)/gnu tools arm embedded/6 2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m\libm.a(lib_a-s_cos.o)
+                0x08005004                cos
+ .text.fabs     0x08005098        0x8 c:/program files (x86)/gnu tools arm embedded/6 2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m\libm.a(lib_a-s_fabs.o)
+                0x08005098                fabs
+ .text.sin      0x080050a0       0x88 c:/program files (x86)/gnu tools arm embedded/6 2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m\libm.a(lib_a-s_sin.o)
+                0x080050a0                sin
+ .text.atan2    0x08005128        0x4 c:/program files (x86)/gnu tools arm embedded/6 2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m\libm.a(lib_a-w_atan2.o)
+                0x08005128                atan2
+ *fill*         0x0800512c        0x4 
  .text.__ieee754_atan2
-                0x08005120      0x1d4 c:/program files (x86)/gnu tools arm embedded/6 2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m\libm.a(lib_a-e_atan2.o)
-                0x08005120                __ieee754_atan2
- *fill*         0x080052f4        0x4 
+                0x08005130      0x1d4 c:/program files (x86)/gnu tools arm embedded/6 2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m\libm.a(lib_a-e_atan2.o)
+                0x08005130                __ieee754_atan2
+ *fill*         0x08005304        0x4 
  .text.__ieee754_rem_pio2
-                0x080052f8      0x444 c:/program files (x86)/gnu tools arm embedded/6 2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m\libm.a(lib_a-e_rem_pio2.o)
-                0x080052f8                __ieee754_rem_pio2
- *fill*         0x0800573c        0x4 
+                0x08005308      0x444 c:/program files (x86)/gnu tools arm embedded/6 2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m\libm.a(lib_a-e_rem_pio2.o)
+                0x08005308                __ieee754_rem_pio2
+ *fill*         0x0800574c        0x4 
  .text.__kernel_cos
-                0x08005740      0x248 c:/program files (x86)/gnu tools arm embedded/6 2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m\libm.a(lib_a-k_cos.o)
-                0x08005740                __kernel_cos
+                0x08005750      0x248 c:/program files (x86)/gnu tools arm embedded/6 2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m\libm.a(lib_a-k_cos.o)
+                0x08005750                __kernel_cos
  .text.__kernel_rem_pio2
-                0x08005988      0x88c c:/program files (x86)/gnu tools arm embedded/6 2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m\libm.a(lib_a-k_rem_pio2.o)
-                0x08005988                __kernel_rem_pio2
- *fill*         0x08006214        0x4 
+                0x08005998      0x88c c:/program files (x86)/gnu tools arm embedded/6 2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m\libm.a(lib_a-k_rem_pio2.o)
+                0x08005998                __kernel_rem_pio2
+ *fill*         0x08006224        0x4 
  .text.__kernel_sin
-                0x08006218      0x16c c:/program files (x86)/gnu tools arm embedded/6 2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m\libm.a(lib_a-k_sin.o)
-                0x08006218                __kernel_sin
- *fill*         0x08006384        0x4 
- .text.floor    0x08006388      0x118 c:/program files (x86)/gnu tools arm embedded/6 2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m\libm.a(lib_a-s_floor.o)
-                0x08006388                floor
- .text.scalbn   0x080064a0       0xfc c:/program files (x86)/gnu tools arm embedded/6 2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m\libm.a(lib_a-s_scalbn.o)
-                0x080064a0                scalbn
+                0x08006228      0x16c c:/program files (x86)/gnu tools arm embedded/6 2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m\libm.a(lib_a-k_sin.o)
+                0x08006228                __kernel_sin
+ *fill*         0x08006394        0x4 
+ .text.floor    0x08006398      0x118 c:/program files (x86)/gnu tools arm embedded/6 2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m\libm.a(lib_a-s_floor.o)
+                0x08006398                floor
+ .text.scalbn   0x080064b0       0xfc c:/program files (x86)/gnu tools arm embedded/6 2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m\libm.a(lib_a-s_scalbn.o)
+                0x080064b0                scalbn
  .text.copysign
-                0x0800659c       0x10 c:/program files (x86)/gnu tools arm embedded/6 2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m\libm.a(lib_a-s_copysign.o)
-                0x0800659c                copysign
- .text          0x080065ac      0x370 c:/program files (x86)/gnu tools arm embedded/6 2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v7e-m\libgcc.a(_arm_addsubdf3.o)
-                0x080065ac                __aeabi_drsub
-                0x080065b4                __aeabi_dsub
-                0x080065b4                __subdf3
-                0x080065b8                __aeabi_dadd
-                0x080065b8                __adddf3
-                0x08006830                __floatunsidf
-                0x08006830                __aeabi_ui2d
-                0x08006850                __floatsidf
-                0x08006850                __aeabi_i2d
-                0x08006874                __aeabi_f2d
-                0x08006874                __extendsfdf2
-                0x080068b0                __floatundidf
-                0x080068b0                __aeabi_ul2d
-                0x080068c0                __floatdidf
-                0x080068c0                __aeabi_l2d
- .text          0x0800691c      0x424 c:/program files (x86)/gnu tools arm embedded/6 2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v7e-m\libgcc.a(_arm_muldivdf3.o)
-                0x0800691c                __aeabi_dmul
-                0x0800691c                __muldf3
-                0x08006b70                __divdf3
-                0x08006b70                __aeabi_ddiv
- .text          0x08006d40      0x110 c:/program files (x86)/gnu tools arm embedded/6 2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v7e-m\libgcc.a(_arm_cmpdf2.o)
-                0x08006d40                __gtdf2
-                0x08006d40                __gedf2
-                0x08006d48                __ltdf2
-                0x08006d48                __ledf2
-                0x08006d50                __nedf2
-                0x08006d50                __eqdf2
-                0x08006d50                __cmpdf2
-                0x08006dcc                __aeabi_cdrcmple
-                0x08006ddc                __aeabi_cdcmpeq
-                0x08006ddc                __aeabi_cdcmple
-                0x08006dec                __aeabi_dcmpeq
-                0x08006e00                __aeabi_dcmplt
-                0x08006e14                __aeabi_dcmple
-                0x08006e28                __aeabi_dcmpge
-                0x08006e3c                __aeabi_dcmpgt
- .text          0x08006e50       0x50 c:/program files (x86)/gnu tools arm embedded/6 2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v7e-m\libgcc.a(_arm_fixdfsi.o)
-                0x08006e50                __aeabi_d2iz
-                0x08006e50                __fixdfsi
- .text          0x08006ea0      0x21c c:/program files (x86)/gnu tools arm embedded/6 2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v7e-m\libgcc.a(_arm_addsubsf3.o)
-                0x08006ea0                __aeabi_frsub
-                0x08006ea8                __subsf3
-                0x08006ea8                __aeabi_fsub
-                0x08006eac                __aeabi_fadd
-                0x08006eac                __addsf3
-                0x0800700c                __aeabi_ui2f
-                0x0800700c                __floatunsisf
-                0x08007014                __aeabi_i2f
-                0x08007014                __floatsisf
-                0x08007030                __aeabi_ul2f
-                0x08007030                __floatundisf
-                0x08007040                __aeabi_l2f
-                0x08007040                __floatdisf
- .text          0x080070bc      0x2a0 c:/program files (x86)/gnu tools arm embedded/6 2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v7e-m\libgcc.a(_arm_muldivsf3.o)
-                0x080070bc                __mulsf3
-                0x080070bc                __aeabi_fmul
-                0x08007224                __aeabi_fdiv
-                0x08007224                __divsf3
- .text          0x0800735c       0xec c:/program files (x86)/gnu tools arm embedded/6 2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v7e-m\libgcc.a(_arm_cmpsf2.o)
-                0x0800735c                __gesf2
-                0x0800735c                __gtsf2
-                0x08007364                __lesf2
-                0x08007364                __ltsf2
-                0x0800736c                __nesf2
-                0x0800736c                __eqsf2
-                0x0800736c                __cmpsf2
-                0x080073cc                __aeabi_cfrcmple
-                0x080073d4                __aeabi_cfcmpeq
-                0x080073d4                __aeabi_cfcmple
-                0x080073e4                __aeabi_fcmpeq
-                0x080073f8                __aeabi_fcmplt
-                0x0800740c                __aeabi_fcmple
-                0x08007420                __aeabi_fcmpge
-                0x08007434                __aeabi_fcmpgt
+                0x080065ac       0x10 c:/program files (x86)/gnu tools arm embedded/6 2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m\libm.a(lib_a-s_copysign.o)
+                0x080065ac                copysign
+ .text          0x080065bc      0x370 c:/program files (x86)/gnu tools arm embedded/6 2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v7e-m\libgcc.a(_arm_addsubdf3.o)
+                0x080065bc                __aeabi_drsub
+                0x080065c4                __aeabi_dsub
+                0x080065c4                __subdf3
+                0x080065c8                __aeabi_dadd
+                0x080065c8                __adddf3
+                0x08006840                __floatunsidf
+                0x08006840                __aeabi_ui2d
+                0x08006860                __floatsidf
+                0x08006860                __aeabi_i2d
+                0x08006884                __aeabi_f2d
+                0x08006884                __extendsfdf2
+                0x080068c0                __floatundidf
+                0x080068c0                __aeabi_ul2d
+                0x080068d0                __floatdidf
+                0x080068d0                __aeabi_l2d
+ .text          0x0800692c      0x424 c:/program files (x86)/gnu tools arm embedded/6 2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v7e-m\libgcc.a(_arm_muldivdf3.o)
+                0x0800692c                __aeabi_dmul
+                0x0800692c                __muldf3
+                0x08006b80                __divdf3
+                0x08006b80                __aeabi_ddiv
+ .text          0x08006d50      0x110 c:/program files (x86)/gnu tools arm embedded/6 2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v7e-m\libgcc.a(_arm_cmpdf2.o)
+                0x08006d50                __gtdf2
+                0x08006d50                __gedf2
+                0x08006d58                __ltdf2
+                0x08006d58                __ledf2
+                0x08006d60                __nedf2
+                0x08006d60                __eqdf2
+                0x08006d60                __cmpdf2
+                0x08006ddc                __aeabi_cdrcmple
+                0x08006dec                __aeabi_cdcmpeq
+                0x08006dec                __aeabi_cdcmple
+                0x08006dfc                __aeabi_dcmpeq
+                0x08006e10                __aeabi_dcmplt
+                0x08006e24                __aeabi_dcmple
+                0x08006e38                __aeabi_dcmpge
+                0x08006e4c                __aeabi_dcmpgt
+ .text          0x08006e60       0x50 c:/program files (x86)/gnu tools arm embedded/6 2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v7e-m\libgcc.a(_arm_fixdfsi.o)
+                0x08006e60                __aeabi_d2iz
+                0x08006e60                __fixdfsi
+ .text          0x08006eb0      0x21c c:/program files (x86)/gnu tools arm embedded/6 2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v7e-m\libgcc.a(_arm_addsubsf3.o)
+                0x08006eb0                __aeabi_frsub
+                0x08006eb8                __subsf3
+                0x08006eb8                __aeabi_fsub
+                0x08006ebc                __aeabi_fadd
+                0x08006ebc                __addsf3
+                0x0800701c                __aeabi_ui2f
+                0x0800701c                __floatunsisf
+                0x08007024                __aeabi_i2f
+                0x08007024                __floatsisf
+                0x08007040                __aeabi_ul2f
+                0x08007040                __floatundisf
+                0x08007050                __aeabi_l2f
+                0x08007050                __floatdisf
+ .text          0x080070cc      0x2a0 c:/program files (x86)/gnu tools arm embedded/6 2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v7e-m\libgcc.a(_arm_muldivsf3.o)
+                0x080070cc                __mulsf3
+                0x080070cc                __aeabi_fmul
+                0x08007234                __aeabi_fdiv
+                0x08007234                __divsf3
+ .text          0x0800736c       0xec c:/program files (x86)/gnu tools arm embedded/6 2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v7e-m\libgcc.a(_arm_cmpsf2.o)
+                0x0800736c                __gesf2
+                0x0800736c                __gtsf2
+                0x08007374                __lesf2
+                0x08007374                __ltsf2
+                0x0800737c                __nesf2
+                0x0800737c                __eqsf2
+                0x0800737c                __cmpsf2
+                0x080073dc                __aeabi_cfrcmple
+                0x080073e4                __aeabi_cfcmpeq
+                0x080073e4                __aeabi_cfcmple
+                0x080073f4                __aeabi_fcmpeq
+                0x08007408                __aeabi_fcmplt
+                0x0800741c                __aeabi_fcmple
+                0x08007430                __aeabi_fcmpge
+                0x08007444                __aeabi_fcmpgt
  *(.init)
  *(.fini)
  *crtbegin.o(.ctors)
@@ -1638,50 +1631,50 @@ Linker script and memory map
  *(SORT(.dtors.*))
  *(.dtors)
  *(.rodata*)
- .rodata        0x08007448       0x1f ..\obj\localization.o
- *fill*         0x08007467        0x1 
+ .rodata        0x08007458       0x1f ..\obj\localization.o
+ *fill*         0x08007477        0x1 
  .rodata.atanhi
-                0x08007468       0x20 c:/program files (x86)/gnu tools arm embedded/6 2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m\libm.a(lib_a-s_atan.o)
+                0x08007478       0x20 c:/program files (x86)/gnu tools arm embedded/6 2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m\libm.a(lib_a-s_atan.o)
  .rodata.atanlo
-                0x08007488       0x20 c:/program files (x86)/gnu tools arm embedded/6 2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m\libm.a(lib_a-s_atan.o)
+                0x08007498       0x20 c:/program files (x86)/gnu tools arm embedded/6 2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m\libm.a(lib_a-s_atan.o)
  .rodata.npio2_hw
-                0x080074a8       0x80 c:/program files (x86)/gnu tools arm embedded/6 2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m\libm.a(lib_a-e_rem_pio2.o)
+                0x080074b8       0x80 c:/program files (x86)/gnu tools arm embedded/6 2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m\libm.a(lib_a-e_rem_pio2.o)
  .rodata.two_over_pi
-                0x08007528      0x108 c:/program files (x86)/gnu tools arm embedded/6 2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m\libm.a(lib_a-e_rem_pio2.o)
- .rodata.PIo2   0x08007630       0x40 c:/program files (x86)/gnu tools arm embedded/6 2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m\libm.a(lib_a-k_rem_pio2.o)
+                0x08007538      0x108 c:/program files (x86)/gnu tools arm embedded/6 2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m\libm.a(lib_a-e_rem_pio2.o)
+ .rodata.PIo2   0x08007640       0x40 c:/program files (x86)/gnu tools arm embedded/6 2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m\libm.a(lib_a-k_rem_pio2.o)
  .rodata.init_jk
-                0x08007670       0x10 c:/program files (x86)/gnu tools arm embedded/6 2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m\libm.a(lib_a-k_rem_pio2.o)
+                0x08007680       0x10 c:/program files (x86)/gnu tools arm embedded/6 2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m\libm.a(lib_a-k_rem_pio2.o)
  *(.eh_fram e*)
 
-.glue_7         0x08007680        0x0
- .glue_7        0x08007680        0x0 linker stubs
+.glue_7         0x08007690        0x0
+ .glue_7        0x08007690        0x0 linker stubs
 
-.glue_7t        0x08007680        0x0
- .glue_7t       0x08007680        0x0 linker stubs
+.glue_7t        0x08007690        0x0
+ .glue_7t       0x08007690        0x0 linker stubs
 
-.vfp11_veneer   0x08007680        0x0
- .vfp11_veneer  0x08007680        0x0 linker stubs
+.vfp11_veneer   0x08007690        0x0
+ .vfp11_veneer  0x08007690        0x0 linker stubs
 
-.v4_bx          0x08007680        0x0
- .v4_bx         0x08007680        0x0 linker stubs
+.v4_bx          0x08007690        0x0
+ .v4_bx         0x08007690        0x0 linker stubs
 
-.iplt           0x08007680        0x0
- .iplt          0x08007680        0x0 ..\obj\uart_node.o
+.iplt           0x08007690        0x0
+ .iplt          0x08007690        0x0 ..\obj\uart_node.o
 
-.rel.dyn        0x08007680        0x0
- .rel.iplt      0x08007680        0x0 ..\obj\uart_node.o
+.rel.dyn        0x08007690        0x0
+ .rel.iplt      0x08007690        0x0 ..\obj\uart_node.o
 
 .ARM.extab
  *(.ARM.extab* .gnu.linkonce.armextab.*)
-                0x08007680                __exidx_start = .
+                0x08007690                __exidx_start = .
 
 .ARM.exidx
  *(.ARM.exidx* .gnu.linkonce.armexidx.*)
-                0x08007680                __exidx_end = .
-                0x08007680                __etext = .
-                0x08007680                _sidata = __etext
+                0x08007690                __exidx_end = .
+                0x08007690                __etext = .
+                0x08007690                _sidata = __etext
 
-.data           0x20000000       0xf4 load address 0x08007680
+.data           0x20000000       0xf4 load address 0x08007690
                 0x20000000                __data_start__ = .
                 0x20000000                _sdata = __data_start__
  *(vtable)
@@ -1696,17 +1689,17 @@ Linker script and memory map
                 0x20000094                AHBPrescTable
  *fill*         0x200000a4        0x4 
  .data          0x200000a8       0x4c ..\obj\speed_control.o
-                0x200000a8                ppr
-                0x200000b0                robot_radius
-                0x200000b8                wheel_radius
-                0x200000c0                time_sampling
-                0x200000c8                min_pid_limit
-                0x200000d0                max_pid_limit
-                0x200000d8                min_pwm_limit
-                0x200000e0                max_pwm_limit
-                0x200000e8                move_ccounter
-                0x200000ec                abs1
-                0x200000f0                abs2
+                0x200000a8                abs1
+                0x200000ac                abs2
+                0x200000b0                ppr
+                0x200000b8                robot_radius
+                0x200000c0                wheel_radius
+                0x200000c8                time_sampling
+                0x200000d0                min_pid_limit
+                0x200000d8                max_pid_limit
+                0x200000e0                min_pwm_limit
+                0x200000e8                max_pwm_limit
+                0x200000f0                move_ccounter
                 0x200000f4                . = ALIGN (0x4)
                 [!provide]                PROVIDE (__preinit_array_start, .)
  *(.preinit_array)
@@ -1726,10 +1719,10 @@ Linker script and memory map
                 0x200000f4                __data_end__ = .
                 0x200000f4                _edata = __data_end__
 
-.igot.plt       0x200000f4        0x0 load address 0x08007774
+.igot.plt       0x200000f4        0x0 load address 0x08007784
  .igot.plt      0x200000f4        0x0 ..\obj\uart_node.o
 
-.bss            0x200000f8      0x4bc load address 0x08007778
+.bss            0x200000f8      0x4bc load address 0x08007788
                 0x200000f8                . = ALIGN (0x4)
                 0x200000f8                __bss_start__ = .
                 0x200000f8                _sbss = __bss_start__
@@ -1740,177 +1733,179 @@ Linker script and memory map
  .bss           0x20000108        0x4 ..\obj\uart_camera.o
                 0x20000108                autosudut
  *fill*         0x2000010c        0x4 
- .bss           0x20000110      0x2b0 ..\obj\speed_control.o
-                0x2000011c                rotaryCount
-                0x20000120                lastCount
-                0x20000124                error
-                0x20000126                errorDua
-                0x20000128                errorTiga
-                0x2000012a                errorEmpat
-                0x2000012c                rpm
-                0x20000130                rpmDua
-                0x20000134                rpmTiga
-                0x20000138                rpmEmpat
-                0x2000013c                setPointSatu
-                0x2000013e                setPointDua
-                0x20000140                setPointTiga
-                0x20000142                setPointEmpat
-                0x20000144                output
-                0x20000148                outputDua
-                0x2000014c                outputTiga
-                0x20000150                outputEmpat
-                0x20000154                speed
-                0x20000158                prevError
-                0x2000015a                derivError
-                0x2000015c                intError
-                0x2000015e                prevErrorDua
-                0x20000160                derivErrorDua
-                0x20000162                intErrorDua
-                0x20000164                prevErrorTiga
-                0x20000166                derivErrorTiga
-                0x20000168                intErrorTiga
-                0x2000016a                prevErrorEmpat
-                0x2000016c                derivErrorEmpat
-                0x2000016e                intErrorEmpat
-                0x20000170                current_x
-                0x20000178                current_y
-                0x20000180                current_w
-                0x20000188                current_w2
-                0x20000190                currentLocal_x
-                0x20000198                currentLocal_y
-                0x200001a0                currentLocal_w
-                0x200001a8                current_speed_1
-                0x200001b0                current_speed_2
-                0x200001b8                current_speed_3
-                0x200001c0                current_speed_4
-                0x200001c8                odo_local_vx
-                0x200001d0                odo_local_vy
-                0x200001d8                odo_local_w
-                0x200001e0                odo_global_vx
-                0x200001e8                odo_global_vy
-                0x200001f0                odo_global_w
-                0x200001f8                odo_global_vx_prev
-                0x20000200                odo_global_vy_prev
-                0x20000208                odo_global_w_prev
-                0x20000210                tra_input_x
-                0x20000218                tra_input_y
-                0x20000220                tra_input_w
-                0x20000228                tra_count_total_x
-                0x20000230                tra_count_x
-                0x20000238                tra_current_time_x
-                0x20000240                tra_current_x
-                0x20000248                last_tra_x
-                0x20000250                tra_count_total_y
-                0x20000258                tra_count_y
-                0x20000260                tra_current_time_y
-                0x20000268                tra_current_y
-                0x20000270                last_tra_y
-                0x20000278                tra_count_total_w
-                0x20000280                tra_count_w
-                0x20000288                tra_current_time_w
-                0x20000290                tra_current_w
-                0x20000298                last_tra_w
-                0x200002a0                is_tra_x_done
-                0x200002a4                is_tra_y_done
-                0x200002a8                is_tra_w_done
-                0x200002ac                is_tra_sin
-                0x200002b0                int_is_counted_up
-                0x200002b8                pid_current_x
-                0x200002c0                pid_error_x
-                0x200002c8                pid_proportional_x
-                0x200002d0                pid_integral_x
-                0x200002d8                pid_derivative_x
-                0x200002e0                pid_current_y
-                0x200002e8                pid_error_y
-                0x200002f0                pid_proportional_y
-                0x200002f8                pid_integral_y
-                0x20000300                pid_derivative_y
-                0x20000308                pid_current_w
-                0x20000310                pid_error_w
-                0x20000318                pid_proportional_w
-                0x20000320                pid_integral_w
-                0x20000328                pid_derivative_w
-                0x20000330                L_speed
-                0x20000338                R_speed
-                0x20000340                F_speed
-                0x20000348                B_speed
-                0x20000350                kine_local_vx
-                0x20000358                kine_local_vy
-                0x20000360                kine_local_w
-                0x20000368                speed_1_value
-                0x20000370                speed_2_value
-                0x20000378                speed_3_value
-                0x20000380                speed_4_value
-                0x20000388                pwm_1_value
-                0x20000390                pwm_2_value
-                0x20000398                pwm_3_value
-                0x200003a0                pwm_4_value
-                0x200003a8                motor
-                0x200003ac                aaa
-                0x200003b0                iii1
-                0x200003b4                iii2
-                0x200003b8                iii3
-                0x200003bc                iii4
+ .bss           0x20000110      0x2e8 ..\obj\speed_control.o
+                0x20000120                a
+                0x20000128                b
+                0x20000130                ballCoorX
+                0x20000134                ballCoorY
+                0x20000138                sudutBall
+                0x20000140                iterBall
+                0x20000144                avgxBall
+                0x20000148                avgyBall
+                0x2000014c                rotaryCount
+                0x20000150                lastCount
+                0x20000154                error
+                0x20000156                errorDua
+                0x20000158                errorTiga
+                0x2000015a                errorEmpat
+                0x2000015c                rpm
+                0x20000160                rpmDua
+                0x20000164                rpmTiga
+                0x20000168                rpmEmpat
+                0x2000016c                setPointSatu
+                0x2000016e                setPointDua
+                0x20000170                setPointTiga
+                0x20000172                setPointEmpat
+                0x20000174                output
+                0x20000178                outputDua
+                0x2000017c                outputTiga
+                0x20000180                outputEmpat
+                0x20000184                speed
+                0x20000188                prevError
+                0x2000018a                derivError
+                0x2000018c                intError
+                0x2000018e                prevErrorDua
+                0x20000190                derivErrorDua
+                0x20000192                intErrorDua
+                0x20000194                prevErrorTiga
+                0x20000196                derivErrorTiga
+                0x20000198                intErrorTiga
+                0x2000019a                prevErrorEmpat
+                0x2000019c                derivErrorEmpat
+                0x2000019e                intErrorEmpat
+                0x200001a0                sudut
+                0x200001a8                current_x
+                0x200001b0                current_y
+                0x200001b8                current_w
+                0x200001c0                current_w2
+                0x200001c8                currentLocal_x
+                0x200001d0                currentLocal_y
+                0x200001d8                currentLocal_w
+                0x200001e0                current_speed_1
+                0x200001e8                current_speed_2
+                0x200001f0                current_speed_3
+                0x200001f8                current_speed_4
+                0x20000200                odo_local_vx
+                0x20000208                odo_local_vy
+                0x20000210                odo_local_w
+                0x20000218                odo_global_vx
+                0x20000220                odo_global_vy
+                0x20000228                odo_global_w
+                0x20000230                odo_global_vx_prev
+                0x20000238                odo_global_vy_prev
+                0x20000240                odo_global_w_prev
+                0x20000248                tra_input_x
+                0x20000250                tra_input_y
+                0x20000258                tra_input_w
+                0x20000260                tra_count_total_x
+                0x20000268                tra_count_x
+                0x20000270                tra_current_time_x
+                0x20000278                tra_current_x
+                0x20000280                last_tra_x
+                0x20000288                tra_count_total_y
+                0x20000290                tra_count_y
+                0x20000298                tra_current_time_y
+                0x200002a0                tra_current_y
+                0x200002a8                last_tra_y
+                0x200002b0                tra_count_total_w
+                0x200002b8                tra_count_w
+                0x200002c0                tra_current_time_w
+                0x200002c8                tra_current_w
+                0x200002d0                last_tra_w
+                0x200002d8                is_tra_x_done
+                0x200002dc                is_tra_y_done
+                0x200002e0                is_tra_w_done
+                0x200002e4                is_tra_sin
+                0x200002e8                int_is_counted_up
+                0x200002f0                pid_current_x
+                0x200002f8                pid_error_x
+                0x20000300                pid_proportional_x
+                0x20000308                pid_integral_x
+                0x20000310                pid_derivative_x
+                0x20000318                pid_current_y
+                0x20000320                pid_error_y
+                0x20000328                pid_proportional_y
+                0x20000330                pid_integral_y
+                0x20000338                pid_derivative_y
+                0x20000340                pid_current_w
+                0x20000348                pid_error_w
+                0x20000350                pid_proportional_w
+                0x20000358                pid_integral_w
+                0x20000360                pid_derivative_w
+                0x20000368                L_speed
+                0x20000370                R_speed
+                0x20000378                F_speed
+                0x20000380                B_speed
+                0x20000388                kine_local_vx
+                0x20000390                kine_local_vy
+                0x20000398                kine_local_w
+                0x200003a0                speed_1_value
+                0x200003a8                speed_2_value
+                0x200003b0                speed_3_value
+                0x200003b8                speed_4_value
+                0x200003c0                pwm_1_value
+                0x200003c8                pwm_2_value
+                0x200003d0                pwm_3_value
+                0x200003d8                pwm_4_value
+                0x200003e0                motor
+                0x200003e4                aaa
+                0x200003e8                iii1
+                0x200003ec                iii2
+                0x200003f0                iii3
+                0x200003f4                iii4
  *(COMMON)
- COMMON         0x200003c0       0x3a ..\obj\uart_node.o
-                0x200003c0                nodey1
-                0x200003c4                strategy
-                0x200003c8                ballYCoor
-                0x200003c9                ballXCoor
-                0x200003ca                flagX
-                0x200003cb                gameState
-                0x200003cc                ballFound
-                0x200003cd                flag
-                0x200003d0                nodex2
-                0x200003d4                compassHeading
-                0x200003d8                nodey2
-                0x200003dc                fragX
-                0x200003dd                compassDerajat2
-                0x200003e0                prevy1
-                0x200003e4                prevx1
-                0x200003e8                compassDerajat1
-                0x200003e9                fragY
-                0x200003ea                flagY
-                0x200003ec                nodex1
-                0x200003f0                acceleroX
-                0x200003f2                xCoor
-                0x200003f4                flagNode
-                0x200003f5                bufferNode
-                0x200003f6                acceleroY
-                0x200003f8                yCoor
- *fill*         0x200003fa        0x2 
- COMMON         0x200003fc       0x18 ..\obj\tm_stm32f4_rotary_encoder.o
-                0x200003fc                fifthCount
-                0x20000400                sixthCount
-                0x20000404                fourthCount
-                0x20000408                secondCount
-                0x2000040c                TM_INT_RE_Count
-                0x20000410                thirdCount
- COMMON         0x20000414        0x6 ..\obj\uart_camera.o
-                0x20000414                buff
-                0x20000419                buffer
- *fill*         0x2000041a        0x6 
- COMMON         0x20000420       0xe8 ..\obj\speed_control.o
-                0x20000420                b
-                0x20000428                sudut2
-                0x20000430                data2
-                0x20000448                ballCoorY
-                0x20000450                data4
-                0x20000468                xCoor2
-                0x2000046c                startHeading
-                0x2000046d                prevStartHeading
-                0x20000470                ballCoorX
-                0x20000474                cosw
-                0x20000478                yCoor2
-                0x20000480                sudutBall
-                0x20000488                data
-                0x200004a0                data3
-                0x200004b8                sudut
-                0x200004c0                coorCount
-                0x200004c4                sinw
-                0x200004c8                data5
-                0x200004e0                a
-                0x200004e8                testes
+ COMMON         0x200003f8       0x3a ..\obj\uart_node.o
+                0x200003f8                nodey1
+                0x200003fc                strategy
+                0x20000400                ballYCoor
+                0x20000401                ballXCoor
+                0x20000402                flagX
+                0x20000403                gameState
+                0x20000404                ballFound
+                0x20000405                flag
+                0x20000408                nodex2
+                0x2000040c                compassHeading
+                0x20000410                nodey2
+                0x20000414                fragX
+                0x20000415                compassDerajat2
+                0x20000418                prevy1
+                0x2000041c                prevx1
+                0x20000420                compassDerajat1
+                0x20000421                fragY
+                0x20000422                flagY
+                0x20000424                nodex1
+                0x20000428                acceleroX
+                0x2000042a                xCoor
+                0x2000042c                flagNode
+                0x2000042d                bufferNode
+                0x2000042e                acceleroY
+                0x20000430                yCoor
+ *fill*         0x20000432        0x2 
+ COMMON         0x20000434       0x18 ..\obj\tm_stm32f4_rotary_encoder.o
+                0x20000434                fifthCount
+                0x20000438                sixthCount
+                0x2000043c                fourthCount
+                0x20000440                secondCount
+                0x20000444                TM_INT_RE_Count
+                0x20000448                thirdCount
+ COMMON         0x2000044c        0x6 ..\obj\uart_camera.o
+                0x2000044c                buff
+                0x20000451                buffer
+ *fill*         0x20000452        0x6 
+ COMMON         0x20000458       0xb0 ..\obj\speed_control.o
+                0x20000458                sudut2
+                0x20000460                data2
+                0x20000478                data4
+                0x20000490                xCoor2
+                0x20000494                startHeading
+                0x20000495                prevStartHeading
+                0x20000498                cosw
+                0x2000049c                yCoor2
+                0x200004a0                data
+                0x200004b8                data3
+                0x200004d0                coorCount
+                0x200004d4                sinw
+                0x200004d8                data5
                 0x200004f0                data6
  COMMON         0x20000508       0xac ..\obj\localization.o
                 0x20000508                prevErrorBallMaju
@@ -1964,7 +1959,7 @@ Linker script and memory map
  *(.heap*)
                 0x200005b4                __HeapLimit = .
 
-.co_stack       0x200005b4      0x804 load address 0x08007c34
+.co_stack       0x200005b4      0x804 load address 0x08007c44
                 0x200005b8                . = ALIGN (0x8)
  *fill*         0x200005b4        0x4 
  *(.co_stack .co_stack.*)
@@ -2007,7 +2002,7 @@ LOAD c:/program files (x86)/gnu tools arm embedded/6 2017-q2-update/bin/../lib/g
 END GROUP
 OUTPUT(encoder.elf elf32-littlearm)
 
-.debug_info     0x00000000     0xe92a
+.debug_info     0x00000000     0xe944
  .debug_info    0x00000000     0x11ba ..\obj\uart_node.o
  .debug_info    0x000011ba      0x27f ..\obj\stm32f4xx_syscfg.o
  .debug_info    0x00001439      0x9d1 ..\obj\stm32f4xx_usart.o
@@ -2023,13 +2018,13 @@ OUTPUT(encoder.elf elf32-littlearm)
  .debug_info    0x000073cf      0x59e ..\obj\lcd_16x2.o
  .debug_info    0x0000796d      0x5cc ..\obj\system_stm32f4xx.o
  .debug_info    0x00007f39      0x81f ..\obj\uart_camera.o
- .debug_info    0x00008758     0x1f02 ..\obj\speed_control.o
- .debug_info    0x0000a65a      0x362 ..\obj\stm32f4xx_exti.o
- .debug_info    0x0000a9bc      0x549 ..\obj\misc.o
- .debug_info    0x0000af05     0x1db5 ..\obj\localization.o
- .debug_info    0x0000ccba     0x1c70 ..\obj\stm32f4xx_tim.o
+ .debug_info    0x00008758     0x1f1c ..\obj\speed_control.o
+ .debug_info    0x0000a674      0x362 ..\obj\stm32f4xx_exti.o
+ .debug_info    0x0000a9d6      0x549 ..\obj\misc.o
+ .debug_info    0x0000af1f     0x1db5 ..\obj\localization.o
+ .debug_info    0x0000ccd4     0x1c70 ..\obj\stm32f4xx_tim.o
 
-.debug_abbrev   0x00000000     0x26fa
+.debug_abbrev   0x00000000     0x2709
  .debug_abbrev  0x00000000      0x250 ..\obj\uart_node.o
  .debug_abbrev  0x00000250      0x144 ..\obj\stm32f4xx_syscfg.o
  .debug_abbrev  0x00000394      0x180 ..\obj\stm32f4xx_usart.o
@@ -2045,11 +2040,11 @@ OUTPUT(encoder.elf elf32-littlearm)
  .debug_abbrev  0x000015fd      0x1e6 ..\obj\lcd_16x2.o
  .debug_abbrev  0x000017e3      0x156 ..\obj\system_stm32f4xx.o
  .debug_abbrev  0x00001939      0x17c ..\obj\uart_camera.o
- .debug_abbrev  0x00001ab5      0x377 ..\obj\speed_control.o
- .debug_abbrev  0x00001e2c      0x1ba ..\obj\stm32f4xx_exti.o
- .debug_abbrev  0x00001fe6      0x170 ..\obj\misc.o
- .debug_abbrev  0x00002156      0x40c ..\obj\localization.o
- .debug_abbrev  0x00002562      0x198 ..\obj\stm32f4xx_tim.o
+ .debug_abbrev  0x00001ab5      0x386 ..\obj\speed_control.o
+ .debug_abbrev  0x00001e3b      0x1ba ..\obj\stm32f4xx_exti.o
+ .debug_abbrev  0x00001ff5      0x170 ..\obj\misc.o
+ .debug_abbrev  0x00002165      0x40c ..\obj\localization.o
+ .debug_abbrev  0x00002571      0x198 ..\obj\stm32f4xx_tim.o
 
 .debug_aranges  0x00000000      0xd38
  .debug_aranges
@@ -2115,29 +2110,29 @@ OUTPUT(encoder.elf elf32-littlearm)
  .debug_ranges  0x000007e8      0x128 ..\obj\localization.o
  .debug_ranges  0x00000910      0x2e8 ..\obj\stm32f4xx_tim.o
 
-.debug_line     0x00000000     0x623d
+.debug_line     0x00000000     0x6240
  .debug_line    0x00000000      0x44c ..\obj\uart_node.o
  .debug_line    0x0000044c      0x28f ..\obj\stm32f4xx_syscfg.o
  .debug_line    0x000006db      0x553 ..\obj\stm32f4xx_usart.o
  .debug_line    0x00000c2e       0xb8 ..\obj\startup_stm32f4xx.o
  .debug_line    0x00000ce6      0x44e ..\obj\pwm_motor.o
- .debug_line    0x00001134      0x395 ..\obj\main.o
- .debug_line    0x000014c9      0x63f ..\obj\stm32f4xx_rcc.o
- .debug_line    0x00001b08      0x39e ..\obj\printf.o
- .debug_line    0x00001ea6      0x574 ..\obj\tm_stm32f4_rotary_encoder.o
- .debug_line    0x0000241a      0x3a1 ..\obj\tm_stm32f4_delay.o
- .debug_line    0x000027bb      0x40e ..\obj\stm32f4xx_gpio.o
- .debug_line    0x00002bc9      0x375 ..\obj\mekanisme_penendang.o
- .debug_line    0x00002f3e      0x4b4 ..\obj\lcd_16x2.o
- .debug_line    0x000033f2      0x28e ..\obj\system_stm32f4xx.o
- .debug_line    0x00003680      0x358 ..\obj\uart_camera.o
- .debug_line    0x000039d8      0x843 ..\obj\speed_control.o
- .debug_line    0x0000421b      0x33b ..\obj\stm32f4xx_exti.o
- .debug_line    0x00004556      0x2d8 ..\obj\misc.o
- .debug_line    0x0000482e      0xeb4 ..\obj\localization.o
- .debug_line    0x000056e2      0xb5b ..\obj\stm32f4xx_tim.o
+ .debug_line    0x00001134      0x396 ..\obj\main.o
+ .debug_line    0x000014ca      0x63f ..\obj\stm32f4xx_rcc.o
+ .debug_line    0x00001b09      0x39e ..\obj\printf.o
+ .debug_line    0x00001ea7      0x574 ..\obj\tm_stm32f4_rotary_encoder.o
+ .debug_line    0x0000241b      0x3a1 ..\obj\tm_stm32f4_delay.o
+ .debug_line    0x000027bc      0x40e ..\obj\stm32f4xx_gpio.o
+ .debug_line    0x00002bca      0x375 ..\obj\mekanisme_penendang.o
+ .debug_line    0x00002f3f      0x4b4 ..\obj\lcd_16x2.o
+ .debug_line    0x000033f3      0x28e ..\obj\system_stm32f4xx.o
+ .debug_line    0x00003681      0x358 ..\obj\uart_camera.o
+ .debug_line    0x000039d9      0x845 ..\obj\speed_control.o
+ .debug_line    0x0000421e      0x33b ..\obj\stm32f4xx_exti.o
+ .debug_line    0x00004559      0x2d8 ..\obj\misc.o
+ .debug_line    0x00004831      0xeb4 ..\obj\localization.o
+ .debug_line    0x000056e5      0xb5b ..\obj\stm32f4xx_tim.o
 
-.debug_str      0x00000000     0x45bc
+.debug_str      0x00000000     0x45d0
  .debug_str     0x00000000      0xfd9 ..\obj\uart_node.o
                                0x106a (size before relaxing)
  .debug_str     0x00000fd9      0x18c ..\obj\stm32f4xx_syscfg.o
@@ -2168,15 +2163,15 @@ OUTPUT(encoder.elf elf32-littlearm)
                                 0x3b5 (size before relaxing)
  .debug_str     0x00002b54       0x9d ..\obj\uart_camera.o
                                 0xacb (size before relaxing)
- .debug_str     0x00002bf1      0x853 ..\obj\speed_control.o
-                               0x17f1 (size before relaxing)
- .debug_str     0x00003444      0x113 ..\obj\stm32f4xx_exti.o
+ .debug_str     0x00002bf1      0x867 ..\obj\speed_control.o
+                               0x1805 (size before relaxing)
+ .debug_str     0x00003458      0x113 ..\obj\stm32f4xx_exti.o
                                 0x37f (size before relaxing)
- .debug_str     0x00003557      0x119 ..\obj\misc.o
+ .debug_str     0x0000356b      0x119 ..\obj\misc.o
                                 0x3f4 (size before relaxing)
- .debug_str     0x00003670      0x538 ..\obj\localization.o
+ .debug_str     0x00003684      0x538 ..\obj\localization.o
                                0x15bf (size before relaxing)
- .debug_str     0x00003ba8      0xa14 ..\obj\stm32f4xx_tim.o
+ .debug_str     0x00003bbc      0xa14 ..\obj\stm32f4xx_tim.o
                                 0xdf6 (size before relaxing)
 
 .comment        0x00000000       0x7f

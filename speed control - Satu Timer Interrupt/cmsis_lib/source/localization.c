@@ -998,6 +998,16 @@ int getProxy()
  */
 void ballGet()
 {
+	int x = GPIO_ReadInputDataBit(GPIOD, GPIO_Pin_9);
+	int y = GPIO_ReadInputDataBit(GPIOD, GPIO_Pin_10);
+
+	if(x && y)
+	{
+		handleRotateIn();
+
+
+	}
+
 	if (getProxy() == 3)
 	{
 		handleRotateIn();

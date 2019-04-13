@@ -63,7 +63,7 @@ void tesMotor(int rpm);
 //5 10 0    tuning yang dulu
 //1.5 0 1   tuning gagal
 #define KP0 2000
-#define KD0 10
+#define KD0 0
 #define KI0 0
 
 #define KP_W 0

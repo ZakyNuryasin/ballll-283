@@ -28,6 +28,31 @@
 
 #include "speed_control.h"
 
+
+int xCoor2;
+int yCoor2;
+extern uint16_t xCoor;
+extern uint16_t yCoor;
+double sudut2;
+
+//hitung koordinat global
+double a = 0, b = 0;
+int abs1 = 1, abs2 = 1;
+int ballCoorX = 0, ballCoorY = 0;
+double sudutBall = 0;
+int iterBall = 0;
+int avgxBall = 0;
+int avgyBall = 0;
+
+
+
+
+
+
+
+
+
+
 /*
  * Variables
  */
@@ -82,7 +107,7 @@ TM_RE_t data6;
 
 //-667.2512755101973
 
-double sudut;
+double sudut = 0;
 extern float compassHeading;
 
 double ppr = 19.2 * 7 * 275 / 40;
@@ -93,8 +118,8 @@ double wheel_radius = 5;
 double time_sampling = 0.004679 * 10;
 double min_pid_limit = -2147483640.0;
 double max_pid_limit = 2147483640.0;
-double min_pwm_limit = -5000;
-double max_pwm_limit = 5000;
+double min_pwm_limit = -10000;
+double max_pwm_limit = 10000;
 
 double current_x = 0.0;
 double current_y = 0.0;
@@ -518,6 +543,13 @@ void TIM2_IRQHandler()
 			calculatePID();
 			kinematic();
 
+
+
+
+
+
+
+
 			if(output > max_pwm_limit) output = max_pwm_limit;
 			else if(output < min_pwm_limit) output = min_pwm_limit;
 
@@ -529,6 +561,14 @@ void TIM2_IRQHandler()
 
 			if(outputEmpat > max_pwm_limit) outputEmpat = max_pwm_limit;
 			else if(outputEmpat < min_pwm_limit) outputEmpat = min_pwm_limit;
+
+//			if(xCoor == 320 && yCoor == 240)
+//			{
+//				output = 0;
+//				outputDua = 0;
+//				outputTiga = 0;
+//				outputEmpat = 0;
+//			}
 
 			pid_error_w = tra_input_w - current_w;
 
@@ -542,7 +582,6 @@ void TIM2_IRQHandler()
 				outputDua += 5000;
 				outputTiga += 5000;
 				outputEmpat += 5000;
-				aaa = 0;
 			}
 			else if(pid_error_w < -10 || pid_error_w > 180)
 			{
@@ -550,7 +589,6 @@ void TIM2_IRQHandler()
 				outputDua -= 5000;
 				outputTiga -= 5000;
 				outputEmpat -= 5000;
-				aaa = 1;
 			}
 
 			motorDC(1, output);
@@ -562,19 +600,6 @@ void TIM2_IRQHandler()
 		}
 //	 }
 }
-
-int xCoor2;
-int yCoor2;
-extern uint16_t xCoor;
-extern uint16_t yCoor;
-double sudut2;
-
-//hitung koordinat global
-double a, b;
-int abs1 = 1, abs2 = 1;
-int ballCoorX, ballCoorY;
-double testes;
-double sudutBall;
 
 void moveInput(){
 
@@ -591,117 +616,124 @@ void moveInput(){
  * 180	525
  */
 	//ubah titik tengah pixel
+
 	xCoor2 = - ((int)xCoor - 320);
 	yCoor2 = - ((int)yCoor - 240);
 
 	//default diam, kalau ga ada bola
-	if(xCoor2 == 0 || yCoor2 == 0)
-	{
-		traInit(current_x, current_y, current_w, 0.0);
-		return;
-	}
-
-
-	//////hitung sudut bola dari kamera ke sudut global
-
-	//cari sudut bola terhadap kamera
 	if(xCoor2 == 0 && yCoor2 == 0)
-		{sudut = 90;}
-	else
-		{sudut = atan2(yCoor2, xCoor2) * 180 / PI;}
-
-	//ubah sudut untuk kuadran
-	if(xCoor2 < 0  && yCoor2 < 0)
-		{sudut = 360 + sudut;}
-	else if(xCoor2 > 0  && yCoor2 < 0)
-		{sudut += 360;}
-
-	//shift 90 agar 0 derajat bola di depan robot
-	if(sudut > 90)
-		{sudut -= 90;}
-	else
-		{sudut += 270;}
-
-	//ubah ke sudut global
-	sudut += current_w;
-
-	if(sudut > 360)
-		{sudut -= 360;}
-
-	sudutBall = sudut;
-
-	/////selesai hitung sudut global bola di variabel sudutBall
-
-
-	//////mulai hitung jarak bola dalam centimeter
-
-	//penanda nilai negatif untuk hitung pixel ke centimeter
-	abs1 = 1;
-	abs2 = 1;
-
-	//ubah koordinat jadi absolut dulu
-	if (xCoor2 < 0)
 	{
-		xCoor2 *= -1;
-		abs1 = 0;
+//		xCoor2 = 0;
+//		yCoor2 = 0;
+//		a = 0;
+//		b = 0;
+
+//		traInit(current_x, current_y, current_w, 0.0);
+//		return;
 	}
+	else{
+		//////hitung sudut bola dari kamera ke sudut global
 
-	if(yCoor2 < 0)
-	{
-		yCoor2 *= -1;
-		abs2 = 0;
+		//cari sudut bola terhadap kamera
+		if(xCoor2 == 0 && yCoor2 == 0)
+			{sudutBall = 0;}
+		else
+			{sudutBall = atan2(yCoor2, xCoor2) * 180 / PI;}
+
+		//ubah sudut untuk kuadran
+		if(xCoor2 < 0  && yCoor2 < 0)
+			{sudutBall = 360 + sudutBall;}
+		else if(xCoor2 > 0  && yCoor2 < 0)
+			{sudutBall += 360;}
+
+		//shift 90 agar 0 derajat bola di depan robot
+		if(sudutBall > 90)
+			{sudutBall -= 90;}
+		else
+			{sudutBall += 270;}
+
+		//ubah ke sudut global
+		sudutBall += current_w;
+
+		if(sudutBall > 360)
+			{sudutBall -= 360;}
+
+//		sudutBall = sudut;
+		/////selesai hitung sudut global bola di variabel sudutBall
+
+		//////mulai hitung jarak bola dalam centimeter
+
+
+		//penanda nilai negatif untuk hitung pixel ke centimeter
+		abs1 = 1;
+		abs2 = 1;
+
+		//ubah koordinat jadi absolut dulu
+		if (xCoor2 < 0)
+		{
+			xCoor2 *= -1;
+			abs1 = 0;
+		}
+
+		if(yCoor2 < 0)
+		{
+			yCoor2 *= -1;
+			abs2 = 0;
+		}
+
+		//ubah pixel ke centimeter
+		if(xCoor2 < 120)
+			a = 0;
+		else if(xCoor2 < 141)	//40
+			a =  65;
+		else if(xCoor2 < 163)	//60
+			a =  85;
+		else if(xCoor2 < 175)	//80
+			a =  105;
+		else if(xCoor2 < 191)	//100
+			a =  125;
+		else if(xCoor2 < 195)	//120
+			a =  145;
+		else if(xCoor2 < 201)	//140
+			a =  165;
+		else if(xCoor2 < 205)	//160
+			a =  185;
+
+		if(yCoor2 < 120)
+			b = 0;
+		else if(yCoor2 < 141)		//40
+			b =  65;
+		else if(yCoor2 < 163)	//60
+			b =  85;
+		else if(yCoor2 < 175)	//80
+			b =  105;
+		else if(yCoor2 < 191)	//100
+			b =  125;
+		else if(yCoor2 < 195)	//120
+			b =  145;
+		else if(yCoor2 < 201)	//140
+			b =  165;
+		else if(yCoor2 < 205)	//160
+			b =  185;
+
+		if(abs1 == 0)
+			a *= -1;
+
+		if(abs2 == 0)
+			b *= -1;
+		//////selesai hitung centimeter
+
+
+		//koordinat bola di kamera ke koordinat global
+		ballCoorX = (cos(current_w2)*a) - (sin(current_w2)*b) + current_x;
+		ballCoorY = (cos(current_w2)*b) + (sin(current_w2)*a) + current_y;
+
+		//perintah gerak ke arah bola
+		traInit(ballCoorX, ballCoorY, sudutBall, 0.0);
+//		traInit(0, 0, sudutBall, 0.0);
+
+//		Delayms(500);
 	}
-
-	//ubah pixel ke centimeter
-	if(xCoor2 < 100)
-		a = 0;
-	else if(xCoor2 < 141)	//40
-		a =  65;
-	else if(xCoor2 < 163)	//60
-		a =  85;
-	else if(xCoor2 < 175)	//80
-		a =  105;
-	else if(xCoor2 < 191)	//100
-		a =  125;
-	else if(xCoor2 < 195)	//120
-		a =  145;
-	else if(xCoor2 < 201)	//140
-		a =  165;
-	else if(xCoor2 < 205)	//160
-		a =  185;
-
-	if(yCoor2 < 100)
-		b = 0;
-	else if(yCoor2 < 141)		//40
-		b =  65;
-	else if(yCoor2 < 163)	//60
-		b =  85;
-	else if(yCoor2 < 175)	//80
-		b =  105;
-	else if(yCoor2 < 191)	//100
-		b =  125;
-	else if(yCoor2 < 195)	//120
-		b =  145;
-	else if(yCoor2 < 201)	//140
-		b =  165;
-	else if(yCoor2 < 205)	//160
-		b =  185;
-
-	if(abs1 == 0)
-		a *= -1;
-
-	if(abs2 == 0)
-		b *= -1;
-	//////selesai hitung centimeter
-
-
-	//koordinat bola di kamera ke koordinat global
-	ballCoorX = (cos(current_w2)*a) + (sin(current_w2)*b) + current_x;
-	ballCoorY = (cos(current_w2)*b) - (sin(current_w2)*a) + current_y;
-
-	//perintah gerak ke arah bola
-	traInit(ballCoorX, ballCoorY, sudut, 0.0);
-//	traInit(0, 0, sudutBall, 0.0);
 }
 
 void calculatePosition2(){

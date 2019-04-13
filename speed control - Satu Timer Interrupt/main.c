@@ -50,8 +50,9 @@ int main(void)
 
 	resetInit();
 	traInit(0, 0, 0, 0);
+	motorSpeed(0,0,0,0);
 
-	Delayms(3000);
+	Delayms(1000);
 //
 //	traInit(0, 0, 90, 0);
 //
@@ -76,17 +77,18 @@ int main(void)
 //		Delayms(3000);
 //	}
 
+//    	traInit(100, 0, 0, 0);
+//		Delayms(5000);
+//    	traInit(100, 100, 0, 0);
+//		Delayms(5000);
+//    	traInit(0, 0, 0, 0);
+//		Delayms(5000);
+
     while(1)
     {
-
     	moveInput();
-//    	traInit(0, 0, 45, 0);
-//		Delayms(3000);
-//
-//    	traInit(0, 0, 0, 0);
-//		Delayms(3000);
-//
-//    	traInit(0, 0, 315, 0);
-//		Delayms(3000);
+//    	maju(100);
+//    	Delayms(1000);
+
     }
 }
