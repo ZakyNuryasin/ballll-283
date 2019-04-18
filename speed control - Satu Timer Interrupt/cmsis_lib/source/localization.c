@@ -91,6 +91,10 @@ int countHor = 0;
 int countVer = 0;
 int pwmMotor = 0;
 
+extern double current_x;
+extern double current_y;
+extern double current_w;
+
 //extern int32_t output = 0;
 //extern int32_t outputDua = 0;
 //extern int32_t outputTiga = 0;
@@ -932,6 +936,21 @@ void init_proximity()
 	gpio_init.GPIO_OType = GPIO_OType_PP;
 	gpio_init.GPIO_PuPd = GPIO_PuPd_DOWN;
 	GPIO_Init(GPIOC, &gpio_init);
+
+
+
+
+	GPIO_InitTypeDef GPIO_InitDef;
+
+	RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOD, ENABLE);
+
+    GPIO_InitDef.GPIO_Pin = GPIO_Pin_9 | GPIO_Pin_10;
+	GPIO_InitDef.GPIO_Mode = GPIO_Mode_IN;
+	GPIO_InitDef.GPIO_OType = GPIO_OType_PP;
+	GPIO_InitDef.GPIO_PuPd = GPIO_PuPd_DOWN;
+	GPIO_InitDef.GPIO_Speed = GPIO_Speed_100MHz;
+	//Initialize pins
+	GPIO_Init(GPIOD, &GPIO_InitDef);
 //
 //	/* Connect pin to interrupt */
 //	SYSCFG_EXTILineConfig(EXTI_PortSourceGPIOC, EXTI_PinSource13);
@@ -996,35 +1015,48 @@ int getProxy()
  * fungsi ini akan memutar hadle jika telah mendapatkan bola
  * dan mencari apabila belum
  */
+
+int limitSwitchKiri;
+int limitSwitchKanan;
+
 void ballGet()
 {
-	int x = GPIO_ReadInputDataBit(GPIOD, GPIO_Pin_9);
-	int y = GPIO_ReadInputDataBit(GPIOD, GPIO_Pin_10);
+	limitSwitchKiri = GPIO_ReadInputDataBit(GPIOC, GPIO_Pin_2);
+	limitSwitchKanan = GPIO_ReadInputDataBit(GPIOC, GPIO_Pin_1);
 
-	if(x && y)
+	if(1)
 	{
-		handleRotateIn();
+//		handleRotateIn();
 
+		if(limitSwitchKiri && limitSwitchKanan)
+		{
+			handleRotateIn();
+//			kickBall();
+		}
+		else
+		{
+//			traInit(current_x , current_y , 0 , 0.0);
+		}
 
 	}
 
-	if (getProxy() == 3)
-	{
-		handleRotateIn();
-//		if(compassHeading>180)
-//		{
-//			rotateAntiClockWise(20);
-//		}
-//		else if (compassHeading<180)
-//		{
-//			rotateClockWise(20);
-//		}
-	}
-	else
-	{
-		handleOff();
-		getBall();
-	}
+//	if (getProxy() == 3)
+//	{
+//		handleRotateIn();
+////		if(compassHeading>180)
+////		{
+////			rotateAntiClockWise(20);
+////		}
+////		else if (compassHeading<180)
+////		{
+////			rotateClockWise(20);
+////		}
+//	}
+//	else
+//	{
+//		handleOff();
+//		getBall();
+//	}
 }
 
 void getBallNew()

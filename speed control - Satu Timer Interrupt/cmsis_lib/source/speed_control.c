@@ -46,7 +46,8 @@ int avgyBall = 0;
 
 
 
-
+extern int limitSwitchKanan;
+extern int limitSwitchKiri;
 
 
 
@@ -591,6 +592,11 @@ void TIM2_IRQHandler()
 				outputEmpat -= 5000;
 			}
 
+			output = 0;
+			outputDua = 0;
+			outputTiga = 0;
+			outputEmpat = 0;
+
 			motorDC(1, output);
 			motorDC(2, outputDua);
 			motorDC(3, outputTiga);
@@ -723,10 +729,23 @@ void moveInput(){
 			b *= -1;
 		//////selesai hitung centimeter
 
-
 		//koordinat bola di kamera ke koordinat global
 		ballCoorX = (cos(current_w2)*a) - (sin(current_w2)*b) + current_x;
 		ballCoorY = (cos(current_w2)*b) + (sin(current_w2)*a) + current_y;
+
+		if(a == 0 && b == 0)
+		{
+			handleRotateIn();
+
+			limitSwitchKiri = GPIO_ReadInputDataBit(GPIOC, GPIO_Pin_2);
+			limitSwitchKanan = GPIO_ReadInputDataBit(GPIOC, GPIO_Pin_1);
+
+			if(limitSwitchKanan || limitSwitchKiri)
+			{
+				Delay(1000);
+				kickBall();
+			}
+		}
 
 		//perintah gerak ke arah bola
 		traInit(ballCoorX, ballCoorY, sudutBall, 0.0);
@@ -743,19 +762,27 @@ void calculatePosition2(){
 
 	//ubah kecepatan roda ke kecepatan lokal robot
 	odo_local_vx = 0.5 * (current_speed_1 + current_speed_2);
-	odo_local_vy = 0.5 * (-current_speed_1 + current_speed_3);
+	odo_local_vy = 0.5 * (-current_speed_1 + current_speed_2);
 	odo_local_w = (current_speed_1+current_speed_2)/(2*robot_radius);
 
+	//fungsi butuh radian
+	current_w2 = current_w * (PI/ 180);
+
 	//ubah kecepatan lokal ke kecepatan global
-	odo_global_vx = (cos(current_w2)*odo_local_vx)-(sin(current_w2)*odo_local_vy);
-	odo_global_vy = (sin(current_w2)*odo_local_vx)+(cos(current_w2)*odo_local_vy);
+	odo_global_vx = (cos(current_w2)*odo_local_vx) - (sin(current_w2)*odo_local_vy);
+	odo_global_vy = (sin(current_w2)*odo_local_vx) + (cos(current_w2)*odo_local_vy);
 	odo_global_w = odo_local_w;
+//	odo_global_w = 0;
 
 	//ubah keceptan global ke koordinat global dengan trapezoidal rule
 	current_x += (odo_global_vx + odo_global_vx_prev)* 0.5 * time_sampling;
 	current_y += (odo_global_vy + odo_global_vy_prev)* 0.5 * time_sampling;
 	current_w += (odo_global_w + odo_global_w_prev)* 0.5 * time_sampling * (180 / PI);
-	current_w = (long int)current_w % 360;
+
+	if(current_w >= 360) current_w -= 360;
+	else if(current_w < 0) current_w += 360;
+
+//	current_w = compassHeading;
 
 	//simpan value saat ini untuk perhitungan selanjutnya
 	odo_global_vx_prev = odo_global_vx;

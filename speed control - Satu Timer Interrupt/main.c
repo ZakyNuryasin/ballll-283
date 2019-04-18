@@ -38,13 +38,13 @@ int main(void)
 	TM_DELAY_Init();
 	init_lcdTimer();
 	lcd_clear();
-//	init_mode();
 	init_proximity();
 	init_speed_control();
 	init_node();
 	init_camera();
 	init_handle();
 	init_penendang();
+//	init_mode();
 //	init_srf();
 	Delayms(5000);
 
@@ -52,7 +52,7 @@ int main(void)
 	traInit(0, 0, 0, 0);
 	motorSpeed(0,0,0,0);
 
-	Delayms(1000);
+	Delayms(3000);
 //
 //	traInit(0, 0, 90, 0);
 //
@@ -86,9 +86,14 @@ int main(void)
 
     while(1)
     {
-    	moveInput();
+    	GPIO_SetBits(GPIOC,GPIO_Pin_1);
+//    	ballGet();
+//    	handleRotateIn();
+//    	moveInput();
+    	kickBall();
 //    	maju(100);
 //    	Delayms(1000);
 
     }
 }
+

@@ -24,21 +24,23 @@
 <part id="6"/>
 <part id="7"/>
 <part id="8"/>
+<part id="9"/>
+<part id="10"/>
 </presentation>
 </folder>
 </info>
 </editorArea>
 <editor id="org.eclipse.cdt.ui.editor.CEditor" name="speed_control.c" partName="speed_control.c" path="E:/Zak/p/trui/ballll-283/speed control - Satu Timer Interrupt/cmsis_lib/source/speed_control.c" title="speed_control.c" tooltip="E:/Zak/p/trui/ballll-283/speed control - Satu Timer Interrupt/cmsis_lib/source/speed_control.c" workbook="DefaultEditorWorkbook">
 <input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/encoder/cmsis_lib/source/speed_control.c"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="15612" selectionTopPixel="9843"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="15368" selectionTopPixel="9911"/>
 </editor>
-<editor id="org.eclipse.cdt.ui.editor.CEditor" name="main.c" partName="main.c" path="E:/Zak/p/trui/ballll-283/speed control - Satu Timer Interrupt/main.c" title="main.c" tooltip="E:/Zak/p/trui/ballll-283/speed control - Satu Timer Interrupt/main.c" workbook="DefaultEditorWorkbook">
+<editor activePart="true" focus="true" id="org.eclipse.cdt.ui.editor.CEditor" name="main.c" partName="main.c" path="E:/Zak/p/trui/ballll-283/speed control - Satu Timer Interrupt/main.c" title="main.c" tooltip="E:/Zak/p/trui/ballll-283/speed control - Satu Timer Interrupt/main.c" workbook="DefaultEditorWorkbook">
 <input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/encoder/main.c"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="1532" selectionTopPixel="1196"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="640" selectionTopPixel="465"/>
 </editor>
-<editor activePart="true" focus="true" id="org.eclipse.cdt.ui.editor.CEditor" name="localization.c" partName="localization.c" path="E:/Zak/p/trui/ballll-283/speed control - Satu Timer Interrupt/cmsis_lib/source/localization.c" title="localization.c" tooltip="E:/Zak/p/trui/ballll-283/speed control - Satu Timer Interrupt/cmsis_lib/source/localization.c" workbook="DefaultEditorWorkbook">
+<editor id="org.eclipse.cdt.ui.editor.CEditor" name="localization.c" partName="localization.c" path="E:/Zak/p/trui/ballll-283/speed control - Satu Timer Interrupt/cmsis_lib/source/localization.c" title="localization.c" tooltip="E:/Zak/p/trui/ballll-283/speed control - Satu Timer Interrupt/cmsis_lib/source/localization.c" workbook="DefaultEditorWorkbook">
 <input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/encoder/cmsis_lib/source/localization.c"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="20413" selectionTopPixel="16966"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="20905" selectionTopPixel="17289"/>
 </editor>
 <editor id="org.eclipse.cdt.ui.editor.CEditor" name="speed_control.h" partName="speed_control.h" path="E:/Zak/p/trui/ballll-283/speed control - Satu Timer Interrupt/cmsis_lib/include/speed_control.h" title="speed_control.h" tooltip="E:/Zak/p/trui/ballll-283/speed control - Satu Timer Interrupt/cmsis_lib/include/speed_control.h" workbook="DefaultEditorWorkbook">
 <input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/encoder/cmsis_lib/include/speed_control.h"/>
@@ -46,40 +48,55 @@
 </editor>
 <editor id="org.eclipse.cdt.ui.editor.CEditor" name="localization.h" partName="localization.h" path="E:/Zak/p/trui/ballll-283/speed control - Satu Timer Interrupt/cmsis_lib/include/localization.h" title="localization.h" tooltip="E:/Zak/p/trui/ballll-283/speed control - Satu Timer Interrupt/cmsis_lib/include/localization.h" workbook="DefaultEditorWorkbook">
 <input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/encoder/cmsis_lib/include/localization.h"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="2004" selectionTopPixel="1292"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="1322" selectionTopPixel="629"/>
 </editor>
 <editor id="org.eclipse.cdt.ui.editor.CEditor" name="uart_camera.c" partName="uart_camera.c" path="E:/Zak/p/trui/ballll-283/speed control - Satu Timer Interrupt/cmsis_lib/source/uart_camera.c" title="uart_camera.c" tooltip="E:/Zak/p/trui/ballll-283/speed control - Satu Timer Interrupt/cmsis_lib/source/uart_camera.c" workbook="DefaultEditorWorkbook">
 <input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/encoder/cmsis_lib/source/uart_camera.c"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="1452" selectionTopPixel="456"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="909" selectionTopPixel="456"/>
 </editor>
 <editor id="org.eclipse.cdt.ui.editor.CEditor" name="uart_camera.h" partName="uart_camera.h" path="E:/Zak/p/trui/ballll-283/speed control - Satu Timer Interrupt/cmsis_lib/include/uart_camera.h" title="uart_camera.h" tooltip="E:/Zak/p/trui/ballll-283/speed control - Satu Timer Interrupt/cmsis_lib/include/uart_camera.h" workbook="DefaultEditorWorkbook">
 <input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/encoder/cmsis_lib/include/uart_camera.h"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="532" selectionTopPixel="359"/>
-</editor>
-<editor id="org.eclipse.cdt.ui.editor.CEditor" name="pwm_motor.c" partName="pwm_motor.c" path="E:/Zak/p/trui/ballll-283/speed control - Satu Timer Interrupt/cmsis_lib/source/pwm_motor.c" title="pwm_motor.c" tooltip="E:/Zak/p/trui/ballll-283/speed control - Satu Timer Interrupt/cmsis_lib/source/pwm_motor.c" workbook="DefaultEditorWorkbook">
-<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/encoder/cmsis_lib/source/pwm_motor.c"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="5419" selectionTopPixel="2182"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="217" selectionTopPixel="0"/>
 </editor>
 <editor id="org.eclipse.cdt.ui.editor.CEditor" name="mekanisme_penendang.c" partName="mekanisme_penendang.c" path="E:/Zak/p/trui/ballll-283/speed control - Satu Timer Interrupt/cmsis_lib/source/mekanisme_penendang.c" title="mekanisme_penendang.c" tooltip="E:/Zak/p/trui/ballll-283/speed control - Satu Timer Interrupt/cmsis_lib/source/mekanisme_penendang.c" workbook="DefaultEditorWorkbook">
 <input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/encoder/cmsis_lib/source/mekanisme_penendang.c"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="1350" selectionTopPixel="544"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="2640" selectionTopPixel="1802"/>
+</editor>
+<editor id="org.eclipse.cdt.ui.editor.CEditor" name="misc.h" partName="misc.h" path="E:/Zak/p/trui/ballll-283/speed control - Satu Timer Interrupt/cmsis_lib/include/misc.h" title="misc.h" tooltip="E:/Zak/p/trui/ballll-283/speed control - Satu Timer Interrupt/cmsis_lib/include/misc.h" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/encoder/cmsis_lib/include/misc.h"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="278" selectionTopPixel="0"/>
+</editor>
+<editor id="org.eclipse.cdt.ui.editor.CEditor" name="lcd_16x2.h" partName="lcd_16x2.h" path="E:/Zak/p/trui/ballll-283/speed control - Satu Timer Interrupt/cmsis_lib/include/lcd_16x2.h" title="lcd_16x2.h" tooltip="E:/Zak/p/trui/ballll-283/speed control - Satu Timer Interrupt/cmsis_lib/include/lcd_16x2.h" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/encoder/cmsis_lib/include/lcd_16x2.h"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="827" selectionTopPixel="0"/>
+</editor>
+<editor id="org.eclipse.cdt.ui.editor.CEditor" name="tm_stm32f4_rotary_encoder.c" partName="tm_stm32f4_rotary_encoder.c" path="E:/Zak/p/trui/ballll-283/speed control - Satu Timer Interrupt/cmsis_lib/source/tm_stm32f4_rotary_encoder.c" title="tm_stm32f4_rotary_encoder.c" tooltip="E:/Zak/p/trui/ballll-283/speed control - Satu Timer Interrupt/cmsis_lib/source/tm_stm32f4_rotary_encoder.c" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/encoder/cmsis_lib/source/tm_stm32f4_rotary_encoder.c"/>
+<editorState selectionHorizontalPixel="0" selectionLength="45" selectionOffset="9161" selectionTopPixel="4556"/>
 </editor>
 </editors>
 <views>
 <view id="org.coocox.builder.ui.views.ProjectView" partName="Project">
-<viewState CommonNavigator.LINKING_ENABLED="0" horizontalPosition="0" org.eclipse.ui.navigator.resources.workingSets.showTopLevelWorkingSets="0" verticalPosition="0">
+<viewState CommonNavigator.LINKING_ENABLED="0" horizontalPosition="0" org.eclipse.ui.navigator.resources.workingSets.showTopLevelWorkingSets="0" verticalPosition="2">
 <expanded>
 <element path="/encoder"/>
 <element path="/encoder/cmsis_lib"/>
+<element path="/encoder/cmsis_lib/include"/>
 <element path="/encoder/cmsis_lib/source"/>
 </expanded>
 <selection>
-<element path="/encoder/cmsis_lib/source/uart_camera.c"/>
+<element path="/encoder/cmsis_lib/include/lcd_16x2.h"/>
 </selection>
 </viewState>
 </view>
 <view id="org.coocox.component.ui.ComponentView" partName="Components">
 <viewState/>
+</view>
+<view id="org.eclipse.search.ui.views.SearchView" partName="Search">
+<viewState isPinned="false">
+<view IMemento.internal.id="" org.eclipse.search.lastActivation="0"/>
+<view IMemento.internal.id="org.eclipse.cdt.ui.pdomSearchViewPage" definitionColumnWidth="150" locationColumnWidth="300" matchColumnWidth="300" org.eclipse.search.lastActivation="1" org.eclipse.search.resultpage.layout="2" showEnclosingDefinitions="true"/>
+</viewState>
 </view>
 <view id="org.eclipse.ui.console.ConsoleView" partName="Console">
 <viewState/>
@@ -119,6 +136,7 @@
 <hide_toolbar_item_id id="org.eclipse.ui.edit.text.toggleShowSelectedElementOnly"/>
 <hide_toolbar_item_id id="org.eclipse.debug.ui.commands.TerminateAndRelaunch"/>
 <view id="org.eclipse.ui.console.ConsoleView"/>
+<view id="org.eclipse.search.ui.views.SearchView"/>
 <fastViewBars>
 <fastViewBar fastViewLocation="16384" id="org.eclipse.ui.internal.ViewStack@e73750" orientation="256" selectedTabId="org.coocox.component.ui.ComponentView" style="0">
 <fastViews>
@@ -127,7 +145,7 @@
 </fastViewBar>
 <fastViewBar fastViewLocation="16384" id="org.eclipse.ui.internal.ViewStack@1e07d3e" orientation="512" selectedTabId="org.coocox.builder.ui.views.ProjectView" style="0">
 <fastViews>
-<view id="org.coocox.builder.ui.views.ProjectView" ratio="0.29984662"/>
+<view id="org.coocox.builder.ui.views.ProjectView" ratio="0.17944786"/>
 </fastViews>
 </fastViewBar>
 <fastViewBar fastViewLocation="131072" id="org.eclipse.ui.internal.ViewStack@13e9963" orientation="512" selectedTabId="org.coocox.component.ui.Help" style="0">
@@ -153,8 +171,10 @@
 <info folder="true" part="org.eclipse.ui.internal.ViewStack@99e99b" ratio="0.6995516" ratioLeft="468" ratioRight="201" relationship="4" relative="org.eclipse.ui.internal.ViewStack@e73750">
 <folder activePageID="org.eclipse.ui.console.ConsoleView" appearance="2" expanded="2">
 <page content="org.eclipse.ui.console.ConsoleView" label="Console"/>
+<page content="org.eclipse.search.ui.views.SearchView" label="Search"/>
 <presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory">
 <part id="0"/>
+<part id="1"/>
 </presentation>
 </folder>
 </info>
@@ -185,165 +205,158 @@
 <editors>
 <editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/encoder/cmsis_lib/source/speed_control.c"/>
 <editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/encoder/main.c"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/encoder/cmsis_lib/source/pwm_motor.c"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/encoder/cmsis_lib/include/uart_camera.h"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/encoder/cmsis_lib/source/uart_camera.c"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/encoder/main.c"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/encoder/cmsis_lib/include/speed_control.h"/>
 <editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/encoder/cmsis_lib/source/localization.c"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/encoder/cmsis_lib/include/localization.h"/>
 <editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/encoder/cmsis_lib/source/mekanisme_penendang.c"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/encoder/cmsis_lib/source/pwm_motor.c"/>
 </editors>
 <item historyLabel="speed_control.c" index="0">
-<position info="not_deleted" x="18350" y="0"/>
+<position info="not_deleted" x="18522" y="0"/>
 </item>
 <item historyLabel="main.c" index="1">
-<position info="not_deleted" x="1188" y="0"/>
+<position info="not_deleted" x="1528" y="0"/>
+</item>
+<item historyLabel="speed_control.c" index="0">
+<position info="not_deleted" x="18522" y="0"/>
 </item>
 <item historyLabel="main.c" index="1">
-<position info="not_deleted" x="464" y="0"/>
+<position info="not_deleted" x="1551" y="0"/>
 </item>
 <item historyLabel="speed_control.c" index="0">
-<position info="not_deleted" x="3444" y="0"/>
+<position info="not_deleted" x="18650" y="0"/>
 </item>
 <item historyLabel="main.c" index="1">
-<position info="not_deleted" x="1476" y="0"/>
+<position info="not_deleted" x="1551" y="0"/>
 </item>
 <item historyLabel="speed_control.c" index="0">
-<position info="not_deleted" x="3444" y="0"/>
-</item>
-<item historyLabel="speed_control.c" index="0">
-<position info="not_deleted" x="15373" y="0"/>
-</item>
-<item historyLabel="speed_control.c" index="0">
-<position info="not_deleted" x="2065" y="10"/>
+<position info="not_deleted" x="18431" y="0"/>
 </item>
 <item historyLabel="main.c" index="1">
-<position info="not_deleted" x="1476" y="0"/>
+<position info="not_deleted" x="1576" y="0"/>
+</item>
+<item historyLabel="mekanisme_penendang.c" index="3">
+<position info="not_deleted" x="2692" y="8"/>
 </item>
 <item historyLabel="speed_control.c" index="0">
-<position info="not_deleted" x="2065" y="10"/>
+<position info="not_deleted" x="18431" y="0"/>
+</item>
+<item historyLabel="main.c" index="1">
+<position info="not_deleted" x="1572" y="0"/>
+</item>
+<item historyLabel="mekanisme_penendang.c" index="3">
+<position info="not_deleted" x="2692" y="8"/>
+</item>
+<item historyLabel="main.c" index="1">
+<position info="not_deleted" x="1573" y="0"/>
+</item>
+<item historyLabel="mekanisme_penendang.c" index="3">
+<position info="not_deleted" x="2642" y="0"/>
+</item>
+<item historyLabel="main.c" index="1">
+<position info="not_deleted" x="1574" y="0"/>
+</item>
+<item historyLabel="mekanisme_penendang.c" index="3">
+<position info="not_deleted" x="2747" y="0"/>
+</item>
+<item historyLabel="main.c" index="1">
+<position info="not_deleted" x="804" y="0"/>
+</item>
+<item historyLabel="mekanisme_penendang.c" index="3">
+<position info="not_deleted" x="1347" y="0"/>
+</item>
+<item historyLabel="main.c" index="1">
+<position info="not_deleted" x="803" y="0"/>
+</item>
+<item historyLabel="mekanisme_penendang.c" index="3">
+<position info="not_deleted" x="2928" y="0"/>
+</item>
+<item historyLabel="main.c" index="1">
+<position info="not_deleted" x="808" y="0"/>
+</item>
+<item historyLabel="mekanisme_penendang.c" index="3">
+<position info="not_deleted" x="2769" y="0"/>
+</item>
+<item historyLabel="main.c" index="1">
+<position info="not_deleted" x="806" y="0"/>
+</item>
+<item historyLabel="mekanisme_penendang.c" index="3">
+<position info="not_deleted" x="1232" y="0"/>
 </item>
 <item historyLabel="speed_control.c" index="0">
-<position info="not_deleted" x="15137" y="0"/>
+<position info="not_deleted" x="18431" y="0"/>
+</item>
+<item historyLabel="main.c" index="1">
+<position info="not_deleted" x="1572" y="0"/>
+</item>
+<item historyLabel="mekanisme_penendang.c" index="3">
+<position info="not_deleted" x="963" y="0"/>
+</item>
+<item historyLabel="main.c" index="1">
+<position info="not_deleted" x="1637" y="0"/>
 </item>
 <item historyLabel="speed_control.c" index="0">
-<position info="not_deleted" x="15636" y="0"/>
+<position info="not_deleted" x="15647" y="0"/>
 </item>
-<item historyLabel="pwm_motor.c" index="2">
-<position info="not_deleted" x="5382" y="7"/>
+<item historyLabel="localization.c" index="2">
+<position info="not_deleted" x="20905" y="0"/>
 </item>
-<item historyLabel="speed_control.c" index="0">
-<position info="not_deleted" x="15636" y="0"/>
+<item historyLabel="main.c" index="1">
+<position info="not_deleted" x="1575" y="0"/>
 </item>
-<item historyLabel="speed_control.c" index="0">
-<position info="not_deleted" x="15217" y="0"/>
+<item historyLabel="mekanisme_penendang.c" index="3">
+<position info="not_deleted" x="1015" y="0"/>
 </item>
-<item historyLabel="speed_control.c" index="0">
-<position info="not_deleted" x="3069" y="13"/>
-</item>
-<item historyLabel="speed_control.c" index="0">
-<position info="not_deleted" x="14972" y="0"/>
+<item historyLabel="main.c" index="1">
+<position info="not_deleted" x="1275" y="0"/>
 </item>
 <item historyLabel="speed_control.c" index="0">
-<position info="not_deleted" x="26241" y="0"/>
+<position info="not_deleted" x="15368" y="0"/>
+</item>
+<item historyLabel="localization.c" index="2">
+<position info="not_deleted" x="20905" y="0"/>
+</item>
+<item historyLabel="main.c" index="1">
+<position info="not_deleted" x="803" y="0"/>
+</item>
+<item historyLabel="mekanisme_penendang.c" index="3">
+<position info="not_deleted" x="907" y="0"/>
+</item>
+<item historyLabel="main.c" index="1">
+<position info="not_deleted" x="806" y="0"/>
+</item>
+<item historyLabel="mekanisme_penendang.c" index="3">
+<position info="not_deleted" x="2815" y="0"/>
+</item>
+<item historyLabel="main.c" index="1">
+<position info="not_deleted" x="1573" y="0"/>
+</item>
+<item historyLabel="mekanisme_penendang.c" index="3">
+<position info="not_deleted" x="2844" y="31"/>
+</item>
+<item historyLabel="main.c" index="1">
+<position info="not_deleted" x="805" y="0"/>
+</item>
+<item historyLabel="mekanisme_penendang.c" index="3">
+<position info="not_deleted" x="1019" y="0"/>
+</item>
+<item historyLabel="main.c" index="1">
+<position info="not_deleted" x="806" y="0"/>
+</item>
+<item historyLabel="mekanisme_penendang.c" index="3">
+<position info="not_deleted" x="1344" y="0"/>
 </item>
 <item historyLabel="speed_control.c" index="0">
-<position info="not_deleted" x="14972" y="0"/>
+<position info="not_deleted" x="15368" y="0"/>
+</item>
+<item historyLabel="main.c" index="1">
+<position info="not_deleted" x="803" y="0"/>
+</item>
+<item historyLabel="mekanisme_penendang.c" index="3">
+<position info="not_deleted" x="2640" y="0"/>
 </item>
 <item historyLabel="speed_control.c" index="0">
-<position info="not_deleted" x="17145" y="6"/>
+<position info="not_deleted" x="15368" y="0"/>
 </item>
-<item historyLabel="speed_control.c" index="0">
-<position info="not_deleted" x="14972" y="0"/>
-</item>
-<item historyLabel="speed_control.c" index="0">
-<position/>
-</item>
-<item historyLabel="speed_control.c" index="0">
-<position info="not_deleted" x="3101" y="13"/>
-</item>
-<item historyLabel="speed_control.c" index="0">
-<position info="not_deleted" x="14409" y="0"/>
-</item>
-<item historyLabel="speed_control.c" index="0">
-<position/>
-</item>
-<item historyLabel="uart_camera.h" index="3">
-<position info="not_deleted" x="578" y="0"/>
-</item>
-<item historyLabel="uart_camera.c" index="4">
-<position info="not_deleted" x="3505" y="0"/>
-</item>
-<item historyLabel="uart_camera.c" index="4">
-<position info="not_deleted" x="1452" y="0"/>
-</item>
-<item historyLabel="speed_control.c" index="0">
-<position/>
-</item>
-<item historyLabel="main.c" index="5">
-<position info="not_deleted" x="1476" y="0"/>
-</item>
-<item historyLabel="speed_control.h" index="6">
-<position info="not_deleted" x="1543" y="0"/>
-</item>
-<item historyLabel="speed_control.c" index="0">
-<position info="not_deleted" x="17052" y="0"/>
-</item>
-<item historyLabel="speed_control.c" index="0">
-<position info="not_deleted" x="15076" y="0"/>
-</item>
-<item historyLabel="main.c" index="5">
-<position info="not_deleted" x="1476" y="0"/>
-</item>
-<item historyLabel="localization.c" index="7">
-<position info="not_deleted" x="4167" y="0"/>
-</item>
-<item historyLabel="localization.h" index="8">
-<position info="not_deleted" x="2004" y="0"/>
-</item>
-<item historyLabel="localization.c" index="7">
-<position info="not_deleted" x="4167" y="0"/>
-</item>
-<item historyLabel="main.c" index="5">
-<position info="not_deleted" x="1520" y="0"/>
-</item>
-<item historyLabel="localization.c" index="7">
-<position info="not_deleted" x="4167" y="0"/>
-</item>
-<item historyLabel="uart_camera.c" index="4">
-<position info="not_deleted" x="1452" y="0"/>
-</item>
-<item historyLabel="main.c" index="5">
-<position info="not_deleted" x="733" y="0"/>
-</item>
-<item historyLabel="localization.c" index="7">
-<position info="not_deleted" x="18506" y="0"/>
-</item>
-<item historyLabel="main.c" index="5">
-<position info="not_deleted" x="1532" y="0"/>
-</item>
-<item historyLabel="localization.c" index="7">
-<position info="not_deleted" x="18506" y="0"/>
-</item>
-<item historyLabel="localization.c" index="7">
-<position info="not_deleted" x="20400" y="0"/>
-</item>
-<item historyLabel="mekanisme_penendang.c" index="9">
-<position info="not_deleted" x="1350" y="0"/>
-</item>
-<item historyLabel="localization.c" index="7">
-<position info="not_deleted" x="20413" y="0"/>
-</item>
-<item historyLabel="speed_control.c" index="0">
-<position info="not_deleted" x="15076" y="0"/>
-</item>
-<item historyLabel="pwm_motor.c" index="10">
-<position info="not_deleted" x="5419" y="0"/>
-</item>
-<item active="true" historyLabel="localization.c" index="7">
-<position info="not_deleted" x="20413" y="0"/>
+<item active="true" historyLabel="main.c" index="1">
+<position info="not_deleted" x="803" y="0"/>
 </item>
 </navigationHistory>
 <input factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/" type="8"/>
@@ -352,6 +365,33 @@
 <actionBarAdvisor/>
 </window>
 <mruList>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="tm_stm32f4_rotary_encoder.c" tooltip="encoder/cmsis_lib/source/tm_stm32f4_rotary_encoder.c">
+<persistable path="/encoder/cmsis_lib/source/tm_stm32f4_rotary_encoder.c"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="stm32f4xx.h" tooltip="encoder/cmsis_boot/stm32f4xx.h">
+<persistable path="/encoder/cmsis_boot/stm32f4xx.h"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="lcd_16x2.c" tooltip="encoder/cmsis_lib/source/lcd_16x2.c">
+<persistable path="/encoder/cmsis_lib/source/lcd_16x2.c"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="lcd_16x2.h" tooltip="encoder/cmsis_lib/include/lcd_16x2.h">
+<persistable path="/encoder/cmsis_lib/include/lcd_16x2.h"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="misc.h" tooltip="encoder/cmsis_lib/include/misc.h">
+<persistable path="/encoder/cmsis_lib/include/misc.h"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="stm32f4xx_usart.h" tooltip="encoder/cmsis_lib/include/stm32f4xx_usart.h">
+<persistable path="/encoder/cmsis_lib/include/stm32f4xx_usart.h"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="stm32f4xx_usart.c" tooltip="encoder/cmsis_lib/source/stm32f4xx_usart.c">
+<persistable path="/encoder/cmsis_lib/source/stm32f4xx_usart.c"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="tm_stm32f4_hcsr04.c" tooltip="encoder/cmsis_lib/source/tm_stm32f4_hcsr04.c">
+<persistable path="/encoder/cmsis_lib/source/tm_stm32f4_hcsr04.c"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="stm32f4xx_gpio.h" tooltip="encoder/cmsis_lib/include/stm32f4xx_gpio.h">
+<persistable path="/encoder/cmsis_lib/include/stm32f4xx_gpio.h"/>
+</file>
 <file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="mekanisme_penendang.c" tooltip="encoder/cmsis_lib/source/mekanisme_penendang.c">
 <persistable path="/encoder/cmsis_lib/source/mekanisme_penendang.c"/>
 </file>
@@ -364,38 +404,11 @@
 <file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="uart_camera.c" tooltip="encoder/cmsis_lib/source/uart_camera.c">
 <persistable path="/encoder/cmsis_lib/source/uart_camera.c"/>
 </file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="tm_stm32f4_rotary_encoder.c" tooltip="encoder/cmsis_lib/source/tm_stm32f4_rotary_encoder.c">
-<persistable path="/encoder/cmsis_lib/source/tm_stm32f4_rotary_encoder.c"/>
-</file>
 <file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="localization.h" tooltip="encoder/cmsis_lib/include/localization.h">
 <persistable path="/encoder/cmsis_lib/include/localization.h"/>
 </file>
 <file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="speed_control.h" tooltip="encoder/cmsis_lib/include/speed_control.h">
 <persistable path="/encoder/cmsis_lib/include/speed_control.h"/>
-</file>
-<file factoryID="org.eclipse.cdt.ui.ExternalEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="math.h" tooltip="C:\Program Files (x86)\GNU Tools ARM Embedded\6 2017-q2-update\arm-none-eabi\include\math.h">
-<persistable path="C:\Program Files (x86)\GNU Tools ARM Embedded\6 2017-q2-update\arm-none-eabi\include\math.h" project="encoder"/>
-</file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="localization.c" tooltip="encoder/cmsis_lib/source/localization.c">
-<persistable path="/encoder/cmsis_lib/source/localization.c"/>
-</file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="main.c" tooltip="encoder/main.c">
-<persistable path="/encoder/main.c"/>
-</file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="speed_control.c" tooltip="encoder/cmsis_lib/source/speed_control.c">
-<persistable path="/encoder/cmsis_lib/source/speed_control.c"/>
-</file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="odometry.h" tooltip="encoder/cmsis_lib/include/odometry.h">
-<persistable path="/encoder/cmsis_lib/include/odometry.h"/>
-</file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="uart_node.c" tooltip="encoder/cmsis_lib/source/uart_node.c">
-<persistable path="/encoder/cmsis_lib/source/uart_node.c"/>
-</file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="odometry.c" tooltip="encoder/cmsis_lib/source/odometry.c">
-<persistable path="/encoder/cmsis_lib/source/odometry.c"/>
-</file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="stm32f4xx_exti.h" tooltip="encoder/cmsis_lib/include/stm32f4xx_exti.h">
-<persistable path="/encoder/cmsis_lib/include/stm32f4xx_exti.h"/>
 </file>
 </mruList>
 </workbench>
