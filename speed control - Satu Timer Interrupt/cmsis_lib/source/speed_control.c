@@ -134,6 +134,8 @@ double current_speed_1 = 0.0;
 double current_speed_2 = 0.0;
 double current_speed_3 = 0.0;
 double current_speed_4 = 0.0;
+double current_speed_5 = 0.0;
+double current_speed_6 = 0.0;
 
 double odo_local_vx = 0.0;
 double odo_local_vy = 0.0;
@@ -539,7 +541,11 @@ void TIM2_IRQHandler()
 	 		}
 	 		iii1++;
 
+	 		FifthGet(&data5);
+	 		SixthGet(&data6);
+
 			calculatePosition();
+//			calculatePosition2();
 //			calculateTrj();
 			calculatePID();
 			kinematic();
@@ -573,18 +579,14 @@ void TIM2_IRQHandler()
 
 			pid_error_w = tra_input_w - current_w;
 
-			if(pid_error_w < 10 && pid_error_w > -10)
-			{
-
-			}
-			else if((pid_error_w > 10 && pid_error_w < 180) || pid_error_w < -180)
+			if((pid_error_w > 4 && pid_error_w < 180) || pid_error_w < -180)
 			{
 				output += 5000;
 				outputDua += 5000;
 				outputTiga += 5000;
 				outputEmpat += 5000;
 			}
-			else if(pid_error_w < -10 || pid_error_w > 180)
+			else if(pid_error_w < -4 || pid_error_w > 180)
 			{
 				output -= 5000;
 				outputDua -= 5000;
@@ -592,10 +594,10 @@ void TIM2_IRQHandler()
 				outputEmpat -= 5000;
 			}
 
-			output = 0;
-			outputDua = 0;
-			outputTiga = 0;
-			outputEmpat = 0;
+//			output = 5000;
+//			outputDua = 5000;
+//			outputTiga = 5000;
+//			outputEmpat = 5000;
 
 			motorDC(1, output);
 			motorDC(2, outputDua);
@@ -757,13 +759,25 @@ void moveInput(){
 
 void calculatePosition2(){
 	//hitung kecepatan roda
-	current_speed_1 = wheel_radius *(((2.0 * PI / ppr) * data5.Diff) / time_sampling);
-	current_speed_2 = wheel_radius *(((2.0 * PI / ppr) * data6.Diff) / time_sampling);
+//	current_speed_1 = wheel_radius *(((2.0 * PI / ppr) * data5.Diff) / time_sampling);
+//	current_speed_2 = wheel_radius *(((2.0 * PI / ppr) * data6.Diff) / time_sampling);
+
+	current_speed_5 = (100 * data5.Diff) / (time_sampling * 1326);
+	current_speed_6 = (100 * data6.Diff * 1.1) / (time_sampling * 1326);
+
+	current_speed_1 = wheel_radius *(((2.0 * PI / ppr) * data2.Diff) / time_sampling);
+	current_speed_2 = wheel_radius *(((2.0 * PI / ppr) * data.Diff) / time_sampling);
+	current_speed_3 = wheel_radius *(((2.0 * PI / ppr) * data4.Diff) / time_sampling);
+	current_speed_4 = wheel_radius *(((2.0 * PI / ppr) * data3.Diff) / time_sampling);
 
 	//ubah kecepatan roda ke kecepatan lokal robot
-	odo_local_vx = 0.5 * (current_speed_1 + current_speed_2);
-	odo_local_vy = 0.5 * (-current_speed_1 + current_speed_2);
-	odo_local_w = (current_speed_1+current_speed_2)/(2*robot_radius);
+//	odo_local_vx = 0.5 * -(current_speed_5 + (current_speed_6));
+	odo_local_vx = 0;
+
+	odo_local_vy = 0.5 * (-current_speed_5 + current_speed_6);
+
+//	odo_local_w = (current_speed_1+current_speed_2+current_speed_3+current_speed_4)/(4*robot_radius);
+	odo_local_w = (current_speed_5+current_speed_6) * 1.3554 / (2*robot_radius);
 
 	//fungsi butuh radian
 	current_w2 = current_w * (PI/ 180);
@@ -772,7 +786,7 @@ void calculatePosition2(){
 	odo_global_vx = (cos(current_w2)*odo_local_vx) - (sin(current_w2)*odo_local_vy);
 	odo_global_vy = (sin(current_w2)*odo_local_vx) + (cos(current_w2)*odo_local_vy);
 	odo_global_w = odo_local_w;
-//	odo_global_w = 0;
+	odo_global_w = 0;
 
 	//ubah keceptan global ke koordinat global dengan trapezoidal rule
 	current_x += (odo_global_vx + odo_global_vx_prev)* 0.5 * time_sampling;
@@ -792,6 +806,8 @@ void calculatePosition2(){
 
 float cosw;
 float sinw;
+double current_w_cmps;
+
 void calculatePosition(){
 
 	//hitung kecepatan roda
@@ -810,12 +826,6 @@ void calculatePosition(){
 	odo_local_vx = 0.5 * (F_speed + B_speed);
 	odo_local_vy = 0.5 * (R_speed + L_speed);
 	odo_local_w = (current_speed_1+current_speed_2+current_speed_3+current_speed_4)/(4*robot_radius);
-//	odo_local_w = 0;
-
-	//ubah kecepatan roda ke kecepatan lokal robot
-//	odo_local_vx = 0.5 * (current_speed_4-current_speed_2);
-//	odo_local_vy = 0.5 * (current_speed_1-current_speed_3);
-//	odo_local_w = (current_speed_1+current_speed_2+current_speed_3+current_speed_4)/(4*robot_radius);
 
 	//fungsi butuh radian
 	current_w2 = current_w * (PI/ 180);
@@ -824,17 +834,23 @@ void calculatePosition(){
 	odo_global_vx = (cos(current_w2)*odo_local_vx) - (sin(current_w2)*odo_local_vy);
 	odo_global_vy = (sin(current_w2)*odo_local_vx) + (cos(current_w2)*odo_local_vy);
 	odo_global_w = odo_local_w;
-//	odo_global_w = 0;
 
 	//ubah keceptan global ke koordinat global dengan trapezoidal rule
 	current_x += (odo_global_vx + odo_global_vx_prev)* 0.5 * time_sampling;
 	current_y += (odo_global_vy + odo_global_vy_prev)* 0.5 * time_sampling;
 	current_w += (odo_global_w + odo_global_w_prev)* 0.5 * time_sampling * (180 / PI);
 
+	//derajat roda
 	if(current_w >= 360) current_w -= 360;
 	else if(current_w < 0) current_w += 360;
 
-//	current_w = compassHeading;
+	//derajat mirror cmps
+	current_w_cmps = compassHeading;
+	current_w_cmps -= 360;
+	if(current_w_cmps < 0)
+		current_w_cmps *= -1;
+
+	current_w = current_w_cmps;
 
 	//simpan value saat ini untuk perhitungan selanjutnya
 	odo_global_vx_prev = odo_global_vx;

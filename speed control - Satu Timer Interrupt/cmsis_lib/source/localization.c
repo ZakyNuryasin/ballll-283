@@ -909,12 +909,8 @@ void init_proximity()
 	RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOC, ENABLE);
 //	RCC_APB2PeriphClockCmd(RCC_APB2Periph_SYSCFG, ENABLE);
 
-	gpio_init.GPIO_Pin  = GPIO_PIN_1;
-	gpio_init.GPIO_Mode = GPIO_Mode_IN;
-	gpio_init.GPIO_Speed = GPIO_Speed_100MHz;
-	gpio_init.GPIO_OType = GPIO_OType_PP;
-	gpio_init.GPIO_PuPd = GPIO_PuPd_DOWN;
-	GPIO_Init(GPIOC, &gpio_init);
+
+	//Proximity
 
 	gpio_init.GPIO_Pin  = GPIO_PIN_2;
 	gpio_init.GPIO_Mode = GPIO_Mode_IN;
@@ -937,8 +933,23 @@ void init_proximity()
 	gpio_init.GPIO_PuPd = GPIO_PuPd_DOWN;
 	GPIO_Init(GPIOC, &gpio_init);
 
+	gpio_init.GPIO_Pin  = GPIO_PIN_5;
+	gpio_init.GPIO_Mode = GPIO_Mode_IN;
+	gpio_init.GPIO_Speed = GPIO_Speed_100MHz;
+	gpio_init.GPIO_OType = GPIO_OType_PP;
+	gpio_init.GPIO_PuPd = GPIO_PuPd_DOWN;
+	GPIO_Init(GPIOC, &gpio_init);
+
+	gpio_init.GPIO_Pin  = GPIO_PIN_6;
+	gpio_init.GPIO_Mode = GPIO_Mode_IN;
+	gpio_init.GPIO_Speed = GPIO_Speed_100MHz;
+	gpio_init.GPIO_OType = GPIO_OType_PP;
+	gpio_init.GPIO_PuPd = GPIO_PuPd_DOWN;
+	GPIO_Init(GPIOC, &gpio_init);
 
 
+
+	//Limit switch
 
 	GPIO_InitTypeDef GPIO_InitDef;
 
@@ -951,6 +962,8 @@ void init_proximity()
 	GPIO_InitDef.GPIO_Speed = GPIO_Speed_100MHz;
 	//Initialize pins
 	GPIO_Init(GPIOD, &GPIO_InitDef);
+
+
 //
 //	/* Connect pin to interrupt */
 //	SYSCFG_EXTILineConfig(EXTI_PortSourceGPIOC, EXTI_PinSource13);
@@ -991,21 +1004,19 @@ void EXTI15_10_IRQHandler(void) {
  * getProxy merupakan fungsi untuk menghasilkan nilai 0 atau 1
  * dari inputan proximity
  */
+int proxyKanan;
+int proxyKiri;
+int proxyBelakang;
+int proxyDepanKiri;
+int proxyDepanKanan;
+
 int getProxy()
 {
-	if (y == 1)
-	{
-		return 1;
-	}
-	else if (z == 1)
-	{
-		return 2;
-	}
-	else if (keeperFlag == 0)
-	{
-		return 3;
-	}
-	return 0;
+	proxyKanan = GPIO_ReadInputDataBit(GPIOC,GPIO_PIN_2);
+	proxyKiri = GPIO_ReadInputDataBit(GPIOC,GPIO_PIN_3);
+	proxyDepanKanan = GPIO_ReadInputDataBit(GPIOC,GPIO_PIN_4);
+	proxyDepanKiri = GPIO_ReadInputDataBit(GPIOC,GPIO_PIN_5);
+	proxyBelakang = GPIO_ReadInputDataBit(GPIOC,GPIO_PIN_6);
 }
 
 /*
