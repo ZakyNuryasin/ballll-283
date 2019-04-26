@@ -58,6 +58,19 @@ void handleRotateIn(){
 	GPIO_SetBits(GPIOB,GPIO_Pin_8);
 	GPIO_SetBits(GPIOA,GPIO_Pin_7);
 
+//	Delayms(3000);
+//
+//	GPIO_ResetBits(GPIOB,GPIO_Pin_7);
+//	GPIO_SetBits(GPIOB,GPIO_Pin_6);
+//	GPIO_SetBits(GPIOA,GPIO_Pin_6);
+//
+//	//right
+//	GPIO_ResetBits(GPIOB,GPIO_Pin_8);
+//	GPIO_SetBits(GPIOB,GPIO_Pin_9);
+//	GPIO_SetBits(GPIOA,GPIO_Pin_7);
+//
+//	Delayms(3000);
+
 }
 
 /*

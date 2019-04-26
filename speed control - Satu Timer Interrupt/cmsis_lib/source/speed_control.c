@@ -594,17 +594,21 @@ void TIM2_IRQHandler()
 				outputEmpat -= 5000;
 			}
 
-//			output = 5000;
-//			outputDua = 5000;
-//			outputTiga = 5000;
-//			outputEmpat = 5000;
+			output = 0;
+			outputDua = 0;
+			outputTiga = 0;
+			outputEmpat = 0;
 
-			motorDC(1, output);
-			motorDC(2, outputDua);
-			motorDC(3, outputTiga);
-			motorDC(4, outputEmpat);
+//			output = -5000;
+//			outputDua = -5000;
+//			outputTiga = -5000;
+//			outputEmpat = -5000;
+
+//			motorDC(1, output);
+//			motorDC(2, outputDua);
+//			motorDC(3, outputTiga);
+//			motorDC(4, outputEmpat);
 //			}
-
 		}
 //	 }
 }

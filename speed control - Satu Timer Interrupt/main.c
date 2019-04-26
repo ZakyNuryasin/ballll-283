@@ -53,7 +53,7 @@ int main(void)
 
 	resetInit();
 
-//	fungsiautosudut();
+	fungsiautosudut();
 
 	traInit(0, 0, 0, 0);
 	motorSpeed(0,0,0,0);
@@ -99,10 +99,31 @@ int main(void)
 //	Delayms(3000);
 //	traInit(0, 0, 0,0);
 
+//	motorDC(1, 5000);
+//	motorDC(2, 5000);
+//	motorDC(3, 5000);
+//	motorDC(4, 5000);
+//
+//	Delayms(3000);
+//
+//	motorDC(1, -5000);
+//	motorDC(2, -5000);
+//	motorDC(3, -5000);
+//	motorDC(4, -5000);
+//
+//	Delayms(3000);
+//
+//	motorDC(1, 0);
+//	motorDC(2, 0);
+//	motorDC(3, 0);
+//	motorDC(4, 0);
+
     while(1)
     {
-    	getProxy();
-    	GPIO_SetBits(GPIOC,GPIO_Pin_1);
+//    	getProxy();
+//    	GPIO_SetBits(GPIOC,GPIO_Pin_1);
+    	handleRotateIn();
+
 //    	traInit(0, -100, 0,0);
 //    	ballGet();
 //    	handleRotateIn();
@@ -110,7 +131,6 @@ int main(void)
 //    	kickBall();
 //    	maju(100);
 //    	Delayms(1000);
-
     }
 }
 

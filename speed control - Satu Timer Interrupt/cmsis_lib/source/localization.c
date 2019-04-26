@@ -1268,6 +1268,7 @@ void getBall(void){
 
 
 }
+
 int temp;
 
 int PID(int param, int desire, int vMaks){
@@ -1324,7 +1325,6 @@ bool getGoalPos(void){
 			handleRotateIn();
 			return false;
 		 }
-
 	}
 }
 
@@ -1384,33 +1384,6 @@ int gotoKickField()
 	}
 	return 0;
 }
-
-void tesRotateMap(void){
-	int icount=1;
-	while(compassHeading > (90 * icount)+2){
-		rotateAntiClockWise(PID(compassHeading,(90 * icount)+2,50));
-	}
-	while(1){
-		if(icount == 1){
-				while(compassHeading > (90 * icount)+2){
-					rotateAntiClockWise(PID(compassHeading,(90 * icount)+2,50));
-				}
-		}
-
-		while(compassHeading < (90 * icount)){
-			rotateAntiClockWise(PID(compassHeading,(90 * icount),50 ));
-		}
-		maju(20);
-		Delayms(2000);
-		rotateAntiClockWise(0);
-		Delayms(2000);
-		icount+=2;
-		if (icount > 3){
-			icount = 1;
-		}
-	}
-}
-
 
 void LCD_InitializeTimer()
 {
@@ -1507,177 +1480,6 @@ int hindar()
 		return 1;
 }
 
-
-void keeperProx(int v)
-{
-	// 18230	150
-	// 17000	140
-
-	//flag proxy
-
-//	keeperFlag = 0;
-
-//	if(keeperFlag == 0)
-//	{
-//		if(getProxy2() == 1)
-//		{
-//			if(keeperFlagHor1 == 1)
-//			{
-//				keeperFlagHor = 1;
-////				countHor = -PROXKK1;
-//			}
-//			else if (keeperFlagHor2 == 1);
-//			{
-//				keeperFlagHor = 2;
-////				countHor = PROXKK1;
-//			}
-//		}
-//		else
-//		{
-//			keeperFlagHor = 0;
-//		}
-//	}
-
-	//buffer flag
-//	if(keeperCount2 == 200){
-//		keeperCount2 = 0;
-//		keeperFlagHor = 0;
-//	}
-//	if(keeperCount2 > 0){
-//		keeperCount2++;
-//	}
-
-	keeperFlagHor = 0;
-
-	if(z == 0)
-		keeperFlagHor = 1;
-	else if(y == 0)
-		keeperFlagHor = 2;
-	else
-		keeperFlagHor = 0;
-
-	keeperFlagHor1 = 0;
-	keeperFlagHor2 = 0;
-	keeperFlagVer1 = 0;
-	keeperFlagVer2 = 0;
-
-	keeperFlag = 0;
-
-	pwmMotor = motorOutput();
-
-	if(ballFound == 1)
-	{
-		keeperFlag2 = 0;
-
-		if(((ballXCoor < 112 && ballYCoor > 30) || (ballXCoor < 70 && ballYCoor <= 30)) && keeperFlagHor!= 1
-			&& countHor > -960
-			)
-		{
-//			if(pwmMotor < -1700)
-//			{
-//				int i = 0;
-//				while(i < 500)
-//				{
-//					stop();
-//					Delayms(1);
-//					i++;
-//
-//					if(ballXCoor < 122)
-//						break;
-//				}
-//			}
-
-			kiri(v);
-			Delayms(10);
-			keeperFlagHor1 = 1;
-			countHor--;
-		}
-		else if(((ballXCoor > 132 && ballYCoor > 30) || (ballXCoor > 140 && ballYCoor <= 30)) && keeperFlagHor!= 2
-			&& countHor < 960
-			)
-		{
-//			if(pwmMotor > 1700)
-//			{
-//				int i = 0;
-//				while(i < 500)
-//				{
-//					stop();
-//					Delayms(1);
-//					i++;
-//
-//					if((ballXCoor < 102 && ballYCoor > 30) || (ballXCoor > 140 && ballYCoor <= 30))
-//						break;
-//				}
-//			}
-
-			kanan(v);
-			Delayms(10);
-			keeperFlagHor2 = 1;
-			countHor++;
-		}
-		else
-		{
-			motorSpeed(0,0,0,0);
-		}
-	}
-	else if (ballFound == 0)
-	{
-		if(z == 0)
-		{
-			keeperFlag2 = 1;
-			keeperCount++;
-			Delayms(10);
-			if(keeperCount == 200){
-				keeperFlag2 = 0;
-				keeperCount = 0;
-			}
-		}
-		else if(y == 0)
-		{
-			keeperFlag2 = 2;
-			keeperCount++;
-			Delayms(10);
-			if(keeperCount == 200){
-				keeperFlag2 = 0;
-				keeperCount = 0;
-			}
-		}
-		else{}
-
-		if(keeperFlag2 == 1)
-		{
-			if(ballFound == 1)
-			{
-				if(ballXCoor <= 138){
-					keeperFlag2 = 0;
-				}
-				motorSpeed(0,0,0,0);
-
-			}
-			else
-			{
-				kiri(50);
-			}
-		}
-		else if(keeperFlag2 == 2)
-		{
-			if(ballFound == 1)
-			{
-				if(ballXCoor >= 146){
-					keeperFlag2 = 0;
-				}
-				motorSpeed(0,0,0,0);
-			}
-			else
-			{
-				kanan(50);
-			}
-		}
-	}
-	else{motorSpeed(0,0,0,0);}
-}
-
-
 void controlWifi()
 {
 	//kontrol wifi
@@ -1766,44 +1568,4 @@ int keeperBalik(int v)
 	}
 
 	return false;
-}
-
-uint8_t aaaaa = 65;
-void keeperwifi(int v)
-{
-	if(gameState == 's')
-	{
-		keeperProx(300);
-//		motorSpeed(0,0,0,0);
-	}
-	else if(gameState == '=')
-	{
-
-//		if(aaaaa == 'z')
-//			aaaaa = 'A';
-//
-//		aaaaa++;
-//
-//		aaaaa = ballXCoor;
-//
-		if(keeperBalik(300))
-			USART_SendData(USART2, ballXCoor);
-	}
-	else if(gameState == 'S')
-	{
-		motorSpeed(0,0,0,0);
-
-	}
-	else {
-		if(keeperBalik(300))
-		{
-			controlWifi();
-		}
-
-		if(gameState == '*')
-		{
-			countVer = 0;
-			countHor = 0;
-		}
-	}
 }
