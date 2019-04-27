@@ -1,28 +1,54 @@
-#include <SPI.h>
-#include <Pixy.h>
-#include <SoftwareSerial.h>
+/*
+ * rosserial PubSub Example
+ * Prints "hello world!" and toggles led
+ */
+ 
 #include <TimerOne.h>
 #include <Wire.h>
-#include <HMC5883L.h>
-#include <math.h>
-#include "compass.h"
-#include <Wire.h>
-#include "Kalman.h" // Source: https://github.com/TKJElectronics/KalmanFilter
-#define PI 3.14159265
-#define X_CENTER        ((PIXY_MAX_X-PIXY_MIN_X)/2)
-#define Y_CENTER        ((PIXY_MAX_Y-PIXY_MIN_Y)/2)
+#include <ros.h>
+#include <std_msgs/Char.h>
+#include <geometry_msgs/Pose2D.h>
+#include <SoftwareSerial.h>
+
+#define KUADRAN1 121
+#define KUADRAN2 971
+#define KUADRAN3 1772
+#define KUADRAN4 2697
+
 #define Address 0x60
-#define LINE 200
 
-unsigned long timer;
+SoftwareSerial mySerial(10, 11); // RX, TX
 
+ros::NodeHandle  nh;
+
+uint8_t xOmni1, xOmni2;
+uint8_t yOmni1, yOmni2; 
+uint8_t xFront1, xFront2;
+uint8_t yFront1, yFront2;
+int camOmniX, camOmniY;
+int camFrontX, camFrontY;
+char conData, conSelData;
 uint8_t buffer[2]; // I2C buffer
-
 float derajat;
 int anglefix;
 int anglefix2;
 
-SoftwareSerial stmSerial(10, 11);
+void camOmniCb( const geometry_msgs::Pose2D& camOmni){
+  camOmniX = camOmni.x;
+  camOmniY = camOmni.y;
+}
+
+void control( const std_msgs::Char& control){
+  conData = control.data;
+}
+
+void control_select( const std_msgs::Char& control_select){
+  conSelData = control_select.data;
+}
+
+ros::Subscriber<geometry_msgs::Pose2D> sub("bot1camOmni", camOmniCb );
+ros::Subscriber<std_msgs::Char> control_subscriber("control", control );
+ros::Subscriber<std_msgs::Char> control_select_subscriber("control", control_select );
 
 void i2cWrite(uint8_t address, uint8_t registerAddress) {
   Wire.beginTransmission(address);
@@ -42,18 +68,12 @@ uint8_t* i2cRead(uint8_t address, uint8_t registerAddress, uint8_t nbytes) {
   return buffer;
 }
 
-
 double getAngleHigh() {
   uint8_t* data = i2cRead(Address, 2, 2);
   return (((data[0] << 8) + data[1]));
 }
 
-int kuadran1 = 121;
-int kuadran2 = 971;
-int kuadran3 = 1772;
-int kuadran4 = 2697;
-
-void cmpsLoop()
+void cmpsLoop(int kuadran1, int kuadran2, int kuadran3, int kuadran4)
 {
   double angleHigh = getAngleHigh();
 
@@ -76,57 +96,60 @@ void cmpsLoop()
     
     anglefix = map(angleHigh, kuadran4, 3599 + kuadran1, 2700, 3599);
   }
-//
-//  Serial.print(angleHigh);
-//  Serial.print("        ");
-//  Serial.println(anglefix);
 
-//  if(stmSerial.available())
-//    stmSerial.read();
+  Serial.print(angleHigh);
+  Serial.print("        ");
+  Serial.println(anglefix);
 
   anglefix2 = anglefix % 100;
   anglefix = anglefix / 100;
 }
 
-
-
-void interruptHandler() {
-  uint8_t heading;
-  char sendBuffer[10];
-
-  sendBuffer[4] = 'C';
-  sendBuffer[5] = anglefix;
-  sendBuffer[6] = 'O';
-  sendBuffer[7] = anglefix2;
-
+void interruptHandler()
+{
   
-  Serial.write(sendBuffer[4]);
-  Serial.write(sendBuffer[5]);
-  Serial.write(sendBuffer[6]);
-  Serial.write(sendBuffer[7]);
+  xOmni1 = camOmniX/10;
+  xOmni2 = camOmniX%10;
+  yOmni1 = camOmniY/10;
+  yOmni2 = camOmniY%10;
 
-  stmSerial.write(sendBuffer[4]);
-  stmSerial.write(sendBuffer[5]);
-  stmSerial.write(sendBuffer[6]);
-  stmSerial.write(sendBuffer[7]);
+  mySerial.write("q");
+  mySerial.write(xOmni1);
+  mySerial.write("w");
+  mySerial.write(xOmni2);
+  mySerial.write("e");
+  mySerial.write(yOmni1);
+  mySerial.write("r");
+  mySerial.write(yOmni2);
+
+  mySerial.write("t");
+  mySerial.write(conData);
+  mySerial.write("y");
+  mySerial.write(conSelData);
+
+  mySerial.write("C");
+  mySerial.write(anglefix);
+  mySerial.write("O");
+  mySerial.write(anglefix2);
 }
+
+//std_msgs::String str_msg;
+//ros::Publisher chatter("chatter", &str_msg);
 
 void setup()
 {
   Serial.begin(9600);
   Wire.begin();
-  stmSerial.begin(9600);
-  Serial.print("Starting...\n");
-
+  nh.initNode();
+//  nh.advertise(chatter);
+  nh.subscribe(sub);
+  mySerial.begin(9600);
   Timer1.initialize(50000);
   Timer1.attachInterrupt(interruptHandler);
-
-  
 }
 
 void loop()
 {
-    cmpsLoop();
-    delay(200);
+  cmpsLoop(KUADRAN1, KUADRAN2, KUADRAN3, KUADRAN4);
+  nh.spinOnce();
 }
-
