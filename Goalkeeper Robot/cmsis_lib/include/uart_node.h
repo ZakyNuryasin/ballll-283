@@ -16,9 +16,11 @@
 /**
  * Functions
  */
+//void init_USART(void);
 void init_node(void);
 void USART2_IRQHandler(void);
 void getGamestate(void);
+
 
 /**
  * Defines

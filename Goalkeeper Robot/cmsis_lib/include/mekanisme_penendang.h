@@ -12,13 +12,6 @@
 /**
  * Functions
  */
-void init_extender();
-void init_proximity();
-void extenderLeft();
-void extenderRight();
-void extenderUp();
-void extenderOff();
-void proxy();
 void init_handle();
 void init_penendang();
 void handleRotateIn();
@@ -31,7 +24,12 @@ void chargeKick();
 void kick(bool mode);
 void tesKicker();
 void tesHandle();
-int proxyLeft, proxyUp, proxyRight;
+void init_extender();
+void rightExtender();
+void leftExtender();
+void upExtender();
+void offExtender();
+
 /**
  * Defines
  */

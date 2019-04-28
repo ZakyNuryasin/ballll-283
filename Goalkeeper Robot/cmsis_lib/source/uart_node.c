@@ -1,6 +1,6 @@
 
 #include "uart_node.h"
-
+uint8_t buffer;
 /*
  * Variables
  */
@@ -12,6 +12,9 @@ extern int gotoxyFlag;
 int strategy;
 char flagNode;
 char bufferNode;
+float autosudut1 = 0;
+
+//extern volatile int32_t rpm;
 
 void init_USART(void)
 {
@@ -62,46 +65,148 @@ void init_USART(void)
 	     USART_Cmd(USART2,ENABLE);
 
 }
-
+char buff[5];
+//char flag1 = 'a';
 void USART2_IRQHandler(void){
-	if( USART_GetITStatus(USART2, USART_IT_RXNE) ){
-		bufferNode = USART_ReceiveData(USART2);
-		if(flagNode=='x'){
-			nodex1 = bufferNode;
-			flagNode = 0;
-		}
-		else if(flagNode=='y'){
-			nodey1 = bufferNode;
-			flagNode = 0;
-		}
-		else if(flagNode=='X'){
-			nodex2 = bufferNode;
-			flagNode = 0;
-		}
-		else if(flagNode=='Y'){
-			nodey2 = bufferNode;
-			flagNode = 0;
-		}
-		else if(flagNode=='g'){
-			gameState = bufferNode;
-			flagNode = 0;
-		}
-		else if(flagNode=='s'){
-			strategy = bufferNode;
-			flagNode = 0;
-		}
-		else {
-			flagNode = bufferNode;
-		}
-		if(prevx1 != nodex1 || prevy1 != nodey1){
-			movX = nodex1;
-			movY = nodey1;
-			gotoxyFlag = 1;
-		}
-		prevx1 = nodex1;
-		prevy1 = nodey1;
-
+	if( USART_GetITStatus(USART2, USART_IT_RXNE) )
+	{
+//		bufferNode = USART_ReceiveData(USART2);
+		USART_SendData(USART2, buffer);
 	}
+//		if(flagNode=='x'){
+//			nodex1 = bufferNode;
+//			flagNode = 0;
+//		}
+//		else if(flagNode=='y'){
+//			nodey1 = bufferNode;
+//			flagNode = 0;
+//		}
+//		else if(flagNode=='X'){
+//			nodex2 = bufferNode;
+//			flagNode = 0;
+//		}
+//		else if(flagNode=='Y'){
+//			nodey2 = bufferNode;
+//			flagNode = 0;
+//		}
+//		else if(flagNode=='g'){
+//			gameState = bufferNode;
+//			flagNode = 0;
+//		}
+//		else if(flagNode=='s'){
+//			strategy = bufferNode;
+//			flagNode = 0;
+//		}
+//		else {
+//			flagNode = bufferNode;
+//		}
+//		if(prevx1 != nodex1 || prevy1 != nodey1){
+//			movX = nodex1;
+//			movY = nodey1;
+//			gotoxyFlag = 1;
+//		}
+//		prevx1 = nodex1;
+//		prevy1 = nodey1;
+//
+//	}
+		if(flag=='X')
+			{
+				ballXCoor = buffer;
+				flag = 0;
+			}
+
+		//	else if(flag=='M')
+		//		{
+		//			fragX = buffer * 10;
+		//			flagX++;
+		//			flag = 0;
+		//		}
+		//
+		//	else if(flag=='N')
+		//		{
+		//			fragX += buffer;
+		//			flagX++;
+		//			flag = 0;
+		//		}
+		//
+		//	else if(flagX == 2)
+		//		{
+		//			ballXCoor = fragX;
+		//			flagX = 0;
+		//			flag = 0;
+		//		}
+
+
+			// select Y coordinate of camera servo
+			else if(flag=='Y')
+			{
+				ballYCoor = buffer;
+				flag = 0;
+			}
+
+		//	else if(flag=='V')
+		//	{
+		//		fragY = buffer * 10;
+		//		flagY++;
+		//		flag = 0;
+		//	}
+		//
+		//	else if(flag=='F')
+		//	{
+		//		fragY += buffer;
+		//		flagY++;
+		//		flag = 0;
+		//	}
+		//
+		//	else if(flagY == 2)
+		//	{
+		//		ballYCoor = fragY;
+		//		flagY = 0;
+		//		flag = 0;
+		//	}
+
+			// select compass data
+			else if (flag =='C')
+			{
+				compassDerajat1 = buffer;
+
+				flag = 0;
+			}
+			// select X direction of accelerometer
+			else if(flag=='O')
+			{
+				compassDerajat2 = buffer;
+				compassHeading = (float)(compassDerajat1*100+compassDerajat2)/10;
+				compassHeading = compassHeading - SUDUTGAWANG - autosudut1;
+
+				if(compassHeading < 0)
+				{
+					compassHeading = compassHeading + 360;
+				}
+				if(compassHeading > 360)
+				{
+					compassHeading = compassHeading - 360;
+				}
+				flag = 0;
+			}
+			// select Y direction of accelerometer
+		//	else if(flag=='L')
+		//	{
+		//		acceleroY = buffer;
+		//		flag = 0;
+		//	}
+			// select ball detection flag
+			else if(flag == 'B')
+			{
+				ballFound = buffer;
+				flag = 0;
+			}
+			// get flag for select data
+			else
+			{
+				flag = buffer;
+			}
+
 }
 
 
@@ -110,6 +215,7 @@ void getGamestate(void){
 	   USART_SendData(USART2, 1);
 }
 
-void init_node(){
-init_USART();
+void init_node(void)
+{
+	init_USART();
 }

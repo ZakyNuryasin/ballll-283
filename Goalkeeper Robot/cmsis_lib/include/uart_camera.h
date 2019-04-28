@@ -27,8 +27,6 @@ void fungsiautosudut();
  */
 uint8_t ballXCoor;
 uint8_t ballYCoor;
-uint16_t xCoor;
-uint16_t yCoor;
 uint8_t acceleroX;
 uint8_t acceleroY;
 uint8_t compassDerajat1;

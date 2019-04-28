@@ -36,7 +36,7 @@
 #include "misc.h"
 #include "defines.h"
 #include  "odometry.h"
-
+#include "tm_stm32f4_adc.h"
 /**
  * Functions
  */
@@ -69,6 +69,13 @@ void LCD_EnableTimerInterrupt();
 void TIM5_IRQHandler();
 void init_lcdTimer();
 int hindar();
+void keeperProxy();
+int getProxyKanan();
+int getProxyKiri();
+int getProxyAtas();
+void readProxy();
+void gpSharp();
+void init_gpsharp();
 
 /**
  * Defines
