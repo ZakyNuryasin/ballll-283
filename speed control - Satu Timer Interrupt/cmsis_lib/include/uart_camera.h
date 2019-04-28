@@ -20,7 +20,7 @@ void fungsiautosudut();
 /*
  * sudut untuk menjadikan compassHeading bernilai 0
  */
-#define SUDUTGAWANG 77
+#define SUDUTGAWANG 186
 
 /**
  * Variables

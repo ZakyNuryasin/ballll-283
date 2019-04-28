@@ -909,12 +909,8 @@ void init_proximity()
 	RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOC, ENABLE);
 //	RCC_APB2PeriphClockCmd(RCC_APB2Periph_SYSCFG, ENABLE);
 
-	gpio_init.GPIO_Pin  = GPIO_PIN_1;
-	gpio_init.GPIO_Mode = GPIO_Mode_IN;
-	gpio_init.GPIO_Speed = GPIO_Speed_100MHz;
-	gpio_init.GPIO_OType = GPIO_OType_PP;
-	gpio_init.GPIO_PuPd = GPIO_PuPd_DOWN;
-	GPIO_Init(GPIOC, &gpio_init);
+
+	//Proximity
 
 	gpio_init.GPIO_Pin  = GPIO_PIN_2;
 	gpio_init.GPIO_Mode = GPIO_Mode_IN;
@@ -937,8 +933,23 @@ void init_proximity()
 	gpio_init.GPIO_PuPd = GPIO_PuPd_DOWN;
 	GPIO_Init(GPIOC, &gpio_init);
 
+	gpio_init.GPIO_Pin  = GPIO_PIN_5;
+	gpio_init.GPIO_Mode = GPIO_Mode_IN;
+	gpio_init.GPIO_Speed = GPIO_Speed_100MHz;
+	gpio_init.GPIO_OType = GPIO_OType_PP;
+	gpio_init.GPIO_PuPd = GPIO_PuPd_DOWN;
+	GPIO_Init(GPIOC, &gpio_init);
+
+	gpio_init.GPIO_Pin  = GPIO_PIN_6;
+	gpio_init.GPIO_Mode = GPIO_Mode_IN;
+	gpio_init.GPIO_Speed = GPIO_Speed_100MHz;
+	gpio_init.GPIO_OType = GPIO_OType_PP;
+	gpio_init.GPIO_PuPd = GPIO_PuPd_DOWN;
+	GPIO_Init(GPIOC, &gpio_init);
 
 
+
+	//Limit switch
 
 	GPIO_InitTypeDef GPIO_InitDef;
 
@@ -951,6 +962,8 @@ void init_proximity()
 	GPIO_InitDef.GPIO_Speed = GPIO_Speed_100MHz;
 	//Initialize pins
 	GPIO_Init(GPIOD, &GPIO_InitDef);
+
+
 //
 //	/* Connect pin to interrupt */
 //	SYSCFG_EXTILineConfig(EXTI_PortSourceGPIOC, EXTI_PinSource13);
@@ -991,21 +1004,19 @@ void EXTI15_10_IRQHandler(void) {
  * getProxy merupakan fungsi untuk menghasilkan nilai 0 atau 1
  * dari inputan proximity
  */
+int proxyKanan;
+int proxyKiri;
+int proxyBelakang;
+int proxyDepanKiri;
+int proxyDepanKanan;
+
 int getProxy()
 {
-	if (y == 1)
-	{
-		return 1;
-	}
-	else if (z == 1)
-	{
-		return 2;
-	}
-	else if (keeperFlag == 0)
-	{
-		return 3;
-	}
-	return 0;
+	proxyKanan = GPIO_ReadInputDataBit(GPIOC,GPIO_PIN_2);
+	proxyKiri = GPIO_ReadInputDataBit(GPIOC,GPIO_PIN_3);
+	proxyDepanKanan = GPIO_ReadInputDataBit(GPIOC,GPIO_PIN_4);
+	proxyDepanKiri = GPIO_ReadInputDataBit(GPIOC,GPIO_PIN_5);
+	proxyBelakang = GPIO_ReadInputDataBit(GPIOC,GPIO_PIN_6);
 }
 
 /*
@@ -1257,6 +1268,7 @@ void getBall(void){
 
 
 }
+
 int temp;
 
 int PID(int param, int desire, int vMaks){
@@ -1313,133 +1325,13 @@ bool getGoalPos(void){
 			handleRotateIn();
 			return false;
 		 }
-
 	}
 }
 
 bool gotoHeadZero(void){
-	 if(compassHeading < 1 || compassHeading > 159)
-	 {
-		return true;
-	 }
-	 else{
-		rotateAntiClockWise(PID(compassHeading,0,30));
-		handleRotateIn();
-		return false;
-	 }
+
 }
 
-bool gotoHeadZero2(double derajat){
-	 if(derajat < 10 || derajat > 150)
-	 {
-		return true;
-	 }
-	 else{
-		rotateAntiClockWise(PID(derajat,0,30));
-		handleRotateIn();
-		return false;
-	 }
-}
-
-void getCoor(int headingProcess,int encoderLeft, int encoderRight){
-    	if(headingProcess == 1){
-//    		if(headCount > 586) headCount -= 586;
-//    		if(headCount < 0) headCount += 586;
-//        	heading = (float)headCount*360/586;
-    	}
-    	else{
-    		left_mm = encoderLeft / TICK_PER_MM_LEFT;
-    		right_mm = encoderRight / TICK_PER_MM_RIGHT;
-    		theta += (right_mm - left_mm) / DIAMETER ;
-    		if (theta > PI)
-    		theta -= TWOPI;
-    		if (theta < (-PI))
-    		theta += TWOPI;
-    		mov = (left_mm + right_mm) / 200; ;
-    		double val = PI/180;
-    		movX = movX + mov * cos (compassHeading*val);
-    		movY = movY + mov * sin (compassHeading*val);
-    		movPrev = mov;
-    	}
-}
-
-void gotoXY(int coorX, int coorY, int head)
-{
-	int kedepan = PID(Y_pos, coorY, 100);
-	int teta = atan(((coorX - X_pos)/(coorY - Y_pos)));
-	int tengah = PID(compassHeading, teta, 100);
-	motorSpeed(tengah - kedepan, tengah - kedepan, tengah + kedepan, tengah + kedepan);
-
-	if(Y_pos == coorY && X_pos == coorX)
-	{
-		rotateAntiClockWise(PID(compassHeading, head, 50));
-	}
-}
-
-void gotoxyCoach(){
-
-		float x,y;
-		double val = 180/PI;
-		x = nodex2-nodex1;
-		y = nodey1-nodey2;
-		gotoHead = atan(y/x)*val;
-		if(x>0 && y>0){
-			gotoHead = gotoHead;
-		}
-		else if(x<0 && y> 0){
-			gotoHead = gotoHead + 180;
-		}
-		else if(x<0 && y<0){
-			gotoHead = gotoHead + 180;
-		}
-		else if(x>0 && y<0){
-			gotoHead = gotoHead+360;
-		}
-		else{
-			gotoHead = compassHeading;
-		}
-		if((gotoHead-compassHeading>-20 && gotoHead-compassHeading<0) ||
-				(gotoHead-compassHeading<20 && gotoHead-compassHeading>=0)){
-			if(abs(nodex2-nodex1) > abs(nodey2-nodey1)){
-				if(nodex2-movX<=5 && nodex2-movX>=-5){
-					motorSpeed(0,0,0,0);
-				}
-				else if(nodex2>nodex1 && nodex2-movX>=5){
-					maju(70);
-				}
-				else if(nodex2>nodex1 && nodex2-movX<-5){
-					mundur(30);
-				}
-				else if(nodex2<nodex1 && nodex2-movX<=-5){
-					maju(70);
-				}
-				else if(nodex2<nodex1 && nodex2-movX>5){
-					mundur(30);
-				}
-			}
-			else{
-				if(nodey2-movY<=5 && nodey2-movY>=-5){
-					motorSpeed(0,0,0,0);
-				}
-				else if(nodey2>nodey1 && nodey2-movY>=5){
-					maju(70);
-				}
-				else if(nodey2>nodey1 && nodey2-movY<-5){
-					mundur(30);
-				}
-				else if(nodey2<nodey1 && nodey2-movY<=-5){
-					maju(70);
-				}
-				else if(nodey2<nodey1 && nodey2-movY>5){
-					mundur(30);
-				}
-			}
-		}
-		else {
-			rotateAntiClockWise(PID(compassHeading,gotoHead,40));
-
-		}
-}
 
 int getGoalPosition()
 {
@@ -1492,33 +1384,6 @@ int gotoKickField()
 	}
 	return 0;
 }
-
-void tesRotateMap(void){
-	int icount=1;
-	while(compassHeading > (90 * icount)+2){
-		rotateAntiClockWise(PID(compassHeading,(90 * icount)+2,50));
-	}
-	while(1){
-		if(icount == 1){
-				while(compassHeading > (90 * icount)+2){
-					rotateAntiClockWise(PID(compassHeading,(90 * icount)+2,50));
-				}
-		}
-
-		while(compassHeading < (90 * icount)){
-			rotateAntiClockWise(PID(compassHeading,(90 * icount),50 ));
-		}
-		maju(20);
-		Delayms(2000);
-		rotateAntiClockWise(0);
-		Delayms(2000);
-		icount+=2;
-		if (icount > 3){
-			icount = 1;
-		}
-	}
-}
-
 
 void LCD_InitializeTimer()
 {
@@ -1615,177 +1480,6 @@ int hindar()
 		return 1;
 }
 
-
-void keeperProx(int v)
-{
-	// 18230	150
-	// 17000	140
-
-	//flag proxy
-
-//	keeperFlag = 0;
-
-//	if(keeperFlag == 0)
-//	{
-//		if(getProxy2() == 1)
-//		{
-//			if(keeperFlagHor1 == 1)
-//			{
-//				keeperFlagHor = 1;
-////				countHor = -PROXKK1;
-//			}
-//			else if (keeperFlagHor2 == 1);
-//			{
-//				keeperFlagHor = 2;
-////				countHor = PROXKK1;
-//			}
-//		}
-//		else
-//		{
-//			keeperFlagHor = 0;
-//		}
-//	}
-
-	//buffer flag
-//	if(keeperCount2 == 200){
-//		keeperCount2 = 0;
-//		keeperFlagHor = 0;
-//	}
-//	if(keeperCount2 > 0){
-//		keeperCount2++;
-//	}
-
-	keeperFlagHor = 0;
-
-	if(z == 0)
-		keeperFlagHor = 1;
-	else if(y == 0)
-		keeperFlagHor = 2;
-	else
-		keeperFlagHor = 0;
-
-	keeperFlagHor1 = 0;
-	keeperFlagHor2 = 0;
-	keeperFlagVer1 = 0;
-	keeperFlagVer2 = 0;
-
-	keeperFlag = 0;
-
-	pwmMotor = motorOutput();
-
-	if(ballFound == 1)
-	{
-		keeperFlag2 = 0;
-
-		if(((ballXCoor < 112 && ballYCoor > 30) || (ballXCoor < 70 && ballYCoor <= 30)) && keeperFlagHor!= 1
-			&& countHor > -960
-			)
-		{
-//			if(pwmMotor < -1700)
-//			{
-//				int i = 0;
-//				while(i < 500)
-//				{
-//					stop();
-//					Delayms(1);
-//					i++;
-//
-//					if(ballXCoor < 122)
-//						break;
-//				}
-//			}
-
-			kiri(v);
-			Delayms(10);
-			keeperFlagHor1 = 1;
-			countHor--;
-		}
-		else if(((ballXCoor > 132 && ballYCoor > 30) || (ballXCoor > 140 && ballYCoor <= 30)) && keeperFlagHor!= 2
-			&& countHor < 960
-			)
-		{
-//			if(pwmMotor > 1700)
-//			{
-//				int i = 0;
-//				while(i < 500)
-//				{
-//					stop();
-//					Delayms(1);
-//					i++;
-//
-//					if((ballXCoor < 102 && ballYCoor > 30) || (ballXCoor > 140 && ballYCoor <= 30))
-//						break;
-//				}
-//			}
-
-			kanan(v);
-			Delayms(10);
-			keeperFlagHor2 = 1;
-			countHor++;
-		}
-		else
-		{
-			motorSpeed(0,0,0,0);
-		}
-	}
-	else if (ballFound == 0)
-	{
-		if(z == 0)
-		{
-			keeperFlag2 = 1;
-			keeperCount++;
-			Delayms(10);
-			if(keeperCount == 200){
-				keeperFlag2 = 0;
-				keeperCount = 0;
-			}
-		}
-		else if(y == 0)
-		{
-			keeperFlag2 = 2;
-			keeperCount++;
-			Delayms(10);
-			if(keeperCount == 200){
-				keeperFlag2 = 0;
-				keeperCount = 0;
-			}
-		}
-		else{}
-
-		if(keeperFlag2 == 1)
-		{
-			if(ballFound == 1)
-			{
-				if(ballXCoor <= 138){
-					keeperFlag2 = 0;
-				}
-				motorSpeed(0,0,0,0);
-
-			}
-			else
-			{
-				kiri(50);
-			}
-		}
-		else if(keeperFlag2 == 2)
-		{
-			if(ballFound == 1)
-			{
-				if(ballXCoor >= 146){
-					keeperFlag2 = 0;
-				}
-				motorSpeed(0,0,0,0);
-			}
-			else
-			{
-				kanan(50);
-			}
-		}
-	}
-	else{motorSpeed(0,0,0,0);}
-}
-
-
 void controlWifi()
 {
 	//kontrol wifi
@@ -1874,44 +1568,4 @@ int keeperBalik(int v)
 	}
 
 	return false;
-}
-
-uint8_t aaaaa = 65;
-void keeperwifi(int v)
-{
-	if(gameState == 's')
-	{
-		keeperProx(300);
-//		motorSpeed(0,0,0,0);
-	}
-	else if(gameState == '=')
-	{
-
-//		if(aaaaa == 'z')
-//			aaaaa = 'A';
-//
-//		aaaaa++;
-//
-//		aaaaa = ballXCoor;
-//
-		if(keeperBalik(300))
-			USART_SendData(USART2, ballXCoor);
-	}
-	else if(gameState == 'S')
-	{
-		motorSpeed(0,0,0,0);
-
-	}
-	else {
-		if(keeperBalik(300))
-		{
-			controlWifi();
-		}
-
-		if(gameState == '*')
-		{
-			countVer = 0;
-			countHor = 0;
-		}
-	}
 }
