@@ -7,12 +7,22 @@ uint8_t buffer;
 float autosudut = 0;
 
 extern volatile int32_t rpm;
+extern double current_y;
+
+void fungsiautosudut()
+{
+	autosudut = compassHeading;
+}
 
 /*
  * inisialisasi uart3 untuk data kamera, kompas dan akselerometer
  */
 void init_camera(void)
 {
+	robotSelect = 0;
+	nomorRobot = 0;
+	controlMode = 0;
+
 	// give the struct a name
 	NVIC_InitTypeDef NVIC_InitStructure;
 	GPIO_InitTypeDef GPIO_InitStructure;
@@ -69,11 +79,6 @@ void init_camera(void)
  * interrupt handler untuk uart3
  */
 
-char buff[5];
-char flag1 = 'a';
-
-
-
 void USART3_IRQHandler(void)
 {
 
@@ -84,93 +89,9 @@ void USART3_IRQHandler(void)
 //		USART_SendData(USART3, buffer);
 	}
 
-//	if(flag1 == 'a'){
-//		for(int i=0;i<4;i++)
-//		{
-//			buff[i] = buffer<<(i*8);
-//		}
-//		buff[4] = 0;
-//		buffer = buff[0];
-//		flag1 = 'b';
-//	}else if(flag1 == 'b')
-//	{
-//		buffer = buff[1];
-//		flag1 = 'c';
-//	}else if(flag1 == 'c')
-//	{
-//		buffer = buff[2];
-//		flag1 = 'd';
-//	}else if(flag1 == 'd')
-//	{
-//		buffer = buff[3];
-//		flag1 = 'e';
-//	}else if(flag == 'e')
-//	{
-//		buffer = buff[4];
-//		flag = 'a';
-//	}
-
-
-	// select X coordinate of camera servo
-	if(flag=='X')
-	{
-		ballXCoor = buffer;
-		flag = 0;
-	}
-
-	else if(flag=='w')
-	{
-		xCoor = (fragX * 10)+ buffer;
-		flagX++;
-		flag = 0;
-	}
-
-	else if(flag=='q')
-	{
-		fragX = buffer;
-		flagX++;
-		flag = 0;
-	}
-
-//	else if(flagX == 2)
-//	{
-//		ballXCoor = fragX;
-//		flagX = 0;
-//		flag = 0;
-//	}
-
-
-	// select Y coordinate of camera servo
-	else if(flag=='Y')
-	{
-		ballYCoor = buffer;
-		flag = 0;
-	}
-
-	else if(flag=='r')
-	{
-		yCoor = (fragY * 10) + buffer;
-		flagY++;
-		flag = 0;
-	}
-
-	else if(flag=='e')
-	{
-//		fragY += buffer;
-		fragY = buffer;
-		flagY++;
-		flag = 0;
-	}
-
-//	else if(flagY == 2)
-//	{
-//		ballYCoor = fragY;
-//		flagY = 0;
-//		flag = 0;
-//	}
 
 	// select compass data
-	else if (flag =='C')
+	if (flag =='C')
 	{
 		compassDerajat1 = buffer;
 
@@ -187,33 +108,116 @@ void USART3_IRQHandler(void)
 		{
 			compassHeading = compassHeading + 360;
 		}
-		if(compassHeading > 360)
+		else if(compassHeading > 360)
 		{
 			compassHeading = compassHeading - 360;
 		}
 		flag = 0;
 	}
-	// select Y direction of accelerometer
-	else if(flag=='L')
+
+
+
+
+	//camera
+	else if(flag=='w')
 	{
-		acceleroY = buffer;
+		xCoor = (fragX * 10)+ buffer;
+		flagX++;
 		flag = 0;
 	}
-	// select ball detection flag
-	else if(flag == 'B')
+
+	else if(flag=='q')
 	{
-		ballFound = buffer;
+		fragX = buffer;
+		flagX++;
 		flag = 0;
 	}
+	else if(flag=='r')
+	{
+		yCoor = (fragY * 10) + buffer;
+		flagY++;
+		flag = 0;
+	}
+	else if(flag=='e')
+	{
+//		fragY += buffer;
+		fragY = buffer;
+		flagY++;
+		flag = 0;
+	}
+
+
+
+
+
+
+
+	//kontrol manual lewat ros
+	else if(flag == '1' || flag == '2')
+	{
+		robotSelect = flag;
+		flag = 0;
+
+		//tanda mode kontrol manual
+		if(robotSelect == nomorRobot)
+			controlMode = 1;
+	}
+	else if(flag == 'w' && robotSelect == nomorRobot)
+	{
+		maju(10000);
+		flag = 0;
+	}
+	else if(flag == 'a' && robotSelect == nomorRobot)
+	{
+		kiri(10000);
+		flag = 0;
+	}
+	else if(flag == 's' && robotSelect == nomorRobot)
+	{
+		kanan(10000);
+		flag = 0;
+	}
+	else if(flag == 'd' && robotSelect == nomorRobot)
+	{
+		mundur(10000);
+		flag = 0;
+	}
+	else if(flag == 'q' && robotSelect == nomorRobot)
+	{
+		stop();
+		flag = 0;
+	}
+
+
+
+
+	//tanda reset posisi encoder
+	else if(flag == '3' && robotSelect == nomorRobot)
+	{
+		resetInit();
+		current_y = 450 - 25;
+		flag = 0;
+	}
+	else if(flag == '4' && robotSelect == nomorRobot)
+	{
+		resetInit();
+		current_y = 112.5 + 25;
+		flag = 0;
+	}
+	else if(flag == '5' && robotSelect == nomorRobot)
+	{
+		resetInit();
+		current_y = 37.5 + 25;
+		flag = 0;
+	}
+
+
+
+
 	// get flag for select data
 	else
 	{
 		flag = buffer;
 	}
 
-}
-
-void fungsiautosudut()
-{
-	autosudut = compassHeading;
 }

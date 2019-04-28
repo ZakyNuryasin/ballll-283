@@ -59,7 +59,7 @@ void init_camera(void)
 	 NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 0;         // this sets the priority group of the USAR31 interrupts
 	 NVIC_InitStructure.NVIC_IRQChannelSubPriority = 0;        // this sets the subpriority inside the group
 	 NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;           // the USART3 interrupts are globally enabled
-	 NVIC_Init(&NVIC_InitStructure);                       // the properties are passed to the NVIC_Init function which takes care of the low level stuff
+	 NVIC_Init(&NVIC_InitStructure);                      // the properties are passed to the NVIC_Init function which takes care of the low level stuff
 
 	 // finally this2, E enables the complete USART3 peripheral
 	 USART_Cmd(USART3,ENABLE);
@@ -72,16 +72,14 @@ void init_camera(void)
 char buff[5];
 char flag1 = 'a';
 
-
-
 void USART3_IRQHandler(void)
 {
 
 	// fetch data from arduino nano
 	if( USART_GetITStatus(USART3, USART_IT_RXNE) )
 	{
-		buffer = USART_ReceiveData(USART3);
-//		USART_SendData(USART3, buffer);
+//		buffer = USART_ReceiveData(USART3);
+		USART_SendData(USART3, buffer);
 	}
 
 //	if(flag1 == 'a'){
@@ -118,26 +116,26 @@ void USART3_IRQHandler(void)
 		flag = 0;
 	}
 
-	else if(flag=='w')
-	{
-		xCoor = (fragX * 10)+ buffer;
-		flagX++;
-		flag = 0;
-	}
-
-	else if(flag=='q')
-	{
-		fragX = buffer;
-		flagX++;
-		flag = 0;
-	}
-
+//	else if(flag=='M')
+//		{
+//			fragX = buffer * 10;
+//			flagX++;
+//			flag = 0;
+//		}
+//
+//	else if(flag=='N')
+//		{
+//			fragX += buffer;
+//			flagX++;
+//			flag = 0;
+//		}
+//
 //	else if(flagX == 2)
-//	{
-//		ballXCoor = fragX;
-//		flagX = 0;
-//		flag = 0;
-//	}
+//		{
+//			ballXCoor = fragX;
+//			flagX = 0;
+//			flag = 0;
+//		}
 
 
 	// select Y coordinate of camera servo
@@ -147,21 +145,20 @@ void USART3_IRQHandler(void)
 		flag = 0;
 	}
 
-	else if(flag=='r')
-	{
-		yCoor = (fragY * 10) + buffer;
-		flagY++;
-		flag = 0;
-	}
-
-	else if(flag=='e')
-	{
+//	else if(flag=='V')
+//	{
+//		fragY = buffer * 10;
+//		flagY++;
+//		flag = 0;
+//	}
+//
+//	else if(flag=='F')
+//	{
 //		fragY += buffer;
-		fragY = buffer;
-		flagY++;
-		flag = 0;
-	}
-
+//		flagY++;
+//		flag = 0;
+//	}
+//
 //	else if(flagY == 2)
 //	{
 //		ballYCoor = fragY;
@@ -194,11 +191,11 @@ void USART3_IRQHandler(void)
 		flag = 0;
 	}
 	// select Y direction of accelerometer
-	else if(flag=='L')
-	{
-		acceleroY = buffer;
-		flag = 0;
-	}
+//	else if(flag=='L')
+//	{
+//		acceleroY = buffer;
+//		flag = 0;
+//	}
 	// select ball detection flag
 	else if(flag == 'B')
 	{

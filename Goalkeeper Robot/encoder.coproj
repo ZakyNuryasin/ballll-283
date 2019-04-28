@@ -102,6 +102,7 @@
     <File name="cmsis_lib/source/uart_camera.c" path="cmsis_lib/source/uart_camera.c" type="1"/>
     <File name="cmsis_lib/source/misc.c" path="cmsis_lib/source/misc.c" type="1"/>
     <File name="cmsis_lib/include/stm32f4xx_tim.h" path="cmsis_lib/include/stm32f4xx_tim.h" type="1"/>
+    <File name="cmsis_lib/source/stm32f4xx_adc.c" path="../../../../Downloads/Compressed/tm_stm32f4_adc/src/stm32f4xx_adc.c" type="1"/>
     <File name="syscalls/syscalls.c" path="syscalls/syscalls.c" type="1"/>
     <File name="cmsis_lib/source/localization.c" path="cmsis_lib/source/localization.c" type="1"/>
     <File name="cmsis_lib/source/stm32f4xx_i2c.c" path="cmsis_lib/source/stm32f4xx_i2c.c" type="1"/>
@@ -113,6 +114,7 @@
     <File name="cmsis_lib/include/speed_control.h" path="cmsis_lib/include/speed_control.h" type="1"/>
     <File name="stdio/printf.c" path="stdio/printf.c" type="1"/>
     <File name="cmsis_lib/include/tm_stm32f4_gpio.h" path="cmsis_lib/include/tm_stm32f4_gpio.h" type="1"/>
+    <File name="cmsis_lib/source/tm_stm32f4_adc.c" path="../../../../Downloads/Compressed/tm_stm32f4_adc/tm_stm32f4_adc.c" type="1"/>
     <File name="cmsis_lib/include/stm32f4xx_rcc.h" path="cmsis_lib/include/stm32f4xx_rcc.h" type="1"/>
     <File name="cmsis_lib/source/stm32f4xx_syscfg.c" path="cmsis_lib/source/stm32f4xx_syscfg.c" type="1"/>
     <File name="stdio" path="" type="2"/>
@@ -121,6 +123,7 @@
     <File name="cmsis/core_cmInstr.h" path="cmsis/core_cmInstr.h" type="1"/>
     <File name="cmsis_lib/include/localization.h" path="cmsis_lib/include/localization.h" type="1"/>
     <File name="cmsis_lib/include/lcd_16x2.h" path="cmsis_lib/include/lcd_16x2.h" type="1"/>
+    <File name="cmsis_lib/include/stm32f4xx_adc.h" path="../../../../Downloads/Compressed/tm_stm32f4_adc/inc/stm32f4xx_adc.h" type="1"/>
     <File name="cmsis_lib/source/speed_control.c" path="cmsis_lib/source/speed_control.c" type="1"/>
     <File name="cmsis_lib/include/stm32f4xx_exti.h" path="cmsis_lib/include/stm32f4xx_exti.h" type="1"/>
     <File name="cmsis_lib/source/stm32f4xx_exti.c" path="cmsis_lib/source/stm32f4xx_exti.c" type="1"/>
@@ -128,6 +131,7 @@
     <File name="cmsis_lib/source/tm_stm32f4_delay.c" path="cmsis_lib/source/tm_stm32f4_delay.c" type="1"/>
     <File name="cmsis_lib/source/tm_stm32f4_gpio.c" path="cmsis_lib/source/tm_stm32f4_gpio.c" type="1"/>
     <File name="cmsis_lib/include/mekanisme_penendang.h" path="cmsis_lib/include/mekanisme_penendang.h" type="1"/>
+    <File name="cmsis_lib/include/tm_stm32f4_adc.h" path="../../../../Downloads/Compressed/tm_stm32f4_adc/tm_stm32f4_adc.h" type="1"/>
     <File name="cmsis_lib/include/uart_camera.h" path="cmsis_lib/include/uart_camera.h" type="1"/>
     <File name="cmsis_lib/include/tm_stm32f4_delay.h" path="cmsis_lib/include/tm_stm32f4_delay.h" type="1"/>
     <File name="cmsis" path="" type="2"/>

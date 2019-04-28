@@ -30,33 +30,40 @@ double inputy = 0.0;
 double inputw = 0.0;
 double sudutw = 0.707106781;
 
+extern uint8_t robotSelect;
+extern uint8_t nomorRobot;
+extern uint8_t controlMode;
+
+
 int main(void)
 {
 	SystemInit();
 
-	lcd_init();
 	TM_DELAY_Init();
-	init_lcdTimer();
-	lcd_clear();
-	init_proximity();
-	init_speed_control();
-//	init_node();
+
+	init_node();
 	init_camera();
 	init_handle();
+	init_proximity();
 	init_penendang();
+	init_speed_control();
+
+	controlMode = 1;
+	stop();
 
 //	init_mode();
 //	init_srf();
 
-
 	Delayms(5000);
-
-	resetInit();
 
 	fungsiautosudut();
 
-	traInit(0, 0, 0, 0);
-	motorSpeed(0,0,0,0);
+	resetInit();
+
+	controlMode = 0;
+
+//	traInit(0, 0, 0, 0);
+//	motorSpeed(0,0,0,0);
 
 	Delayms(1000);
 
@@ -93,40 +100,49 @@ int main(void)
 //	Delayms(3000);
 //	traInit(0, 0, 270, 0);
 //	Delayms(3000);
-//	traInit(0, 0, 90, 0);
-//	Delayms(3000);
-//	traInit(0, 0, 270, 0);
-//	Delayms(3000);
-//	traInit(0, 0, 0,0);
+//	traInit(0, 0, 0, 0);
 
-//	motorDC(1, 5000);
-//	motorDC(2, 5000);
-//	motorDC(3, 5000);
-//	motorDC(4, 5000);
-//
+//	traInit(-150, -150, 90, 0);
 //	Delayms(3000);
-//
-//	motorDC(1, -5000);
-//	motorDC(2, -5000);
-//	motorDC(3, -5000);
-//	motorDC(4, -5000);
-//
+//	traInit(0, 0, 180, 0);
 //	Delayms(3000);
-//
-//	motorDC(1, 0);
-//	motorDC(2, 0);
-//	motorDC(3, 0);
-//	motorDC(4, 0);
+
+//	traInit(0, 0, 315, 0);
+//	Delayms(2000);
+//	traInit(0, 200, 315, 0);
+
+	controlMode = 1;
+
+	stop();
+
+	handleRotateIn();
 
     while(1)
     {
-//    	getProxy();
+
+
+    	getProxy();
 //    	GPIO_SetBits(GPIOC,GPIO_Pin_1);
-    	handleRotateIn();
+
+
 
 //    	traInit(0, -100, 0,0);
 //    	ballGet();
-//    	handleRotateIn();
+
+//		maju(15000);
+//
+//    	if(ballGet())
+//    	{
+//    		handleOff(); cx
+//    		Delayms(500);
+//    		handleRotateOut();
+//    		Delayms(100);
+//    	}
+//    	else {
+//    		handleRotateIn();
+//		}
+
+
 //    	moveInput();
 //    	kickBall();
 //    	maju(100);

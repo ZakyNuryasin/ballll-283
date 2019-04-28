@@ -20,7 +20,7 @@ void fungsiautosudut();
 /*
  * sudut untuk menjadikan compassHeading bernilai 0
  */
-#define SUDUTGAWANG 186
+#define SUDUTGAWANG 0
 
 /**
  * Variables
@@ -38,9 +38,13 @@ uint8_t fragX;
 uint8_t fragY;
 uint8_t flagX;
 uint8_t flagY;
+
+uint8_t robotSelect;
+uint8_t nomorRobot;
+uint8_t controlMode;
+
 float compassHeading;
 char flag;
 //int fragX, fragY, flagX = 0, flagY = 0;
-
 
 #endif

@@ -54,7 +54,6 @@ void init_mode();
 void init_proximity();
 void init_proximity2();
 int getProxy();
-void ballGet(void);
 void getBallNew();
 void getBall(void);
 int PID(int param, int desire, int vMaks);
@@ -112,6 +111,19 @@ int hindar();
 #define MAKSXKICK	0
 #define MINYKICK	0
 #define MAKSYKICK	0
+
+
+
+int limitSwitchKiri;
+int limitSwitchKanan;
+int proxyKanan;
+int proxyKiri;
+int proxyBelakang;
+int proxyDepanKiri;
+int proxyDepanKanan;
+int gotoBall;
+
+int ballGet(void);
 
 #endif
 

@@ -27,86 +27,6 @@ void init_handle(){
 	GPIO_Init(GPIOB, &GPIO_InitStructure);
 
 }
-void init_extender()
-{
-		GPIO_InitTypeDef GPIO_InitStructure;
-		RCC_AHB1PeriphClockCmd( RCC_AHB1Periph_GPIOD, ENABLE);
-		GPIO_InitStructure.GPIO_Pin = GPIO_Pin_8 | GPIO_Pin_9 | GPIO_Pin_10;
-		GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
-		GPIO_InitStructure.GPIO_Mode = GPIO_Mode_OUT;
-		GPIO_InitStructure.GPIO_OType = GPIO_OType_PP;
-		GPIO_InitStructure.GPIO_PuPd = GPIO_PuPd_NOPULL;
-		GPIO_Init(GPIOD, &GPIO_InitStructure);
-
-}
-void init_proximity()
-{
-	GPIO_InitTypeDef GPIO_InitStructure;
-	RCC_AHB1PeriphClockCmd( RCC_AHB1Periph_GPIOC, ENABLE);
-	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_4 | GPIO_Pin_5 | GPIO_Pin_6;
-	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_100MHz;
-	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IN;
-	GPIO_InitStructure.GPIO_OType = GPIO_OType_PP;
-	GPIO_InitStructure.GPIO_PuPd = GPIO_PuPd_NOPULL;
-	GPIO_Init(GPIOC, &GPIO_InitStructure);
-
-
-	proxyRight = GPIO_ReadInputDataBit(GPIOC, GPIO_Pin_4);
-	proxyUp = GPIO_ReadInputDataBit(GPIOC, GPIO_Pin_5);
-	proxyLeft = GPIO_ReadInputDataBit(GPIOC, GPIO_Pin_6);
-
-}
-
-void extenderLeft()
-{
-	GPIO_ResetBits(GPIOD,GPIO_Pin_10);
-}
-void extenderRight()
-{
-	GPIO_ResetBits(GPIOD,GPIO_Pin_8);
-}
-void extenderUp()
-{
-	GPIO_ResetBits(GPIOD,GPIO_Pin_9);
-}
-void extenderOff()
-{
-	GPIO_SetBits(GPIOD,GPIO_Pin_8);
-	GPIO_SetBits(GPIOD,GPIO_Pin_9);
-	GPIO_SetBits(GPIOD,GPIO_Pin_10);
-}
-
-void proxy()
-{
-//	GPIO_SetBits(GPIOC,GPIO_Pin_4);
-//	GPIO_SetBits(GPIOC,GPIO_Pin_5);
-//	GPIO_SetBits(GPIOC,GPIO_Pin_6);
-}
-void testExtender()
-{
-	extenderRight();
-//	delayms(1000);
-	extenderUp();
-//	delayms(1000);
-	extenderLeft();
-//	delayms(1000);
-	extenderOff();
-}
-void testProxy()
-{
-	while(proxyLeft==1)
-	{
-		extenderLeft();
-	}
-	while(proxyUp==1)
-	{
-		extenderUp();
-	}
-	while(proxyRight==1)
-	{
-		extenderRight();
-	}
-}
 
 /*
  * inisialisasi penendang
@@ -131,7 +51,65 @@ void handleRotateIn(){
 	GPIO_ResetBits(GPIOB,GPIO_Pin_8);
 	GPIO_SetBits(GPIOA,GPIO_Pin_7);
 }
+int bolaketemu=0;
+int posisibola;
 
+
+void init_extender()
+{
+	GPIO_InitTypeDef GPIO_InitStructure;
+	RCC_AHB1PeriphClockCmd( RCC_AHB1Periph_GPIOD, ENABLE);
+	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_8 | GPIO_Pin_9 | GPIO_Pin_10;
+	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
+	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_OUT;
+	GPIO_InitStructure.GPIO_OType = GPIO_OType_PP;
+	GPIO_InitStructure.GPIO_PuPd = GPIO_PuPd_NOPULL;
+	GPIO_Init(GPIOD, &GPIO_InitStructure);
+	GPIO_SetBits(GPIOD,GPIO_Pin_8);// tangan kiri
+	GPIO_SetBits(GPIOD,GPIO_Pin_9);// tangan kanan
+	GPIO_SetBits(GPIOD,GPIO_Pin_10);// tangan atas
+}
+void rightExtender()
+{
+	GPIO_ResetBits(GPIOD,GPIO_Pin_9);
+}
+
+void leftExtender()
+{
+	GPIO_ResetBits(GPIOD,GPIO_Pin_8);// tangan kiri
+}
+void upExtender()
+{
+	GPIO_ResetBits(GPIOD,GPIO_Pin_10);// tangan kiri
+}
+void offExtender()
+{
+	GPIO_SetBits(GPIOD,GPIO_Pin_8);// tangan kiri
+	GPIO_SetBits(GPIOD,GPIO_Pin_9);// tangan kiri
+	GPIO_SetBits(GPIOD,GPIO_Pin_10);// tangan kiri
+}
+
+
+//void bergerak()
+//{
+//	while(1)
+//	{
+//		if (posisibola<=50 && posisibola>0)
+//		{
+//			traInit(posisibola, 0, 180, 0);
+//			tangankiri();
+//		}
+//		else if (posisibola>=51 && posisibola<=100)
+//		{
+//			traInit(posisibola, 0, 0, 0);
+//			tangankanan();
+//		}
+//		else
+//			{
+//			tanganmati();
+//			}
+//	}
+//}
 /*
  * gerakan handle kiri masuk
  */

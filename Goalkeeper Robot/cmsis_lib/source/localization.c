@@ -91,6 +91,30 @@ int countHor = 0;
 int countVer = 0;
 int pwmMotor = 0;
 
+int proxyKiri1 = 1;
+int proxyKiri2 = 1;
+int proxyKiri3 = 1;
+
+int proxyKanan1 = 1;
+int proxyKanan2 = 1;
+int proxyKanan3 = 1;
+
+int proxyAtas1 = 1;
+int proxyAtas2 = 1;
+int proxyAtas3 = 1;
+int proxySampingKiri =1;
+int proxySampingKanan = 1;
+
+
+float gpValue;
+float gpDistance;
+
+int proxyCount = 0;
+int pflag1 = 0;
+int pflag2 = 0;
+
+
+
 //extern int32_t output = 0;
 //extern int32_t outputDua = 0;
 //extern int32_t outputTiga = 0;
@@ -560,6 +584,75 @@ void keeper()
 	}
 }
 
+void keeperProxy()
+{
+
+	if(proxyKiri1==0 || proxyKiri2==0 || proxyKiri3==0 || pflag1 ==1)
+	{
+		pflag1 = 1;
+		if (proxyCount < 100)
+		{
+			leftExtender();
+			Delayms(10);
+			proxyCount++;
+			if (proxyCount==99)
+					{
+						offExtender();
+						Delayms(10);
+						proxyCount = 0;
+						pflag1 = 0;
+					}
+		}
+	}
+	else if(proxyAtas1==0 || proxyAtas2==0 || proxyAtas3==0 || pflag1 ==2)
+			{
+			pflag1 = 2;
+				if (proxyCount < 100)
+				{
+					upExtender();
+					Delayms(10);
+					proxyCount++;
+					if (proxyCount==99)
+					{
+						offExtender();
+						Delayms(10);
+						proxyCount = 0;
+						pflag1 = 0;
+					}
+				}
+
+			}
+	else if(proxyKanan1==0 || proxyKanan2==0 || proxyKanan3==0 || pflag1 == 3)
+		{
+			pflag1 = 3;
+			if (proxyCount < 100)
+			{
+				rightExtender();
+				Delayms(10);
+				proxyCount++;
+				if (proxyCount == 99)
+						{
+							offExtender();
+							Delayms(10);
+							proxyCount = 0;
+							pflag1 = 0;
+						}
+			}
+
+		}
+	else
+	{
+		offExtender();
+		proxyCount = 0;
+//		if (pflag1 == 1)
+//		{
+//			offExtender();
+//			proxyCount = 0;
+//			pflag1 = 0;
+//		}
+	}
+}
+
 void keeperTengah()
 {
 	if(tengahflag == 0)
@@ -893,74 +986,102 @@ void init_mode(){
 	GPIO_Init(GPIOC, &gpio_init);
 }
 
-/*
- *
- */
-//void init_proximity()
+//void init_gpsharp()
 //{
-//	GPIO_InitTypeDef gpio_init;
-////	EXTI_InitTypeDef EXTI_InitStruct;
-////	NVIC_InitTypeDef NVIC_InitStruct;
+////	 TM_USART_Init(USART1, TM_USART_PinsPack_2, 115200);
 //
-//	RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOC, ENABLE);
-////	RCC_APB2PeriphClockCmd(RCC_APB2Periph_SYSCFG, ENABLE);
-//
-//	gpio_init.GPIO_Pin  = GPIO_PIN_4;
-//	gpio_init.GPIO_Mode = GPIO_Mode_IN;
-//	gpio_init.GPIO_Speed = GPIO_Speed_100MHz;
-//	gpio_init.GPIO_OType = GPIO_OType_PP;
-//	gpio_init.GPIO_PuPd = GPIO_PuPd_DOWN;
-//	GPIO_Init(GPIOC, &gpio_init);
+//	    /* Initialize ADC1 on channel 0, this is pin PA10 */
+//	    TM_ADC_Init(ADC1, ADC_Channel_10);
 ////
-//	gpio_init.GPIO_Pin  = GPIO_PIN_5;
-//	gpio_init.GPIO_Mode = GPIO_Mode_IN;
-//	gpio_init.GPIO_Speed = GPIO_Speed_100MHz;
-//	gpio_init.GPIO_OType = GPIO_OType_PP;
-//	gpio_init.GPIO_PuPd = GPIO_PuPd_DOWN;
-//	GPIO_Init(GPIOC, &gpio_init);
-//
-//	gpio_init.GPIO_Pin  = GPIO_PIN_6;
-//	gpio_init.GPIO_Mode = GPIO_Mode_IN;
-//	gpio_init.GPIO_Speed = GPIO_Speed_100MHz;
-//	gpio_init.GPIO_OType = GPIO_OType_PP;
-//	gpio_init.GPIO_PuPd = GPIO_PuPd_DOWN;
-//	GPIO_Init(GPIOC, &gpio_init);
-//
-////
-////	/* Connect pin to interrupt */
-////	SYSCFG_EXTILineConfig(EXTI_PortSourceGPIOC, EXTI_PinSource13);
-////
-////
-////	/* Configure external interrupt */
-////	EXTI_InitStruct.EXTI_Line = EXTI_Line13;
-////	EXTI_InitStruct.EXTI_LineCmd = ENABLE;
-////	EXTI_InitStruct.EXTI_Mode = EXTI_Mode_Interrupt;
-////	EXTI_InitStruct.EXTI_Trigger = EXTI_Trigger_Rising;
-////	EXTI_Init(&EXTI_InitStruct);
-////
-////	/* Add interrupt to NVIC */
-////	NVIC_InitStruct.NVIC_IRQChannel = EXTI15_10_IRQn;
-////	NVIC_InitStruct.NVIC_IRQChannelPreemptionPriority = 0x03;
-////	NVIC_InitStruct.NVIC_IRQChannelSubPriority = 0x00;
-////	NVIC_InitStruct.NVIC_IRQChannelCmd = ENABLE;
-////	NVIC_Init(&NVIC_InitStruct);
-////
+////	    /* Initialize ADC1 on channel 3, this is pin PA3 */
+////	    TM_ADC_Init(ADC1, ADC_Channel_3);
 //}
+void init_proximity()
+{
+	GPIO_InitTypeDef gpio_init;
+//	EXTI_InitTypeDef EXTI_InitStruct;
+//	NVIC_InitTypeDef NVIC_InitStruct;
 
+	RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOC, ENABLE);
+//	RCC_APB2PeriphClockCmd(RCC_APB2Periph_SYSCFG, ENABLE);
 
+	gpio_init.GPIO_Pin  = GPIO_PIN_1;
+	gpio_init.GPIO_Mode = GPIO_Mode_IN;
+	gpio_init.GPIO_Speed = GPIO_Speed_100MHz;
+	gpio_init.GPIO_OType = GPIO_OType_PP;
+	gpio_init.GPIO_PuPd = GPIO_PuPd_DOWN;
+	GPIO_Init(GPIOC, &gpio_init);
 
-//#ifdef ACTIVATEPROXY1
-//void EXTI15_10_IRQHandler(void) {
-//	if (EXTI_GetITStatus(EXTI_Line13) != RESET) {
-//		proxyRight = GPIO_ReadInputDataBit(GPIOC, GPIO_Pin_4);
-//		proxyUp = GPIO_ReadInputDataBit(GPIOC, GPIO_Pin_5);
-//		proxyLeft = GPIO_ReadInputDataBit(GPIOC, GPIO_Pin_6);
-//		/* Clear interrupt bit */
-//		EXTI_ClearITPendingBit(EXTI_Line1);
-//	}
-//}
-//
-//#endif
+	gpio_init.GPIO_Pin  = GPIO_PIN_2;
+	gpio_init.GPIO_Mode = GPIO_Mode_IN;
+	gpio_init.GPIO_Speed = GPIO_Speed_100MHz;
+	gpio_init.GPIO_OType = GPIO_OType_PP;
+	gpio_init.GPIO_PuPd = GPIO_PuPd_DOWN;
+	GPIO_Init(GPIOC, &gpio_init);
+
+	gpio_init.GPIO_Pin  = GPIO_PIN_3;
+	gpio_init.GPIO_Mode = GPIO_Mode_IN;
+	gpio_init.GPIO_Speed = GPIO_Speed_100MHz;
+	gpio_init.GPIO_OType = GPIO_OType_PP;
+	gpio_init.GPIO_PuPd = GPIO_PuPd_DOWN;
+	GPIO_Init(GPIOC, &gpio_init);
+
+	gpio_init.GPIO_Pin  = GPIO_PIN_4;
+	gpio_init.GPIO_Mode = GPIO_Mode_IN;
+	gpio_init.GPIO_Speed = GPIO_Speed_100MHz;
+	gpio_init.GPIO_OType = GPIO_OType_PP;
+	gpio_init.GPIO_PuPd = GPIO_PuPd_DOWN;
+	GPIO_Init(GPIOC, &gpio_init);
+
+	gpio_init.GPIO_Pin  = GPIO_PIN_5;
+	gpio_init.GPIO_Mode = GPIO_Mode_IN;
+	gpio_init.GPIO_Speed = GPIO_Speed_100MHz;
+	gpio_init.GPIO_OType = GPIO_OType_PP;
+	gpio_init.GPIO_PuPd = GPIO_PuPd_DOWN;
+	GPIO_Init(GPIOC, &gpio_init);
+
+	gpio_init.GPIO_Pin  = GPIO_PIN_6;
+	gpio_init.GPIO_Mode = GPIO_Mode_IN;
+	gpio_init.GPIO_Speed = GPIO_Speed_100MHz;
+	gpio_init.GPIO_OType = GPIO_OType_PP;
+	gpio_init.GPIO_PuPd = GPIO_PuPd_DOWN;
+	GPIO_Init(GPIOC, &gpio_init);
+
+	gpio_init.GPIO_Pin  = GPIO_PIN_7;
+	gpio_init.GPIO_Mode = GPIO_Mode_IN;
+	gpio_init.GPIO_Speed = GPIO_Speed_100MHz;
+	gpio_init.GPIO_OType = GPIO_OType_PP;
+	gpio_init.GPIO_PuPd = GPIO_PuPd_DOWN;
+	GPIO_Init(GPIOC, &gpio_init);
+
+	gpio_init.GPIO_Pin  = GPIO_PIN_8;
+	gpio_init.GPIO_Mode = GPIO_Mode_IN;
+	gpio_init.GPIO_Speed = GPIO_Speed_100MHz;
+	gpio_init.GPIO_OType = GPIO_OType_PP;
+	gpio_init.GPIO_PuPd = GPIO_PuPd_DOWN;
+	GPIO_Init(GPIOC, &gpio_init);
+
+	gpio_init.GPIO_Pin  = GPIO_PIN_9;
+	gpio_init.GPIO_Mode = GPIO_Mode_IN;
+	gpio_init.GPIO_Speed = GPIO_Speed_100MHz;
+	gpio_init.GPIO_OType = GPIO_OType_PP;
+	gpio_init.GPIO_PuPd = GPIO_PuPd_DOWN;
+	GPIO_Init(GPIOC, &gpio_init);
+
+	gpio_init.GPIO_Pin  = GPIO_PIN_10;
+	gpio_init.GPIO_Mode = GPIO_Mode_IN;
+	gpio_init.GPIO_Speed = GPIO_Speed_100MHz;
+	gpio_init.GPIO_OType = GPIO_OType_PP;
+	gpio_init.GPIO_PuPd = GPIO_PuPd_DOWN;
+	GPIO_Init(GPIOC, &gpio_init);
+
+	gpio_init.GPIO_Pin  = GPIO_PIN_11;
+	gpio_init.GPIO_Mode = GPIO_Mode_IN;
+	gpio_init.GPIO_Speed = GPIO_Speed_100MHz;
+	gpio_init.GPIO_OType = GPIO_OType_PP;
+	gpio_init.GPIO_PuPd = GPIO_PuPd_DOWN;
+	GPIO_Init(GPIOC, &gpio_init);
+}
 
 
 /*
@@ -969,22 +1090,38 @@ void init_mode(){
  */
 int getProxy()
 {
-	if (y == 1)
-	{
-		return 1;
-	}
-	else if (z == 1)
-	{
-		return 2;
-	}
-	else if (keeperFlag == 0)
-	{
-		return 3;
-	}
-	return 0;
+
+}
+
+void readProxy()
+{
+	proxyKiri1 = GPIO_ReadInputDataBit(GPIOC, GPIO_Pin_1);
+	proxyKiri2 = GPIO_ReadInputDataBit(GPIOC, GPIO_Pin_2);
+	proxyKiri3 = GPIO_ReadInputDataBit(GPIOC, GPIO_Pin_3);
+
+	proxyAtas1 = GPIO_ReadInputDataBit(GPIOC, GPIO_Pin_4);
+	proxyAtas2 = GPIO_ReadInputDataBit(GPIOC, GPIO_Pin_5);
+	proxyAtas3 = GPIO_ReadInputDataBit(GPIOC, GPIO_Pin_6);
+
+	proxyKanan1 = GPIO_ReadInputDataBit(GPIOC, GPIO_Pin_7);
+	proxyKanan2 = GPIO_ReadInputDataBit(GPIOC, GPIO_Pin_8);
+	proxyKanan3 = GPIO_ReadInputDataBit(GPIOC, GPIO_Pin_9);
+
+	proxySampingKanan = GPIO_ReadInputDataBit(GPIOC, GPIO_Pin_10);
+	proxySampingKiri = GPIO_ReadInputDataBit(GPIOC, GPIO_Pin_11);
+
+
+//	gpValue = TM_ADC_Read(ADC1, ADC_Channel_10);
+
+}
+
+void gpSharp()
+{
+	gpDistance = 10650.08 * pow(gpValue,-0.935) - 10;
 }
 
 /*
+ *
  * ballGet merupakan fungsi untuk mengetahui apakah
  * robot telah mendapatkan bola atau belum dengan
  * menggunakan proximity

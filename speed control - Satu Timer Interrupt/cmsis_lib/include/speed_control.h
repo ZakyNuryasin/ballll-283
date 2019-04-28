@@ -43,10 +43,10 @@ void calculateTrj();
 void calculatePID();
 
 void motorSpeed(int16_t leftBackSpeed, int16_t leftFrontSpeed, int16_t righFrontSpeed, int rightBackSpeed);
-void maju(int32_t pwm);
-void mundur(int32_t pwm);
-void kanan(int32_t pwm);
-void kiri(int32_t pwm);
+void maju(int32_t speed);
+void mundur(int32_t speed);
+void kanan(int32_t speed);
+void kiri(int32_t speed);
 void timurLaut(int32_t pwm);
 void tenggara(int32_t pwm);
 void baratLaut(int32_t pwm);
@@ -55,6 +55,8 @@ void rotateClockWise(int32_t pwm);
 void rotateAntiClockWise(int32_t pwm);
 void stop();
 void tesMotor(int rpm);
+
+void moveInput();
 
 /**
  * Defines
@@ -74,6 +76,12 @@ void tesMotor(int rpm);
 #define KD1 0
 #define KI1 1
 
+#define KPBall 2000;
+#define KDBall 0;
+#define KIBall 0;
+
 #define constrain(amt,low,high) ((amt)<(low)?(low):((amt)>(high)?(high):(amt)))
 
 #endif //SPEED_CONTROL_H_
+
+extern int gotoBall;

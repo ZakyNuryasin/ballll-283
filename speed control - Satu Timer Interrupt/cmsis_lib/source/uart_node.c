@@ -13,6 +13,25 @@ int strategy;
 char flagNode;
 char bufferNode;
 
+char a;
+char b;
+
+extern int proxyKanan;
+extern int proxyKiri;
+extern int proxyBelakang;
+extern int proxyDepanKiri;
+extern int proxyDepanKanan;
+
+extern int limitSwitchKiri;
+extern int limitSwitchKanan;
+
+extern uint16_t xCoor2;
+extern uint16_t yCoor2;
+
+extern double current_x;
+extern double current_y;
+extern double current_w;
+
 void init_USART(void)
 {
 		NVIC_InitTypeDef NVIC_InitStructure;
@@ -66,33 +85,37 @@ void init_USART(void)
 void USART2_IRQHandler(void){
 	if( USART_GetITStatus(USART2, USART_IT_RXNE) ){
 		bufferNode = USART_ReceiveData(USART2);
-		if(flagNode=='x'){
+		if(flagNode=='a'){
 			nodex1 = bufferNode;
 			flagNode = 0;
 		}
-		else if(flagNode=='y'){
+		else if(flagNode=='b'){
 			nodey1 = bufferNode;
-			flagNode = 0;
-		}
-		else if(flagNode=='X'){
-			nodex2 = bufferNode;
-			flagNode = 0;
-		}
-		else if(flagNode=='Y'){
-			nodey2 = bufferNode;
-			flagNode = 0;
-		}
-		else if(flagNode=='g'){
-			gameState = bufferNode;
-			flagNode = 0;
-		}
-		else if(flagNode=='s'){
-			strategy = bufferNode;
 			flagNode = 0;
 		}
 		else {
 			flagNode = bufferNode;
 		}
+
+
+
+		USART_SendData(USART2, 12);
+		USART_SendData(USART2, (uint8_t)current_x/100);
+		USART_SendData(USART2, 13);
+		USART_SendData(USART2, (uint8_t)current_x%100);
+		USART_SendData(USART2, 14);
+		USART_SendData(USART2, (uint8_t)current_y/100);
+		USART_SendData(USART2, 15);
+		USART_SendData(USART2, (uint8_t)current_y%100);
+		USART_SendData(USART2, 16);
+		USART_SendData(USART2, (uint8_t)current_w/100);
+		USART_SendData(USART2, 17);
+		USART_SendData(USART2, (uint8_t)current_w%100);
+
+
+
+
+
 		if(prevx1 != nodex1 || prevy1 != nodey1){
 			movX = nodex1;
 			movY = nodey1;
@@ -101,6 +124,64 @@ void USART2_IRQHandler(void){
 		prevx1 = nodex1;
 		prevy1 = nodey1;
 
+	}
+}
+
+void menu()
+{
+	if(b == 0)
+	{
+//		if(a == 0)
+//			//auto nyerang;
+//		else if (a == 1)
+//			//manual nyerang;
+//		else if(a == 2)
+//			//autoo back;
+//		else if(a == 3)
+//			//manula back;
+	}
+	else if(b == 1)
+	{
+//		if(a == 0)
+//			//tesMotor(10000);
+//		else if(a == 1)
+//			//test handle;
+//		else if(a == 2)
+//			//test kicker;
+	}
+	else if(b == 2)
+	{
+		if(a == 0)
+		{
+			USART_SendData(USART2, 1);
+			USART_SendData(USART2, (uint8_t)proxyKanan);
+			USART_SendData(USART2, 2);
+			USART_SendData(USART2, (uint8_t)proxyDepanKanan);
+			USART_SendData(USART2, 3);
+			USART_SendData(USART2, (uint8_t)proxyDepanKiri);
+			USART_SendData(USART2, 4);
+			USART_SendData(USART2, (uint8_t)proxyKiri);
+			USART_SendData(USART2, 5);
+			USART_SendData(USART2, (uint8_t)proxyBelakang);
+		}
+		else if(a == 1)
+		{
+//			USART_SendData(USART2, 6);
+//			USART_SendData(USART2, (uint8_t)limitSwitchKanan);
+//			USART_SendData(USART2, 7);
+//			USART_SendData(USART2, (uint8_t)limitSwitchKiri);
+		}
+		else if(a == 2)
+		{
+			USART_SendData(USART2, 8);
+			USART_SendData(USART2, (uint8_t)xCoor2/100);
+			USART_SendData(USART2, 9);
+			USART_SendData(USART2, (uint8_t)xCoor2%100);
+			USART_SendData(USART2, 10);
+			USART_SendData(USART2, (uint8_t)yCoor2/100);
+			USART_SendData(USART2, 11);
+			USART_SendData(USART2, (uint8_t)yCoor2%100);
+		}
 	}
 }
 

@@ -34,6 +34,13 @@ int yCoor2;
 extern uint16_t xCoor;
 extern uint16_t yCoor;
 double sudut2;
+int vRotate = 5000;
+
+double time_sampling = 0.004679 * 10;
+double min_pid_limit = -2147483640.0;
+double max_pid_limit = 2147483640.0;
+double min_pwm_limit = -12500;
+double max_pwm_limit = 12500;
 
 //hitung koordinat global
 double a = 0, b = 0;
@@ -43,16 +50,6 @@ double sudutBall = 0;
 int iterBall = 0;
 int avgxBall = 0;
 int avgyBall = 0;
-
-
-
-extern int limitSwitchKanan;
-extern int limitSwitchKiri;
-
-
-
-
-
 
 /*
  * Variables
@@ -115,12 +112,6 @@ double ppr = 19.2 * 7 * 275 / 40;
 //double ppr = 19.2 * 7 * 275 / 80;
 double robot_radius = 28;
 double wheel_radius = 5;
-
-double time_sampling = 0.004679 * 10;
-double min_pid_limit = -2147483640.0;
-double max_pid_limit = 2147483640.0;
-double min_pwm_limit = -10000;
-double max_pwm_limit = 10000;
 
 double current_x = 0.0;
 double current_y = 0.0;
@@ -544,11 +535,22 @@ void TIM2_IRQHandler()
 	 		FifthGet(&data5);
 	 		SixthGet(&data6);
 
-			calculatePosition();
-//			calculatePosition2();
-//			calculateTrj();
-			calculatePID();
-			kinematic();
+	 		gotoBall = 0;
+
+
+	 		if(gotoBall == 1)
+	 		{
+	 			moveInput();
+	 		}
+	 		else
+	 		{
+				calculatePosition();
+//				calculatePosition2();
+//				calculateTrj();
+				calculatePID();
+				kinematic();
+			}
+
 
 
 
@@ -579,35 +581,39 @@ void TIM2_IRQHandler()
 
 			pid_error_w = tra_input_w - current_w;
 
-			if((pid_error_w > 4 && pid_error_w < 180) || pid_error_w < -180)
+			if((pid_error_w > 7 && pid_error_w < 180) || pid_error_w < -180)
 			{
-				output += 5000;
-				outputDua += 5000;
-				outputTiga += 5000;
-				outputEmpat += 5000;
+				output += vRotate;
+				outputDua += vRotate;
+				outputTiga += vRotate;
+				outputEmpat += vRotate;
 			}
-			else if(pid_error_w < -4 || pid_error_w > 180)
+			else if(pid_error_w < -7 || pid_error_w > 180)
 			{
-				output -= 5000;
-				outputDua -= 5000;
-				outputTiga -= 5000;
-				outputEmpat -= 5000;
+				output -= vRotate;
+				outputDua -= vRotate;
+				outputTiga -= vRotate;
+				outputEmpat -= vRotate;
 			}
 
-			output = 0;
-			outputDua = 0;
-			outputTiga = 0;
-			outputEmpat = 0;
+//			output = 0;
+//			outputDua = 0;
+//			outputTiga = 0;
+//			outputEmpat = 0;
 
-//			output = -5000;
-//			outputDua = -5000;
-//			outputTiga = -5000;
-//			outputEmpat = -5000;
+//			output = -7500;
+//			outputDua = -7500;
+//			outputTiga = -7500;
+//			outputEmpat = -7500;
 
-//			motorDC(1, output);
-//			motorDC(2, outputDua);
-//			motorDC(3, outputTiga);
-//			motorDC(4, outputEmpat);
+			if(controlMode == 0)
+			{
+				motorDC(1, output);
+				motorDC(2, outputDua);
+				motorDC(3, outputTiga);
+				motorDC(4, outputEmpat);
+			}
+
 //			}
 		}
 //	 }
@@ -633,6 +639,7 @@ void moveInput(){
 	yCoor2 = - ((int)yCoor - 240);
 
 	//default diam, kalau ga ada bola
+	//	atau ke tempat bola terakhir
 	if(xCoor2 == 0 && yCoor2 == 0)
 	{
 //		xCoor2 = 0;
@@ -644,7 +651,8 @@ void moveInput(){
 //		return;
 	}
 	else{
-		//////hitung sudut bola dari kamera ke sudut global
+
+		//=========hitung sudut bola dari kamera ke sudut global
 
 		//cari sudut bola terhadap kamera
 		if(xCoor2 == 0 && yCoor2 == 0)
@@ -663,18 +671,11 @@ void moveInput(){
 			{sudutBall -= 90;}
 		else
 			{sudutBall += 270;}
+		//========selesai hitung sudut global bola di variabel sudutBall
 
-		//ubah ke sudut global
-		sudutBall += current_w;
 
-		if(sudutBall > 360)
-			{sudutBall -= 360;}
 
-//		sudutBall = sudut;
-		/////selesai hitung sudut global bola di variabel sudutBall
-
-		//////mulai hitung jarak bola dalam centimeter
-
+		//=========mulai hitung jarak bola dalam centimeter
 
 		//penanda nilai negatif untuk hitung pixel ke centimeter
 		abs1 = 1;
@@ -733,31 +734,32 @@ void moveInput(){
 
 		if(abs2 == 0)
 			b *= -1;
-		//////selesai hitung centimeter
+		//=========selesai hitung centimeter
 
-		//koordinat bola di kamera ke koordinat global
-		ballCoorX = (cos(current_w2)*a) - (sin(current_w2)*b) + current_x;
-		ballCoorY = (cos(current_w2)*b) + (sin(current_w2)*a) + current_y;
 
-		if(a == 0 && b == 0)
+		//=========gerak dengan referensi koordinat lokal
+		if(a <= 65 && b <= 65)
 		{
 			handleRotateIn();
-
-			limitSwitchKiri = GPIO_ReadInputDataBit(GPIOC, GPIO_Pin_2);
-			limitSwitchKanan = GPIO_ReadInputDataBit(GPIOC, GPIO_Pin_1);
-
-			if(limitSwitchKanan || limitSwitchKiri)
-			{
-				Delay(1000);
-				kickBall();
-			}
 		}
 
 		//perintah gerak ke arah bola
-		traInit(ballCoorX, ballCoorY, sudutBall, 0.0);
+//		traInit(ballCoorX, ballCoorY, sudutBall, 0.0);
 //		traInit(0, 0, sudutBall, 0.0);
 
-//		Delayms(500);
+		tra_input_w = sudutBall;
+
+		output = a - b;
+		outputDua = -a - b;
+		outputTiga = -a + b;
+		outputEmpat = a + b;
+
+		output *= KPBall;
+		outputDua *= KPBall;
+		outputTiga *= KPBall;
+		outputEmpat *= KPBall;
+
+		//=========selesai perintah gerak
 	}
 }
 
@@ -862,43 +864,6 @@ void calculatePosition(){
 	odo_global_w_prev = odo_global_w;
 }
 
-void calculateTrj(){
-	//hitung trajectory
-	if (tra_count_x < tra_count_total_x){
-		tra_count_x++; //increment counter
-		if (tra_count_total_x > 0.0){
-			tra_current_time_x = tra_count_x / tra_count_total_x; //cari waktu sekarang untuk dimasukan ke dalam rumus trajectory
-			tra_current_x = tra_input_x * ((6 * pow(tra_current_time_x,5.0)) - (15 * pow(tra_current_time_x,4.0)) + (10 * pow(tra_current_time_x,3.0))); //kalikan input trajectory dengan hasil rumus trajectory
-		}
-	} else if (tra_count_x >= tra_count_total_x) {
-		is_tra_x_done = 1;	//jika sudah selesai beri nilai 1(true)
-	}
-
-	if (is_tra_sin == 0){
-		if (tra_count_y < tra_count_total_y){
-			tra_count_y++;
-			if (tra_count_total_y > 0.0){
-				tra_current_time_y = tra_count_y / tra_count_total_y;
-				tra_current_y = tra_input_y * ((6 * pow(tra_current_time_y,5.0)) - (15 * pow(tra_current_time_y,4.0)) + (10 * pow(tra_current_time_y,3.0)));
-			}
-		} else if (tra_count_y >= tra_count_total_y) {
-			is_tra_y_done = 1;
-		}
-	} else if (is_tra_sin == 1) {
-		tra_current_y = (-500)*sin(0.0020943951023932 * (current_x + 750)); //rumus sinusoidal arena merah
-	}
-
-	if (tra_count_w < tra_count_total_w){
-		tra_count_w++;
-		if (tra_count_total_w > 0.0){
-			tra_current_time_w = tra_count_w / tra_count_total_w;
-			tra_current_w = tra_input_w * ((6 * pow(tra_current_time_w,5.0)) - (15 * pow(tra_current_time_w,4.0)) + (10 * pow(tra_current_time_w,3.0)));
-		}
-	} else if (tra_count_w >= tra_count_total_w) {
-		is_tra_w_done = 1;
-	}
-}
-
 void calculatePID(){
 
 	pid_error_x = tra_input_x - current_x;									//hitung error pid
@@ -990,153 +955,55 @@ void motorSpeed1(int16_t leftBackSpeed, int16_t leftFrontSpeed, int16_t righFron
 	setPointEmpat = rightBackSpeed;
 }
 
-/**
-  *semua roda maju
-  *
-  **/
-void maju(int32_t rpm) {
-//	motorDc(kaDepan, 1);
-//	motorDc(kiDepan, 1);
-//	motorDc(kaBelakang, 1);
-//	motorDc(kiBelakang, 1);
-	motorSpeed(-rpm,-rpm,rpm,rpm);
-	startHeading = 0;
+
+void maju(int32_t speed)
+{
+	motorDC(1, -speed);
+	motorDC(2, -speed);
+	motorDC(3, speed);
+	motorDC(4, speed);
 }
 
-/**
-  *semua roda mundur
-  **/
-void mundur(int32_t rpm) {
-//	motorDc(kaDepan, -1);
-//	motorDc(kiDepan, -1);
-//	motorDc(kaBelakang, -1);
-//	motorDc(kiBelakang, -1);
-//	if (jarakBelakang < 25)
-//	{
-//		rpm = -PID(jarakBelakang,20,40);
-//	}
-	motorSpeed(rpm,rpm,-rpm,-rpm);
-	changeStartHeading(0);
+void mundur(int32_t speed)
+{
+	motorDC(1, speed);
+	motorDC(2, speed);
+	motorDC(3, -speed);
+	motorDC(4, -speed);
 }
 
-/**
-  *roda kiri depan dan kanan belakang maju
-  *vice versa
-  **/
-void kanan(int32_t rpm) {
-//	motorDc(kaDepan, -1);
-//	motorDc(kiDepan, 1);
-//	motorDc(kaBelakang, 1);
-//	motorDc(kiBelakang, -1);
-	motorSpeed(rpm,-rpm,-rpm,rpm);
-	changeStartHeading(0);
+void kanan(int32_t speed)
+{
+	motorDC(1, speed);
+	motorDC(2, -speed);
+	motorDC(3, -speed);
+	motorDC(4, speed);
 }
 
-/**
-  *roda kiri depan dan kanan belakang mundur
-  *vice versa
-  **/
-void kiri(int32_t rpm) {
-//	motorDc(kaDepan, 1);
-//	motorDc(kiDepan, -1);
-//	motorDc(kaBelakang, -1);
-//	motorDc(kiBelakang, 1);
-	motorSpeed(-rpm,rpm,rpm,-rpm);
-	changeStartHeading(0);
+void kiri(int32_t speed)
+{
+	motorDC(1, -speed);
+	motorDC(2, speed);
+	motorDC(3, speed);
+	motorDC(4, -speed);
 }
 
-/**
-  *Ke kanan atas
-  *kiri depan dan kanan belakang maju, sisanya diam
-  **/
-void timurLaut(int32_t rpm) {
-//	motorDc(kaDepan, 0);
-//	motorDc(kiDepan, 1);
-//	motorDc(kaBelakang, 1);
-//	motorDc(kiBelakang, 0);
-	motorSpeed(0,-rpm,0,rpm);
-	changeStartHeading(0);
+void rotate(int32_t speed)
+{
+	motorDC(1, speed);
+	motorDC(2, speed);
+	motorDC(3, speed);
+	motorDC(4, speed);
 }
 
-/**
-  *Ke kanan bawah
-  *kiri depan dan kanan belakang mundur, sisanya diam
-  **/
-void tenggara(int32_t rpm) {
-//	motorDc(kaDepan, 0);
-//	motorDc(kiDepan, -1);
-//	motorDc(kaBelakang, -1);
-//	motorDc(kiBelakang, 0);
-	motorSpeed(0,rpm,0,-rpm);
-	changeStartHeading(0);
+void stop()
+{
+	motorDC(1, 0);
+	motorDC(2, 0);
+	motorDC(3, 0);
+	motorDC(4, 0);
 }
 
-/**
-  *Ke kiri atas
-  *Kanan depan dan kiri belakang maju, sisanya diam
-  **/
-void baratLaut(int32_t rpm) {
-//	motorDc(kaDepan, 1);
-//	motorDc(kiDepan, 0);
-//	motorDc(kaBelakang, 0);
-//	motorDc(kiBelakang, 1);
-	motorSpeed(-rpm,0,rpm,0);
-	changeStartHeading(0);
-}
-
-/**
-  *Ke kiri bawaj
-  *Kanan depan dan kiri belakang mundur, sisanya diam
-  **/
-void baratDaya(int32_t rpm) {
-//	motorDc(kaDepan, -1);
-//	motorDc(kiDepan, 0);
-//	motorDc(kaBelakang, 0);
-//	motorDc(kiBelakang, -1);
-	motorSpeed(rpm,0,-rpm,0);
-	changeStartHeading(0);
-}
-
-/**
-  * roda kanan depan dan kanan belakang arahnya ke belakang
-  * vice versa
-  **/
-void rotateClockWise(int32_t rpm) {
-//	motorDc(kaDepan, -1);
-//	motorDc(kiDepan, 1);
-//	motorDc(kaBelakang, -1);
-//	motorDc(kiBelakang, 1);
-	motorSpeed(-rpm,-rpm,-rpm,-rpm);
-	changeStartHeading(1);
-}
-
-
-/**
-  * roda kanan depan dan kanan belakang arahnya ke depan
-  * vice versa
-  **/
-void rotateAntiClockWise(int32_t rpm) {
-//	motorDc(kaDepan, 1);
-//	motorDc(kiDepan, -1);
-//	motorDc(kaBelakang, 1);
-//	motorDc(kiBelakang, -1);
-	motorSpeed(rpm,rpm,rpm,rpm);
-
-	output = rpm;
-	outputDua = rpm;
-	outputTiga = rpm;
-	outputEmpat = rpm;
-
-	changeStartHeading(1);
-}
-
-void stop() {
-//	motorDc(kaDepan, 1);
-//	motorDc(kiDepan, -1);
-//	motorDc(kaBelakang, 1);
-//	motorDc(kiBelakang, -1);
-	motorSpeed(0,0,0,0);
-}
 
 void tesMotor(int rpm){
 	maju(rpm);
