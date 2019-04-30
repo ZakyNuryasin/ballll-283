@@ -493,10 +493,10 @@ void setup()
   pixy.init();
 
   //line sensor
-  lineSerial[0] = 'L';
-  lineSerial[2] = 'R';
-  lineSerial[4] = 'F';
-  pinMode(7, INPUT);
+//  lineSerial[0] = 'L';
+//  lineSerial[2] = 'R';
+//  lineSerial[4] = 'F';
+//  pinMode(7, INPUT);
   
 //  calibrate();
 //  calibrateDefault();

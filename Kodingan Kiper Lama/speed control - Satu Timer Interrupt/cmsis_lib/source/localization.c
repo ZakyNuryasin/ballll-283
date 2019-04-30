@@ -426,7 +426,7 @@ void keeper()
 		keeperFlag = 1;
 		keeperCount++;
 		Delayms(10);
-		if(keeperCount == 200){
+		if(keeperCount == 20){
 			keeperFlag = 0;
 		}
 	}
@@ -435,7 +435,7 @@ void keeper()
 		keeperFlag = 2;
 		keeperCount++;
 		Delayms(10);
-		if(keeperCount == 200){
+		if(keeperCount == 20){
 			keeperFlag = 0;
 		}
 	}
@@ -531,17 +531,20 @@ void keeper()
 					maju(50);
 				}
 			}
-//			if(flagStrategy == 2 )
-//			{
-//				if (proxyTengah == 1)
-//				{
-//					kanan(50);
-//				}
-//				else if (proxyTengah == 0)
-//				{
-//					motorSpeed(0,0,0,0);
-//				}
-//			}
+			if(flagStrategy == 2 )
+			{
+				if (proxyTengah == 1)
+				{
+					kanan(50);
+					Delayms(500);
+				}
+				else if (proxyTengah == 0)
+				{
+					kiri(20);
+					Delayms(500);
+					motorSpeed(0,0,0,0);
+				}
+			}
 		}
 	}
 }
@@ -936,7 +939,7 @@ void init_proximity()
  */
 int getProxy1()
 {
-	if (proxyKiri1 == 0 || proxyKiri2 == 0 || proxyKiri3 == 0)
+	if (/*proxyKiri1 == 0 ||*/ proxyKiri2 == 0 || proxyKiri3 == 0)
 	{
 		return 1;
 	}
@@ -952,11 +955,11 @@ int getProxy1()
 }
 int getProxy()
 {
-	if (proxySampingKanan == 1)
+	if (proxySampingKanan == 0)
 	{
 		return 1;
 	}
-	else if (proxySampingKiri == 1)
+	else if (proxySampingKiri == 0)
 	{
 		return 2;
 	}
@@ -968,7 +971,7 @@ int getProxy()
 }
 void readProxy()
 {
-	proxyKiri1 = GPIO_ReadInputDataBit(GPIOC, GPIO_Pin_1);
+//	proxyKiri1 = GPIO_ReadInputDataBit(GPIOC, GPIO_Pin_1);
 	proxyKiri2 = GPIO_ReadInputDataBit(GPIOC, GPIO_Pin_2);
 	proxyKiri3 = GPIO_ReadInputDataBit(GPIOC, GPIO_Pin_3);
 
@@ -989,7 +992,7 @@ void readProxy()
 //	gpValue = TM_ADC_Read(ADC1, ADC_Channel_10);
 
 }
-double gpread = 0;
+uint8_t gpread = 0;
 int flaggp = 0;
 void readGP()
 {
@@ -999,15 +1002,15 @@ void readGP()
 	else
 		flaggp = 0;
 
-	if(gpread >= 1437 && gpread<=1511)
+	if(gpread >= 2500 && gpread<=2700)
 	{
 		GPDistance=60;
 	}
-	else if (gpread <=1437)
+	else if (gpread <=2500)
 	{
 		GPDistance=100;
 	}
-	else if (gpread >=1511)
+	else if (gpread >=2700)
 		{
 			GPDistance=0;
 		}
@@ -1015,6 +1018,19 @@ void readGP()
 //	if(gpread >=1437 && gpread<= 1511)
 //		GPDistance = 50;
 //	GPDistance = 10650.08 * pow(gpread, -0.935) - 10;
+//	GPDistance = 9462 / (gpread - 16.92);
+//	GPDistance = 5461 / (gpread - 17) - 2 ;
+//	GPDistance = 12343.85 * pow(gpread, -1.15);
+
+//	double distance;
+//	for(int gpiter = 0; gpiter < 10; gpiter++)
+//	{
+//		distance = (1834.9953/gpread) - 6.2304;
+//		GPDistance += distance;
+//	}
+//
+//	GPDistance = GPDistance / 10;
+
 	Delayms(100);
 }
 void proxyExtender()
@@ -1023,20 +1039,20 @@ void proxyExtender()
 	if(getProxy1()==1|| pflag1 ==1)
 	{
 		pflag1 = 1;
-		if (proxyCount < 100)
+		if (proxyCount < 10)
 		{
 			leftExtender();
 			Delayms(10);
 			proxyCount++;
 		}
-		if (proxyCount==100)
+		if (proxyCount==10)
 		{
-			if(proxyCount1 < 100)
+			if(proxyCount1 < 10)
 			{
 				offExtender();
 				Delayms(10);
 				proxyCount1++;
-				if(proxyCount1 == 100)
+				if(proxyCount1 == 10)
 				{
 					proxyCount1 = 0;
 					proxyCount = 0;
@@ -1048,20 +1064,20 @@ void proxyExtender()
 	else if(getProxy1()==2 || pflag1 ==2)
 			{
 			pflag1 = 2;
-				if (proxyCount < 100)
+				if (proxyCount < 10)
 				{
 					upExtender();
 					Delayms(10);
 					proxyCount++;
 				}
-				if (proxyCount==100)
+				if (proxyCount==10)
 				{
-					if(proxyCount1 < 100)
+					if(proxyCount1 < 10)
 					{
 						offExtender();
 						Delayms(10);
 						proxyCount1++;
-						if(proxyCount1 == 100)
+						if(proxyCount1 == 10)
 						{
 							proxyCount1 = 0;
 							proxyCount = 0;
@@ -1073,20 +1089,20 @@ void proxyExtender()
 	else if(getProxy1()==3 || pflag1 == 3)
 		{
 			pflag1 = 3;
-			if (proxyCount < 100)
+			if (proxyCount < 10)
 			{
 				rightExtender();
 				Delayms(10);
 				proxyCount++;
 			}
-			if (proxyCount==100)
+			if (proxyCount==10)
 			{
-				if(proxyCount1 < 100)
+				if(proxyCount1 < 10)
 				{
 					offExtender();
 					Delayms(10);
 					proxyCount1++;
-					if(proxyCount1 == 100)
+					if(proxyCount1 == 10)
 					{
 						proxyCount1 = 0;
 						proxyCount = 0;

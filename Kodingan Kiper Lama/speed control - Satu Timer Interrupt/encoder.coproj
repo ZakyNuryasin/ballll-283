@@ -133,8 +133,8 @@
     <File name="cmsis_lib/include/mekanisme_penendang.h" path="cmsis_lib/include/mekanisme_penendang.h" type="1"/>
     <File name="cmsis_lib/include/tm_stm32f4_adc.h" path="cmsis_lib/include/tm_stm32f4_adc.h" type="1"/>
     <File name="cmsis_lib/include/uart_camera.h" path="cmsis_lib/include/uart_camera.h" type="1"/>
-    <File name="cmsis" path="" type="2"/>
     <File name="cmsis_lib/include/tm_stm32f4_delay.h" path="cmsis_lib/include/tm_stm32f4_delay.h" type="1"/>
+    <File name="cmsis" path="" type="2"/>
     <File name="cmsis_lib/source/pwm_motor.c" path="cmsis_lib/source/pwm_motor.c" type="1"/>
     <File name="cmsis_lib" path="" type="2"/>
     <File name="cmsis_lib/source/stm32f4xx_tim.c" path="cmsis_lib/source/stm32f4xx_tim.c" type="1"/>
